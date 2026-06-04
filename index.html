@@ -347,6 +347,12 @@
       font-weight: 600;
     }
     .section-head p { margin-top: 10px; color: rgba(255,255,255,0.5); font-size: 0.95rem; }
+    html[data-theme=light] {
+      --dark-1: #f5f7fa !important;
+      --dark-2: #ffffff !important;
+      --glass-bg: rgba(255,255,255,0.7) !important;
+      --glass-border: rgba(0,0,0,0.08) !important;
+    }
     html[data-theme=light] .section-head p,
     html[data-theme=light] .glass-card p,
     html[data-theme=light] .testimonial blockquote,
@@ -358,9 +364,31 @@
     html[data-theme=light] .pricing-card ul li,
     html[data-theme=light] .cta-band p,
     html[data-theme=light] footer,
+    html[data-theme=light] footer *,
     html[data-theme=light] .hero .subtitle,
     html[data-theme=light] .hero p,
-    html[data-theme=light] .pricing-card p { color: #4b5563 !important; }
+    html[data-theme=light] .pricing-card p,
+    html[data-theme=light] .glass-card .muted,
+    html[data-theme=light] .section-head p,
+    html[data-theme=light] .hero-card p,
+    html[data-theme=light] .pricing-card .muted,
+    html[data-theme=light] .author-card .role,
+    html[data-theme=light] .nav-right .menu a,
+    html[data-theme=light] .btn-secondary { color: #374151 !important; }
+    html[data-theme=light] .section-head h2,
+    html[data-theme=light] .glass-card h3,
+    html[data-theme=light] .chapter-item h4,
+    html[data-theme=light] .faq-item summary,
+    html[data-theme=light] .pricing-card h3,
+    html[data-theme=light] .testimonial .stars,
+    html[data-theme=light] .chapter-num { color: #111827 !important; }
+    html[data-theme=light] .section-head .badge,
+    html[data-theme=light] .hero-badge,
+    html[data-theme=light] .hero .subtitle { color: #1e40af !important; border-color: #1e40af !important; }
+    html[data-theme=light] .hero-card .price,
+    html[data-theme=light] .stat-num,
+    html[data-theme=light] .pricing-card .price-big { background: #1e40af !important; -webkit-background-clip: text !important; background-clip: text !important; -webkit-text-fill-color: transparent !important; }
+    html[data-theme=light] .brand { -webkit-text-fill-color: #1e40af !important; color: #1e40af !important; }
 
     /* ===== GLASS CARD ===== */
     .glass-card {
@@ -411,6 +439,14 @@
     html[data-theme=light] .form-group textarea::placeholder { color: rgba(0,0,0,0.3); }
     html[data-theme=light] .faq-item summary { color: #1e40af; }
     html[data-theme=light] .pricing-card.featured { border-color: #1e40af; }
+    html[data-theme=light] .hero-overlay { background: linear-gradient(135deg, rgba(245,247,250,0.9) 0%, rgba(245,247,250,0.6) 50%, rgba(245,247,250,0.25) 100%) !important; }
+    html[data-theme=light] .btn-primary { color: #1e40af !important; border-color: #1e40af !important; }
+    html[data-theme=light] .btn-primary:hover { background: rgba(30,64,175,0.1) !important; box-shadow: 0 0 25px rgba(30,64,175,0.2) !important; }
+    html[data-theme=light] .btn-gold { color: #b45309 !important; border-color: #b45309 !important; }
+    html[data-theme=light] .nav { background: rgba(245,247,250,0.85) !important; }
+    html[data-theme=light] .scroll-indicator a { border-color: rgba(0,0,0,0.2) !important; }
+    html[data-theme=light] .scroll-indicator a::after { background: #1e40af !important; }
+    html[data-theme=light] .author-card img { border-color: #1e40af !important; box-shadow: 0 0 20px rgba(30,64,175,0.2) !important; }
 
     /* ===== SOCIAL ICONS ===== */
     .social-links { display: flex; gap: 10px; align-items: center; }
@@ -1043,18 +1079,14 @@
       toggle.addEventListener('click', () => {
         lightMode = !lightMode;
         if (lightMode) {
-          document.documentElement.style.setProperty('--dark-1', '#f5f7fa');
-          document.documentElement.style.setProperty('--dark-2', '#ffffff');
-          document.documentElement.style.setProperty('--glass-bg', 'rgba(255,255,255,0.5)');
-          document.documentElement.style.setProperty('--glass-border', 'rgba(0,0,0,0.08)');
+          document.documentElement.setAttribute('data-theme', 'light');
+          document.documentElement.style.cssText = '';
           document.body.style.color = '#111827';
           toggle.querySelector('span').textContent = 'Dark';
           toggle.querySelector('.icon').innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3c.5 0 .6.68.16.91A6.5 6.5 0 0 0 19.09 12.5c.23.44-.42.59-.88.29A8.96 8.96 0 0 1 21 12.79Z"></path>';
         } else {
-          document.documentElement.style.setProperty('--dark-1', '#0a0a12');
-          document.documentElement.style.setProperty('--dark-2', '#12121f');
-          document.documentElement.style.setProperty('--glass-bg', 'rgba(255,255,255,0.03)');
-          document.documentElement.style.setProperty('--glass-border', 'rgba(255,255,255,0.08)');
+          document.documentElement.setAttribute('data-theme', 'dark');
+          document.documentElement.style.cssText = '';
           document.body.style.color = '#ffffff';
           toggle.querySelector('span').textContent = 'Light';
           toggle.querySelector('.icon').innerHTML = '<circle cx="12" cy="12" r="5"></circle><path d="M12 1v2"></path><path d="M12 21v2"></path><path d="M4.22 4.22l1.42 1.42"></path><path d="M18.36 18.36l1.42 1.42"></path><path d="M1 12h2"></path><path d="M21 12h2"></path><path d="M4.22 19.78l1.42-1.42"></path><path d="M18.36 5.64l1.42-1.42"></path>';
