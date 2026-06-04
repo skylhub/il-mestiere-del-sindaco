@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Il Mestiere del Sindaco</title>
+  <meta name="description" content="Approfondimenti, competenze, notizie e risorse sul ruolo del sindaco e sull'amministrazione locale." />
+  <style>
+    :root {
+      --bg: #f5f7fa;
+      --surface: #ffffff;
+      --surface-soft: #eef2f7;
+      --text: #111827;
+      --muted: #6b7280;
+      --border: #d9e1ea;
+      --silver: #aeb7c4;
+      --acid: #c6ff4d;
+      --acid-dark: #9acb23;
+      --shadow: 0 18px 50px rgba(17, 24, 39, 0.08);
+      --radius: 24px;
+      --hero-overlay: rgba(245, 247, 250, 0.92);
+      --hero-overlay-mid: rgba(245, 247, 250, 0.72);
+      --hero-overlay-end: rgba(245, 247, 250, 0.18);
+      --hero-text: #111827;
+    }
+
+    html[data-theme="dark"] {
+      --bg: #0b1220;
+      --surface: #111827;
+      --surface-soft: #0f172a;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: rgba(255,255,255,0.08);
+      --silver: #94a3b8;
+      --acid: #c6ff4d;
+      --acid-dark: #9acb23;
+      --shadow: 0 20px 60px rgba(0,0,0,0.30);
+      --hero-overlay: rgba(11, 18, 32, 0.94);
+      --hero-overlay-mid: rgba(11, 18, 32, 0.72);
+      --hero-overlay-end: rgba(11, 18, 32, 0.22);
+      --hero-text: #e5e7eb;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background-color 0.35s ease, color 0.35s ease;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: color-mix(in srgb, var(--bg) 86%, transparent);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: background-color 0.35s ease, border-color 0.35s ease;
+    }
+
+    .nav-inner {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--acid);
+      box-shadow: 0 0 0 5px rgba(198, 255, 77, 0.25);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .menu a {
+      margin-left: 18px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .menu a:hover { color: var(--text); }
+
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: transform 0.25s ease, background-color 0.35s ease, border-color 0.35s ease;
+      min-width: 132px;
+      justify-content: center;
+    }
+
+    .theme-toggle:hover { transform: translateY(-1px); }
+
+    .theme-toggle .icon {
+      width: 18px;
+      height: 18px;
+      display: inline-block;
+    }
+
+    .hamburger {
+      display: none;
+      width: 46px;
+      height: 46px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease;
+    }
+
+    .hamburger:hover { transform: translateY(-1px); }
+
+    .hamburger svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 74px 0 auto 0;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      z-index: 40;
+      padding: 18px 16px 20px;
+    }
+
+    .mobile-menu.open { display: block; }
+
+    .mobile-menu a {
+      display: block;
+      padding: 14px 10px;
+      font-weight: 800;
+      color: var(--text);
+      border-radius: 14px;
+    }
+
+    .mobile-menu a:hover {
+      background: var(--surface-soft);
+    }
+
+    .hero {
+      padding: 24px 0 34px;
+    }
+
+    .hero-shell {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      background:
+        linear-gradient(90deg, var(--hero-overlay) 0%, var(--hero-overlay-mid) 42%, var(--hero-overlay-end) 100%),
+        url("https://templatemo.com/templates/templatemo_617_pixel_forge/images/tm-pixel-forge-01.jpg?auto=format&fit=crop&w=1800&q=80")
+        center/cover no-repeat;
+      min-height: 76vh;
+      display: flex;
+      align-items: end;
+      transition: background 0.35s ease, border-color 0.35s ease;
+    }
+
+    .hero-content {
+      width: 100%;
+      padding: 42px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      align-items: end;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(198, 255, 77, 0.30);
+      color: #2b3a08;
+      border: 1px solid rgba(154, 203, 35, 0.22);
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      margin: 0 0 16px;
+      font-size: clamp(2.5rem, 5vw, 4.8rem);
+      line-height: 0.98;
+      max-width: 12ch;
+      letter-spacing: -0.03em;
+      color: var(--hero-text);
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 60ch;
+      color: var(--muted);
+      font-size: 1.06rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 20px;
+      border-radius: 999px;
+      font-weight: 800;
+      border: 1px solid transparent;
+      transition: transform 0.28s ease, box-shadow 0.28s ease, background-color 0.28s ease, color 0.28s ease, border-color 0.28s ease;
+      will-change: transform;
+    }
+
+    .btn-primary {
+      background: var(--acid);
+      color: #111827;
+      box-shadow: 0 14px 30px rgba(198, 255, 77, 0.28);
+      animation: ctaPulse 2.8s ease-in-out infinite;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px) scale(1.08) rotate(-1deg);
+      background: var(--acid-dark);
+      box-shadow: 0 18px 40px rgba(154, 203, 35, 0.38);
+    }
+
+    .btn-primary:active { transform: scale(0.96); }
+
+    .btn-secondary {
+      background: var(--surface);
+      border-color: var(--border);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px) scale(1.04);
+      border-color: var(--silver);
+    }
+
+    @keyframes ctaPulse {
+      0% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-1px) scale(1.03); }
+      100% { transform: translateY(0) scale(1); }
+    }
+
+    .hero-card {
+      background: color-mix(in srgb, var(--surface) 82%, transparent);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 22px;
+      backdrop-filter: blur(10px);
+      transition: background-color 0.35s ease, border-color 0.35s ease;
+    }
+
+    .hero-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.05rem;
+    }
+
+    .hero-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    main { padding: 10px 0 72px; }
+    .section { margin-top: 34px; }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: end;
+      margin-bottom: 18px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 58ch;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+      transition: background-color 0.35s ease, border-color 0.35s ease;
+    }
+
+    .card img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      border-radius: 18px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .stat {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .muted { color: var(--muted); }
+
+    .feature {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .feature-icon {
+      width: 46px;
+      height: 46px;
+      flex: 0 0 46px;
+      border-radius: 14px;
+      background: rgba(198, 255, 77, 0.26);
+      border: 1px solid rgba(154, 203, 35, 0.20);
+      display: grid;
+      place-items: center;
+    }
+
+    .feature-icon img {
+      width: 24px;
+      height: 24px;
+      margin: 0;
+      object-fit: contain;
+    }
+
+    .slider {
+      position: relative;
+      overflow: hidden;
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      background: var(--surface);
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .slide {
+      min-width: 100%;
+      position: relative;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .slide-caption {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      background: rgba(17, 24, 39, 0.66);
+      color: white;
+      padding: 14px 16px;
+      border-radius: 16px;
+      backdrop-filter: blur(8px);
+    }
+
+    .slider-controls {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .slider-btn {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 10px 14px;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      font-weight: 800;
+    }
+
+    .quotes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .quote-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .quote-box blockquote {
+      margin: 0;
+      font-size: 1.03rem;
+      color: var(--text);
+    }
+
+    .quote-box cite {
+      font-style: normal;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .quote-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .download-link {
+      padding: 11px 14px;
+      border-radius: 999px;
+      background: var(--acid);
+      color: #111827;
+      font-weight: 800;
+    }
+
+    .download-link:hover {
+      background: var(--acid-dark);
+    }
+
+    .news-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .news-item {
+      padding: 18px;
+      border-radius: 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .meta {
+      font-size: 0.9rem;
+      color: var(--silver);
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: 1.4fr 0.9fr 0.9fr;
+      gap: 18px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 100%;
+      min-height: 240px;
+      object-fit: cover;
+      border-radius: 22px;
+      display: block;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .form {
+      display: grid;
+      gap: 12px;
+    }
+
+    .form label {
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .form input,
+    .form textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      border-radius: 16px;
+      padding: 13px 14px;
+      font: inherit;
+      box-shadow: var(--shadow);
+    }
+
+    .form textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .map-frame {
+      width: 100%;
+      min-height: 420px;
+      border: 0;
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    footer {
+      padding: 28px 0 36px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 1100px) {
+      .quotes,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 960px) {
+      .hero-content,
+      .grid-3,
+      .grid-2,
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-shell { min-height: auto; }
+      .hero-content { padding: 24px; }
+      .slide img { height: 280px; }
+    }
+
+    @media (max-width: 720px) {
+      .nav-inner {
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 12px 0;
+      }
+
+      .menu {
+        display: none;
+      }
+
+      .hamburger {
+        display: inline-flex;
+      }
+
+      .menu-open .menu {
+        display: none;
+      }
+
+      .section-head {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .mobile-menu.open {
+        display: block;
+      }
+
+      .theme-toggle {
+        min-width: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <span class="brand-mark"></span>
+        <span>Il Mestiere del Sindaco</span>
+      </div>
+
+      <div class="nav-right">
+        <div class="menu" id="desktopMenu">
+          <a href="#ruolo">Ruolo</a>
+          <a href="#competenze">Competenze</a>
+          <a href="#example1">Example 1</a>
+          <a href="#example2">Example 2</a>
+          <a href="#risorse">Risorse</a>
+          <a href="#news">News</a>
+          <a href="#contatti">Contatti</a>
+        </div>
+
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambia tema">
+          <svg id="themeIcon" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            ircle cx="12" cy="12" r="5"></circle>
+            <path d="M12 1v2"></path>
+            <path d="M12 21v2"></path>
+            <path d="M4.22 4.22l1.42 1.42"></path>
+            <path d="M18.36 18.36l1.42 1.42"></path>
+            <path d="M1 12h2"></path>
+            <path d="M21 12h2"></path>
+            <path d="M4.22 19.78l1.42-1.42"></path>
+            <path d="M18.36 5.64l1.42-1.42"></path>
+          </svg>
+          <span id="themeLabel">Light</span>
+        </button>
+
+        <button class="hamburger" id="hamburgerBtn" type="button" aria-label="Apri menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M4 7h16"></path>
+            <path d="M4 12h16"></path>
+            <path d="M4 17h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#ruolo">Ruolo</a>
+    <a href="#competenze">Competenze</a>
+    <a href="#example1">Example 1</a>
+    <a href="#example2">Example 2</a>
+    <a href="#risorse">Risorse</a>
+    <a href="#news">News</a>
+    <a href="#contatti">Contatti</a>
+  </div>
+
+  <section class="hero">
+    <div class="container hero-shell">
+      <div class="hero-content">
+        <div>
+          <div class="eyebrow">Amministrazione locale · Cittadini · Territorio</div>
+          <h1>Il mestiere del sindaco, raccontato bene.</h1>
+          <p>
+            Un sito chiaro e moderno per spiegare il ruolo del sindaco, le competenze,
+            le responsabilità e il rapporto con la comunità.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#ruolo">Esplora il sito</a>
+            <a class="btn btn-secondary" href="#contatti">Contattaci</a>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <h3>Cosa trovi qui</h3>
+          <p>Approfondimenti, notizie, schede pratiche, risorse e contenuti dedicati al ruolo del sindaco e ai servizi comunali.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <section class="section">
+      <div class="grid-3">
+        <div class="card">
+          <div class="stat">01</div>
+          <h3>Ruolo istituzionale</h3>
+          <p class="muted">Spiegazioni semplici su funzioni, poteri e limiti del sindaco.</p>
+        </div>
+        <div class="card">
+          <div class="stat">02</div>
+          <h3>Relazione con la città</h3>
+          <p class="muted">Comunicazione, ascolto e dialogo con cittadini e territorio.</p>
+        </div>
+        <div class="card">
+          <div class="stat">03</div>
+          <h3>Servizi e decisioni</h3>
+          <p class="muted">Cosa cambia nella vita quotidiana dei cittadini e come vengono prese le decisioni.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ruolo" class="section">
+      <div class="section-head">
+        <div>
+          <h2>Il ruolo del sindaco</h2>
+          <p>Una presentazione molto semplice, adatta a un sito divulgativo o istituzionale.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1522083165195-3424ed129620?auto=format&fit=crop&w=1200&q=80" alt="Incontro istituzionale in sala" />
+          <h3>Guida e rappresentanza</h3>
+          <p class="muted">Il sindaco rappresenta il Comune e coordina l’azione amministrativa.</p>
+        </div>
+
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80" alt="Edificio comunale" />
+          <h3>Istituzioni e territorio</h3>
+          <p class="muted">Il sito può spiegare come si collegano Comune, giunta, consiglio e cittadini.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="competenze" class="section">
+      <div class="section-head">
+        <div>
+          <h2>Competenze principali</h2>
+          <p>Sezione adatta a blocchi brevi, visivi e facili da leggere.</p>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="card feature">
+          <div class="feature-icon">
+            <img src="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/icons/building-castle.svg" alt="Icona istituzioni" />
+          </div>
+          <div>
+            <h3>Istituzioni</h3>
+            <p class="muted">Ruolo, rappresentanza, atti e funzioni del Comune.</p>
+          </div>
+        </div>
+
+        <div class="card feature">
+          <div class="feature-icon">
+            <img src="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/icons/users-group.svg" alt="Icona cittadini" />
+          </div>
+          <div>
+            <h3>Comunità</h3>
+            <p class="muted">Ascolto, partecipazione, incontri pubblici e trasparenza.</p>
+          </div>
+        </div>
+
+        <div class="card feature">
+          <div class="feature-icon">
+            <img src="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/icons/bell-ringing.svg" alt="Icona emergenze" />
+          </div>
+          <div>
+            <h3>Urgenze</h3>
+            <p class="muted">Ordinanze, sicurezza, servizi essenziali e gestione delle emergenze.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="example1" class="section">
+      <div class="section-head">
+        <div>
+          <h2>Example 1</h2>
+          <p>Image slides with captions, in the same one-file layout.</p>
+        </div>
+      </div>
+
+      <div class="slider">
+        <div class="slides" id="slides">
+          <div class="slide">
+            <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1400&q=80" alt="Persone in riunione pubblica" />
+            <div class="slide-caption">Ascolto della comunità e partecipazione pubblica.</div>
+          </div>
+          <div class="slide">
+            <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1400&q=80" alt="Sala riunioni istituzionale" />
+            <div class="slide-caption">Incontri istituzionali e coordinamento amministrativo.</div>
+          </div>
+          <div class="slide">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1400&q=80" alt="Piazza e architettura urbana" />
+            <div class="slide-caption">Territorio, città e identità locale.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slider-controls">
+        <button class="slider-btn" type="button" id="prevSlide">Prev</button>
+        <button class="slider-btn" type="button" id="nextSlide">Next</button>
+      </div>
+    </section>
+
+    <section id="example2" class="section">
+      <div class="section-head">
+        <div>
+          <h2>Example 2</h2>
+          <p>Quote boxes with download CTAs.</p>
+        </div>
+      </div>
+
+      <div class="quotes">
+        <div class="quote-box">
+          <blockquote>“Un sindaco efficace ascolta prima di decidere e comunica in modo chiaro.”</blockquote>
+          ite>Template quote 01</cite>
+          <div class="quote-actions">
+            <a class="download-link" href="#" download>Download PDF</a>
+            <a class="btn btn-secondary" href="#">Read more</a>
+          </div>
+        </div>
+
+        <div class="quote-box">
+          <blockquote>“La qualità del lavoro del sindaco si vede nei servizi e nella fiducia dei cittadini.”</blockquote>
+          ite>Template quote 02</cite>
+          <div class="quote-actions">
+            <a class="download-link" href="#" download>Download PDF</a>
+            <a class="btn btn-secondary" href="#">Read more</a>
+          </div>
+        </div>
+
+        <div class="quote-box">
+          <blockquote>“Trasparenza, ascolto e rapidità sono tre elementi chiave per amministrare bene.”</blockquote>
+          ite>Template quote 03</cite>
+          <div class="quote-actions">
+            <a class="download-link" href="#" download>Download PDF</a>
+            <a class="btn btn-secondary" href="#">Read more</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="risorse" class="section">
+      <div class="section-head">
+        <div>
+          <h2>Risorse e immagini</h2>
+          <p>Qui puoi aggiungere foto stock gratuite, guide, PDF e materiali utili.</p>
+        </div>
+      </div>
+
+      <div class="gallery">
+        <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80" alt="Persone in riunione pubblica" />
+        <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=900&q=80" alt="Sala riunioni istituzionale" />
+        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80" alt="Piazza e architettura urbana" />
+      </div>
+    </section>
+
+    <section id="news" class="section">
+      <div class="section-head">
+        <div>
+          <h2>News in evidenza</h2>
+          <p>Piccoli contenuti editoriali con aspetto pulito e molto leggibile.</p>
+        </div>
+      </div>
+
+      <div class="news-list">
+        <article class="news-item">
+          <div class="meta">Approfondimento · Amministrazione locale</div>
+          <h3>Le funzioni del sindaco spiegate in modo semplice</h3>
+          <p class="muted">Una scheda introduttiva per capire competenze, ruoli e responsabilità.</p>
+        </article>
+
+        <article class="news-item">
+          <div class="meta">Guida · Cittadini e servizi</div>
+          <h3>Come comunicare meglio con il Comune</h3>
+          <p class="muted">Canali digitali, sportelli e strumenti utili per il rapporto con i cittadini.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contatti" class="section">
+      <div class="section-head">
+        <div>
+          <h2>Contatti</h2>
+          <p>Sezione finale con form e mappa.</p>
+        </div>
+      </div>
+
+      <div class="contact-grid">
+        <div class="card">
+          <form class="form">
+            <div>
+              abel for="name">Nome</label>
+              <input id="name" type="text" placeholder="Il tuo nome" />
+            </div>
+            <div>
+              abel for="email">Email</label>
+              <input id="email" type="email" placeholder="La tua email" />
+            </div>
+            <div>
+              abel for="message">Messaggio</label>
+              <textarea id="message" placeholder="Scrivi qui il tuo messaggio"></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">Invia messaggio</button>
+          </form>
+        </div>
+
+        <div class="card">
+          <iframe
+            class="map-frame"
+            src="https://www.google.com/maps?q=Romano%20d'Ezzelino&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Mappa"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div><strong>Il Mestiere del Sindaco</strong> · sito informativo sul ruolo del sindaco.</div>
+      <div>© 2026</div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const toggle = document.getElementById("themeToggle");
+      const label = document.getElementById("themeLabel");
+      const icon = document.getElementById("themeIcon");
+      const storageKey = "ims-theme";
+      const hamburger = document.getElementById("hamburgerBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const slides = document.getElementById("slides");
+      const prevBtn = document.getElementById("prevSlide");
+      const nextBtn = document.getElementById("nextSlide");
+      const totalSlides = slides.children.length;
+      let currentSlide = 0;
+
+      function setIcon(theme) {
+        if (theme === "dark") {
+          icon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3c.5 0 .6.68.16.91A6.5 6.5 0 0 0 19.09 12.5c.23.44-.42.59-.88.29A8.96 8.96 0 0 1 21 12.79Z"></path>';
+          label.textContent = "Dark";
+        } else {
+          icon.innerHTML = 'ircle cx="12" cy="12" r="5"></circle><path d="M12 1v2"></path><path d="M12 21v2"></path><path d="M4.22 4.22l1.42 1.42"></path><path d="M18.36 18.36l1.42 1.42"></path><path d="M1 12h2"></path><path d="M21 12h2"></path><path d="M4.22 19.78l1.42-1.42"></path><path d="M18.36 5.64l1.42-1.42"></path>';
+          label.textContent = "Light";
+        }
+      }
+
+      function applyTheme(theme) {
+        root.setAttribute("data-theme", theme);
+        setIcon(theme);
+      }
+
+      function updateSlide() {
+        slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+      }
+
+      const saved = localStorage.getItem(storageKey);
+      if (saved === "dark" || saved === "light") {
+        applyTheme(saved);
+      } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        applyTheme("dark");
+      } else {
+        applyTheme("light");
+      }
+
+      toggle.addEventListener("click", () => {
+        const current = root.getAttribute("data-theme") === "dark" ? "dark" : "light";
+        const next = current === "dark" ? "light" : "dark";
+        applyTheme(next);
+        localStorage.setItem(storageKey, next);
+      });
+
+      hamburger.addEventListener("click", () => {
+        mobileMenu.classList.toggle("open");
+      });
+
+      mobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => mobileMenu.classList.remove("open"));
+      });
+
+      prevBtn.addEventListener("click", () => {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        updateSlide();
+      });
+
+      nextBtn.addEventListener("click", () => {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateSlide();
+      });
+
+      setInterval(() => {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateSlide();
+      }, 5000);
+    })();
+  </script>
+</body>
+</html>
