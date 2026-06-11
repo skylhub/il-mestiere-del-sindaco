@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Il Mestiere del Sindaco - Coming Soon</title>
+    <title>Coming Soon</title>
     <style>
         * {
             margin: 0;
@@ -12,169 +12,96 @@
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
+            background: #000;
+            color: #00f0ff;
+            font-family: 'Arial', sans-serif;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: white;
             text-align: center;
             overflow: hidden;
-        }
-        
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            position: relative;
         }
         
         .container {
-            max-width: 600px;
+            z-index: 10;
             padding: 2rem;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            animation: fadeIn 1s ease-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
         }
         
         h1 {
-            font-size: 2.5rem;
+            font-size: 4rem;
             margin-bottom: 1rem;
-            background: linear-gradient(to right, #00f0ff, #ff00d4);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { opacity: 0.8; }
-            50% { opacity: 1; }
-            100% { opacity: 0.8; }
-        }
-        
-        p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            color: #e0e0e0;
-            line-height: 1.6;
-        }
-        
-        .countdown {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-        
-        .countdown-item {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 1rem;
-            min-width: 80px;
-        }
-        
-        .countdown-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #00f0ff;
-        }
-        
-        .countdown-label {
-            font-size: 0.8rem;
             text-transform: uppercase;
-            color: #aaa;
+            letter-spacing: 4px;
+            animation: glow 2s ease-in-out infinite alternate;
         }
         
-        .progress-bar {
-            height: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            overflow: hidden;
-            margin: 2rem 0;
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff; }
+            to { text-shadow: 0 0 20px #00f0ff, 0 0 30px #00f0ff, 0 0 40px #00f0ff; }
         }
         
-        .progress {
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(0, 240, 255, 0.7);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
             height: 100%;
-            background: linear-gradient(to right, #00f0ff, #ff00d4);
-            width: 30%;
-            border-radius: 4px;
-            animation: progress 3s infinite ease-in-out;
+            pointer-events: none;
         }
         
-        @keyframes progress {
-            0% { width: 30%; }
-            50% { width: 70%; }
-            100% { width: 30%; }
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle var(--duration, 3s) infinite ease-in-out;
         }
         
-        .contact {
-            margin-top: 2rem;
-            font-size: 0.9rem;
-            color: #aaa;
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
         }
         
-        .contact a {
-            color: #00f0ff;
-            text-decoration: none;
-        }
-        
-        .contact a:hover {
-            text-decoration: underline;
-        }
-        
-        @media (max-width: 600px) {
-            .container {
-                margin: 1rem;
-                padding: 1.5rem;
-            }
-            
+        @media (max-width: 768px) {
             h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
             
-            p {
+            .subtitle {
                 font-size: 1rem;
-            }
-            
-            .countdown {
-                flex-wrap: wrap;
-            }
-            
-            .countdown-item {
-                min-width: 60px;
-                padding: 0.7rem;
-            }
-            
-            .countdown-number {
-                font-size: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
+    <div class="stars" id="stars"></div>
     <div class="container">
-        <h1>Il Mestiere del Sindaco</h1>
-        <p>Stiamo preparando qualcosa di straordinario per voi. Il nostro sito ufficiale sarà presto disponibile con contenuti esclusivi e risorse utili per amministratori locali.</p>
-        
-        <div class="progress-bar">
-            <div class="progress"></div>
-        </div>
-        
-        <p>Restate sintonizzati per il lancio ufficiale!</p>
-        
-        <div class="contact">
-            Per informazioni: <a href="mailto:info@ilmestieredelsindaco.com">info@ilmestieredelsindaco.com</a>
-        </div>
+        <h1>Coming Soon</h1>
+        <div class="subtitle">Something amazing is on the way</div>
     </div>
+    
+    <script>
+        // Create stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 150; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.width = `${Math.random() * 3}px`;
+            star.style.height = star.style.width;
+            star.style.setProperty('--duration', `${Math.random() * 3 + 2}s`);
+            star.style.animationDelay = `${Math.random() * 5}s`;
+            starsContainer.appendChild(star);
+        }
+    </script>
 </body>
 </html>
