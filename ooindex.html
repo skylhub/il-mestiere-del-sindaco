@@ -1,4 +1,200 @@
 <!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accesso Protetto - Il Mestiere del Sindaco</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .login-container {
+            max-width: 400px;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.85);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 1s ease-out;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #00f0ff, #ff00d4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ccc;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #00f0ff;
+            box-shadow: 0 0 0 2px rgba(0, 240, 255, 0.3);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #00f0ff, #00b3c3);
+            border: none;
+            border-radius: 10px;
+            color: #000;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 240, 255, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .error {
+            color: #ff6b6b;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: none;
+            padding: 10px;
+            background: rgba(255, 107, 107, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 107, 107, 0.3);
+        }
+
+        .protected-content {
+            display: none;
+            width: 100%;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: none;
+        }
+
+        .back-link a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .back-link a:hover {
+            background: rgba(0, 0, 0, 0.8);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="back-link" id="backLink">
+        <a href="/">&larr; Torna alla Home</a>
+    </div>
+
+    <div class="login-container" id="loginContainer">
+        <h1>Accesso Protetto</h1>
+        <p>Questo contenuto è riservato. Inserisci la password per accedere alla guida completa.</p>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Inserisci la password" autocomplete="off">
+        </div>
+        <button id="submitBtn">Accedi</button>
+        <div class="error" id="error">Password errata. Riprova.</div>
+    </div>
+
+    <div class="protected-content" id="protectedContent">
+        <!-- Protected content will be loaded here -->
+    </div>
+
+    <script>
+        // Password protection
+        const correctPassword = "G14nluc4";
+        const loginContainer = document.getElementById('loginContainer');
+        const protectedContent = document.getElementById('protectedContent');
+        const passwordInput = document.getElementById('password');
+        const submitBtn = document.getElementById('submitBtn');
+        const errorDiv = document.getElementById('error');
+        const backLink = document.getElementById('backLink');
+
+        // The actual protected content (simplified for this example)
+        const protectedHTML = `
+          <!DOCTYPE html>
 <html lang="it" data-theme="light">
 <head>
   <meta charset="UTF-8" />
@@ -648,14 +844,14 @@
             e strategie di comunicazione. <strong>Scritto da un ex sindaco per i nuovi sindaci.</strong>
           </p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#acquista">Acquista il manuale →</a>
+            <a class="btn btn-primary" href="#acquista">Acquista la guida →</a>
             <a class="btn btn-secondary" href="#indice">Scopri l'indice</a>
           </div>
         </div>
         <aside class="hero-card">
           <img class="book-cover"
                src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=300&q=80"
-               alt="Copertina del manuale Il Mestiere del Sindaco" />
+               alt="Copertina della guida Il Mestiere del Sindaco" />
           <h3>Il Mestiere del Sindaco</h3>
           <p class="muted" style="text-align:center;font-size:0.88rem;">Guida pratica · 320 pagine · Edizione 2026</p>
           <div class="price">€24,90 <small>+ IVA</small></div>
@@ -909,26 +1105,26 @@
 
       <div class="faq-item">
         <details>
-          <summary>Il manuale è aggiornato alle ultime normative?</summary>
+          <summary>La guida è aggiornata alle ultime normative?</summary>
           <p>Sì, l'edizione 2026 è aggiornata alle più recenti modifiche del TUEL, al Codice degli Appalti e alle norme sul PNRR. Ogni anno pubblichiamo un aggiornamento gratuito per chi ha già acquistato.</p>
         </details>
       </div>
       <div class="faq-item">
         <details>
           <summary>Esiste anche in formato digitale?</summary>
-          <p>Sì, il manuale è disponibile in formato PDF, ePub e cartaceo. Con l'acquisto della versione cartacea ricevi gratis anche il PDF.</p>
+          <p>Sì, la guida è disponibile in formato PDF, ePub e cartaceo. Con l'acquisto della versione cartacea ricevi gratis anche il PDF.</p>
         </details>
       </div>
       <div class="faq-item">
         <details>
-          <summary>Posso ordinarlo per il mio Comune (acquisto multiplo)?</summary>
+          <summary>Posso ordinarla per il mio Comune (acquisto multiplo)?</summary>
           <p>Certamente. Per ordini da 10 copie in su contattaci: applichiamo sconti progressivi e fatturazione elettronica per la PA.</p>
         </details>
       </div>
       <div class="faq-item">
         <details>
           <summary>I modelli sono davvero pronti all'uso?</summary>
-          <p>Sì. Ogni modello è scaricabile in formato .docx e .pdf. Li trovi nei QR code sparsi nei capitoli e nella sezione finale del manuale.</p>
+          <p>Sì. Ogni modello è scaricabile in formato .docx e .pdf. Li trovi nei QR code sparsi nei capitoli e nella sezione finale della guida.</p>
         </details>
       </div>
     </section>
@@ -986,9 +1182,9 @@
     <!-- CTA BAND -->
     <div class="cta-band">
       <h2>Non aspettare il primo consiglio comunale</h2>
-      <p>Ordina ora e ricevi il manuale in 2-3 giorni. Oppure scarica subito l'anteprima gratuita.</p>
+      <p>Ordina ora e ricevi la guida in 2-3 giorni. Oppure scarica subito l'anteprima gratuita.</p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-        <a class="btn" href="#acquista">Acquista il manuale →</a>
+        <a class="btn" href="#acquista">Acquista la guida →</a>
         <a class="btn btn-secondary" href="#" style="background:transparent;color:white;border-color:rgba(255,255,255,0.4);">Scarica anteprima</a>
       </div>
     </div>
@@ -997,7 +1193,7 @@
   <footer>
     <div class="container footer-inner">
       <div>
-        <strong>Il Mestiere del Sindaco</strong> · Manuale per nuovi amministratori
+        <strong>Il Mestiere del Sindaco</strong> · Guida per nuovi amministratori
       </div>
       <div class="footer-links">
         <a href="#">Privacy</a>
@@ -1057,5 +1253,48 @@
       });
     })();
   </script>
+</body>
+</html>
+        `;
+
+        // Handle password submission
+        function checkPassword() {
+            if (passwordInput.value === correctPassword) {
+                // Hide login form and show protected content
+                loginContainer.style.display = 'none';
+                backLink.style.display = 'block';
+                
+                // Load the protected content
+                protectedContent.innerHTML = protectedHTML;
+                protectedContent.style.display = 'block';
+                
+                // Store authentication status in sessionStorage
+                sessionStorage.setItem('ooindex_authenticated', 'true');
+            } else {
+                // Show error message
+                errorDiv.style.display = 'block';
+                passwordInput.value = '';
+                passwordInput.focus();
+            }
+        }
+
+        // Check if already authenticated
+        if (sessionStorage.getItem('ooindex_authenticated') === 'true') {
+            loginContainer.style.display = 'none';
+            backLink.style.display = 'block';
+            protectedContent.innerHTML = protectedHTML;
+            protectedContent.style.display = 'block';
+        }
+
+        // Handle button click
+        submitBtn.addEventListener('click', checkPassword);
+
+        // Handle Enter key press
+        passwordInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+    </script>
 </body>
 </html>
