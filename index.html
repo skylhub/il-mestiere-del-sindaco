@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Il Mestiere del Sindaco - Coming Soon</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,7 +13,9 @@
         }
 
         body {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -21,101 +23,102 @@
             padding: 20px;
             position: relative;
             overflow-x: hidden;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                        url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
-            background-attachment: fixed;
         }
 
-        .overlay {
+        body::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.6);
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 20%);
             z-index: 1;
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-            padding: 60px 50px;
             text-align: center;
-            max-width: 600px;
+            max-width: 800px;
             width: 100%;
             position: relative;
             z-index: 2;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            margin: 20px;
+            padding: 40px 20px;
         }
 
         .logo {
             width: 80px;
             height: 80px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 50%;
-            margin: 0 auto 25px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: 24px;
+            margin: 0 auto 30px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 36px;
             color: white;
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.25);
         }
 
         h1 {
             font-family: 'Poppins', sans-serif;
             font-weight: 800;
-            font-size: 2.8rem;
-            color: #2c3e50;
-            margin-bottom: 15px;
-            line-height: 1.2;
-            letter-spacing: -0.5px;
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -1px;
         }
 
         .subtitle {
-            font-size: 1.3rem;
-            color: #7f8c8d;
-            margin-bottom: 30px;
-            font-weight: 500;
+            font-size: 1.4rem;
+            color: #94a3b8;
+            margin-bottom: 40px;
+            font-weight: 400;
+            line-height: 1.5;
         }
 
         p {
-            color: #95a5a6;
-            font-size: 1.1rem;
+            color: #cbd5e1;
+            font-size: 1.2rem;
             line-height: 1.6;
-            margin-bottom: 35px;
+            margin-bottom: 45px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .cta-button {
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            padding: 18px 40px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px 45px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
             color: white;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
             font-size: 1.2rem;
             text-decoration: none;
-            border-radius: 50px;
+            border-radius: 16px;
             margin: 30px 0;
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
             transition: all 0.3s ease;
             border: none;
             cursor: pointer;
-            letter-spacing: 0.5px;
+            letter-spacing: -0.2px;
         }
 
         .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.4);
         }
 
         .cta-button:active {
-            transform: translateY(-1px);
+            transform: translateY(0);
         }
 
         .book-icon {
@@ -130,60 +133,125 @@
         }
 
         .progress-container {
-            margin: 40px 0;
+            margin: 50px 0;
         }
 
         .progress-text {
-            color: #7f8c8d;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
+            color: #94a3b8;
+            font-size: 1rem;
+            margin-bottom: 20px;
             font-weight: 500;
         }
 
         .progress-bar {
-            height: 8px;
-            background: #ecf0f1;
-            border-radius: 4px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
             overflow: hidden;
             margin: 0 auto;
-            max-width: 400px;
+            max-width: 500px;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #667eea, #764ba2);
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
             width: 45%;
-            border-radius: 4px;
+            border-radius: 3px;
             transition: width 1s ease-in-out;
         }
 
         .contact {
-            color: #bdc3c7;
-            font-size: 0.95rem;
-            margin-top: 30px;
+            color: #94a3b8;
+            font-size: 1rem;
+            margin-top: 40px;
         }
 
         .contact a {
-            color: #667eea;
+            color: #818cf8;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 500;
         }
 
         .contact a:hover {
             text-decoration: underline;
         }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 40px 30px;
-            }
+        /* Countdown timer styling */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 40px 0;
+        }
 
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 20px 15px;
+            min-width: 90px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .countdown-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 5px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
             h1 {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
             }
 
             .subtitle {
+                font-size: 1.2rem;
+            }
+
+            p {
                 font-size: 1.1rem;
+            }
+
+            .cta-button {
+                padding: 18px 35px;
+                font-size: 1.1rem;
+            }
+
+            .countdown {
+                gap: 15px;
+            }
+
+            .countdown-item {
+                min-width: 70px;
+                padding: 15px 10px;
+            }
+
+            .countdown-number {
+                font-size: 1.8rem;
+            }
+
+            .countdown-label {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
             }
 
             p {
@@ -191,42 +259,31 @@
             }
 
             .cta-button {
-                padding: 16px 32px;
-                font-size: 1.1rem;
-            }
-
-            .logo {
-                width: 60px;
-                height: 60px;
-                font-size: 24px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 30px 20px;
-            }
-
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            .subtitle {
+                padding: 16px 30px;
                 font-size: 1rem;
-            }
-
-            .cta-button {
-                padding: 14px 25px;
-                font-size: 1rem;
-                gap: 8px;
+                gap: 10px;
             }
 
             .book-icon {
                 font-size: 1.2rem;
             }
+
+            .countdown {
+                gap: 10px;
+                flex-wrap: wrap;
+            }
+
+            .countdown-item {
+                min-width: 65px;
+                padding: 12px 8px;
+            }
+
+            .countdown-number {
+                font-size: 1.5rem;
+            }
         }
 
-        /* Animazioni di entrata */
+        /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -238,18 +295,24 @@
             }
         }
 
-        .container {
+        .container > * {
             animation: fadeInUp 0.8s ease-out;
         }
+
+        .container > *:nth-child(1) { animation-delay: 0.1s; }
+        .container > *:nth-child(2) { animation-delay: 0.2s; }
+        .container > *:nth-child(3) { animation-delay: 0.3s; }
+        .container > *:nth-child(4) { animation-delay: 0.4s; }
+        .container > *:nth-child(5) { animation-delay: 0.5s; }
+        .container > *:nth-child(6) { animation-delay: 0.6s; }
+        .container > *:nth-child(7) { animation-delay: 0.7s; }
     </style>
 </head>
 <body>
-    <div class="overlay"></div>
-    
     <div class="container">
         <div class="logo">🏛️</div>
         
-        <h1>Il Mestiere del Sindaco</h1>
+        <h1>IL MESTIERE DEL SINDACO</h1>
         <div class="subtitle">La guida pratica per nuovi amministratori locali</div>
         
         <p>Il nostro sito ufficiale sarà presto disponibile con contenuti esclusivi e risorse utili per amministratori locali.</p>
