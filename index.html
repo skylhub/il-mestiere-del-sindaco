@@ -1,1115 +1,180 @@
 <!DOCTYPE html>
-<html lang="it" data-theme="dark">
+<html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Il Mestiere del Sindaco — Manuale per Nuovi Amministratori</title>
-  <meta name="description" content="Il manuale pratico per chi diventa sindaco: competenze, procedure, modelli, check-list e strategie per amministrare bene fin dal primo giorno." />
-  <meta name="keywords" content="sindaco, manuale sindaco, amministrazione locale, competenze sindaco, guida nuovo sindaco, libro sindaco" />
-  <meta property="og:title" content="Il Mestiere del Sindaco — Manuale per Nuovi Amministratori" />
-  <meta property="og:description" content="Dalla proclamazione al primo consiglio comunale: tutto ciò che un nuovo sindaco deve sapere." />
-  <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://skylhub.github.io/il-mestiere-del-sindaco/" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230a0a12'/%3E%3Crect x='18' y='32' width='28' height='24' rx='3' fill='%2300f0ff' opacity='0.9'/%3E%3Crect x='22' y='36' width='8' height='8' rx='1.5' fill='%230a0a12'/%3E%3Crect x='34' y='36' width='8' height='8' rx='1.5' fill='%230a0a12'/%3E%3Cpath d='M12 34l20-16 20 16' stroke='%2300f0ff' stroke-width='4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='28' y='40' width='8' height='16' rx='1' fill='%230a0a12'/%3E%3C/svg%3E" />
-  <style>
-    /* ===== NEXAVERSE DARK THEME ===== */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --primary: #00f0ff;
-      --secondary: #ff00d4;
-      --accent: #9d4edd;
-      --dark-1: #0a0a12;
-      --dark-2: #12121f;
-      --dark-3: #1a1a2e;
-      --glass-bg: rgba(255, 255, 255, 0.03);
-      --glass-border: rgba(255, 255, 255, 0.08);
-      --glow-cyan: rgba(0, 240, 255, 0.4);
-      --glow-magenta: rgba(255, 0, 212, 0.4);
-      --radius: 20px;
-    }
-
-    body {
-      font-family: 'Outfit', sans-serif;
-      background: var(--dark-1);
-      color: #ffffff;
-      overflow-x: hidden;
-      min-height: 100vh;
-    }
-
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
-    .container { width: min(1200px, calc(100% - 32px)); margin: 0 auto; position: relative; z-index: 10; }
-
-    /* ===== AMBIENT BACKGROUND ===== */
-    .ambient-bg {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      pointer-events: none; z-index: 0; overflow: hidden;
-    }
-    .orb {
-      position: absolute; border-radius: 50%; filter: blur(80px);
-      animation: float 20s ease-in-out infinite;
-    }
-    .orb-1 {
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, var(--glow-cyan) 0%, transparent 70%);
-      top: -200px; left: -200px; animation-delay: 0s;
-    }
-    .orb-2 {
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, var(--glow-magenta) 0%, transparent 70%);
-      bottom: -150px; right: -150px; animation-delay: -7s;
-    }
-    .orb-3 {
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(157, 78, 221, 0.3) 0%, transparent 70%);
-      top: 50%; left: 50%; transform: translate(-50%, -50%); animation-delay: -14s;
-    }
-    @keyframes float {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      25% { transform: translate(50px, -30px) scale(1.05); }
-      50% { transform: translate(-30px, 50px) scale(0.95); }
-      75% { transform: translate(-50px, -20px) scale(1.02); }
-    }
-
-    .grid-overlay {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background-image:
-        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-      background-size: 80px 80px;
-      pointer-events: none; z-index: 1;
-    }
-
-    /* ===== NAV (sticky transparent over hero) ===== */
-    .nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(10, 10, 18, 0.6);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .nav-inner {
-      min-height: 70px; display: flex; align-items: center;
-      justify-content: space-between; gap: 20px;
-    }
-    .brand {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-family: 'Syne', sans-serif;
-      font-weight: 600; letter-spacing: 1px; font-size: 0.95rem;
-      background: linear-gradient(135deg, var(--primary) 0%, #ffffff 50%, var(--secondary) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-      white-space: nowrap;
-    }
-    .brand-mark {
-      width: 10px; height: 10px; border-radius: 50%;
-      background: var(--primary);
-      box-shadow: 0 0 12px var(--glow-cyan);
-      flex: 0 0 10px;
-    }
-    .nav-right { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: flex-end; }
-    .menu { display: flex; align-items: center; gap: 0; }
-    .menu a {
-      margin-left: 20px; color: rgba(255,255,255,0.6);
-      font-weight: 400; font-size: 0.85rem; letter-spacing: 1px;
-      transition: color 0.3s ease;
-    }
-    .menu a:hover { color: var(--primary); }
-    .theme-toggle {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 8px 14px; border-radius: 50px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      color: rgba(255,255,255,0.7); cursor: pointer;
-      font-family: 'Outfit', sans-serif; font-size: 0.78rem;
-      transition: all 0.3s ease;
-    }
-    .theme-toggle:hover { border-color: var(--primary); color: var(--primary); }
-    .theme-toggle .icon { width: 14px; height: 14px; display: inline-block; }
-    .hamburger {
-      display: none; width: 42px; height: 42px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      color: rgba(255,255,255,0.7);
-      border-radius: 12px; cursor: pointer;
-      align-items: center; justify-content: center;
-      transition: all 0.3s ease;
-    }
-    .hamburger:hover { border-color: var(--primary); }
-    .hamburger svg { width: 20px; height: 20px; }
-    .mobile-menu {
-      display: none; position: fixed; inset: 70px 0 auto 0;
-      background: rgba(10, 10, 18, 0.95);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      z-index: 99; padding: 16px;
-    }
-    .mobile-menu.open { display: block; }
-    .mobile-menu a {
-      display: block; padding: 14px 10px; font-weight: 500;
-      color: rgba(255,255,255,0.7); border-radius: 12px;
-      letter-spacing: 1px; font-size: 0.9rem;
-    }
-    .mobile-menu a:hover { background: rgba(255,255,255,0.05); color: var(--primary); }
-
-    /* ===== HERO — BREEZED STYLE ===== */
-    .hero {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
-      background: #000;
-    }
-    .hero img.hero-bg {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: center;
-    }
-    .hero-overlay {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: linear-gradient(
-        135deg,
-        rgba(10, 10, 18, 0.85) 0%,
-        rgba(10, 10, 18, 0.55) 50%,
-        rgba(10, 10, 18, 0.30) 100%
-      );
-      z-index: 2;
-    }
-    .hero-content {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 3;
-      text-align: center;
-      width: 90%;
-      max-width: 820px;
-      padding: 40px;
-    }
-    .hero-badge {
-      display: inline-block; padding: 8px 20px;
-      background: rgba(0, 240, 255, 0.12);
-      border: 1px solid rgba(0, 240, 255, 0.3);
-      border-radius: 50px;
-      font-size: 0.78rem; letter-spacing: 2px;
-      color: var(--primary); margin-bottom: 24px;
-      animation: fadeInDown 1s both 0.5s;
-    }
-    .hero h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(2.4rem, 5.5vw, 4.8rem);
-      font-weight: 700;
-      line-height: 1.1;
-      margin-bottom: 8px;
-      animation: fadeInDown 1s both 0.8s;
-    }
-    .hero h1 span {
-      background: linear-gradient(135deg, var(--primary) 0%, #ffffff 50%, var(--secondary) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero .subtitle {
-      font-size: 1.1rem; font-weight: 300; letter-spacing: 3px;
-      color: rgba(255,255,255,0.6); margin-bottom: 18px;
-      animation: fadeInDown 1s both 1.1s;
-    }
-    .hero p {
-      color: rgba(255,255,255,0.7); font-size: 1rem;
-      line-height: 1.7; max-width: 600px; margin: 0 auto 28px;
-      animation: fadeInDown 1s both 1.3s;
-    }
-    .hero-actions {
-      display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
-      animation: fadeInUp 1s both 1.6s;
-    }
-
-    /* ===== BUTTONS ===== */
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      padding: 14px 28px; border-radius: 50px;
-      font-family: 'Outfit', sans-serif; font-weight: 500;
-      font-size: 0.9rem; letter-spacing: 1px;
-      transition: all 0.3s ease; cursor: pointer;
-      position: relative; overflow: hidden;
-    }
-    .btn::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0;
-      height: 50%;
-      background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 100%);
-      border-radius: 50px 50px 0 0;
-      pointer-events: none;
-    }
-    .btn-primary {
-      background: rgba(0, 240, 255, 0.15);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--primary);
-      color: var(--primary);
-    }
-    .btn-primary:hover {
-      background: rgba(0, 240, 255, 0.2);
-      box-shadow: 0 0 30px rgba(0, 200, 220, 0.3);
-      transform: translateY(-3px);
-    }
-    .btn-secondary {
-      background: rgba(255,255,255,0.05);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.15);
-      color: rgba(255,255,255,0.8);
-    }
-    .btn-secondary:hover {
-      border-color: rgba(255,255,255,0.3);
-      color: #ffffff;
-      transform: translateY(-3px);
-    }
-    .btn-gold {
-      background: rgba(245, 158, 11, 0.15);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(245, 158, 11, 0.4);
-      color: #fbbf24;
-    }
-    .btn-gold:hover {
-      background: rgba(245, 158, 11, 0.2);
-      box-shadow: 0 0 25px rgba(245, 158, 11, 0.2);
-      transform: translateY(-3px);
-    }
-    .btn-white {
-      background: rgba(255,255,255,0.9);
-      border: 1px solid transparent;
-      color: var(--dark-1);
-    }
-    .btn-white:hover {
-      background: #ffffff;
-      transform: translateY(-3px);
-      box-shadow: 0 0 25px rgba(255,255,255,0.15);
-    }
-
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ===== Scroll indicator ===== */
-    .scroll-indicator {
-      position: absolute;
-      bottom: 30px; left: 50%;
-      transform: translateX(-50%);
-      z-index: 3;
-      animation: fadeInUp 1s both 2.5s;
-    }
-    .scroll-indicator a {
-      display: inline-block;
-      width: 30px; height: 48px;
-      border: 2px solid rgba(255,255,255,0.3);
-      border-radius: 15px;
-      position: relative;
-      transition: border-color 0.3s ease;
-    }
-    .scroll-indicator a:hover { border-color: var(--primary); }
-    .scroll-indicator a::after {
-      content: '';
-      position: absolute;
-      top: 8px; left: 50%;
-      transform: translateX(-50%);
-      width: 4px; height: 10px;
-      background: var(--primary);
-      border-radius: 2px;
-      animation: scrollDot 2s infinite;
-    }
-    @keyframes scrollDot {
-      0% { opacity: 1; top: 8px; }
-      50% { opacity: 1; top: 24px; }
-      100% { opacity: 0; top: 24px; }
-    }
-
-    /* ===== SECTION BASE ===== */
-    .section { margin-top: 60px; }
-    .section-head { text-align: center; max-width: 700px; margin: 0 auto 32px; }
-    .section-head .badge {
-      display: inline-block; padding: 6px 16px;
-      background: rgba(0, 240, 255, 0.1);
-      border: 1px solid rgba(0, 240, 255, 0.3);
-      border-radius: 50px;
-      font-size: 0.75rem; letter-spacing: 2px;
-      color: var(--primary); margin-bottom: 14px;
-    }
-    .section-head h2 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(1.4rem, 2.5vw, 1.8rem);
-      font-weight: 600;
-    }
-    .section-head p { margin-top: 10px; color: rgba(255,255,255,0.5); font-size: 0.95rem; }
-    html[data-theme=light] {
-      --dark-1: #f5f7fa !important;
-      --dark-2: #ffffff !important;
-      --glass-bg: rgba(255,255,255,0.7) !important;
-      --glass-border: rgba(0,0,0,0.08) !important;
-    }
-    html[data-theme=light] .section-head p,
-    html[data-theme=light] .glass-card p,
-    html[data-theme=light] .testimonial blockquote,
-    html[data-theme=light] .testimonial cite,
-    html[data-theme=light] .faq-item p,
-    html[data-theme=light] .author-card p,
-    html[data-theme=light] .chapter-item p,
-    html[data-theme=light] .stat-label,
-    html[data-theme=light] .pricing-card ul li,
-    html[data-theme=light] .cta-band p,
-    html[data-theme=light] footer,
-    html[data-theme=light] footer *,
-    html[data-theme=light] .hero .subtitle,
-    html[data-theme=light] .hero p,
-    html[data-theme=light] .pricing-card p,
-    html[data-theme=light] .glass-card .muted,
-    html[data-theme=light] .section-head p,
-    html[data-theme=light] .hero-card p,
-    html[data-theme=light] .pricing-card .muted,
-    html[data-theme=light] .author-card .role,
-    html[data-theme=light] .nav-right .menu a,
-    html[data-theme=light] .btn-secondary { color: #374151 !important; }
-    html[data-theme=light] .section-head h2,
-    html[data-theme=light] .glass-card h3,
-    html[data-theme=light] .chapter-item h4,
-    html[data-theme=light] .faq-item summary,
-    html[data-theme=light] .pricing-card h3,
-    html[data-theme=light] .testimonial .stars,
-    html[data-theme=light] .chapter-num { color: #111827 !important; }
-    html[data-theme=light] .section-head .badge,
-    html[data-theme=light] .hero-badge,
-    html[data-theme=light] .hero .subtitle { color: #1e40af !important; border-color: #1e40af !important; }
-    html[data-theme=light] .hero-card .price,
-    html[data-theme=light] .stat-num,
-    html[data-theme=light] .pricing-card .price-big { background: #1e40af !important; -webkit-background-clip: text !important; background-clip: text !important; -webkit-text-fill-color: transparent !important; }
-    html[data-theme=light] .brand { -webkit-text-fill-color: #1e40af !important; color: #1e40af !important; }
-
-    /* ===== GLASS CARD ===== */
-    .glass-card {
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius);
-      padding: 24px;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.4s ease;
-    }
-
-    /* ===== CONTACT ===== */
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-    .contact-form { display: flex; flex-direction: column; gap: 16px; }
-    .form-group input,
-    .form-group textarea {
-      width: 100%; padding: 14px 18px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--glass-border);
-      border-radius: 12px;
-      color: inherit;
-      font-family: 'Outfit', sans-serif; font-size: 0.9rem;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-    .form-group input::placeholder,
-    .form-group textarea::placeholder { color: rgba(255,255,255,0.3); }
-    .form-group input:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 15px var(--glow-cyan);
-    }
-    .form-group textarea { min-height: 130px; resize: vertical; }
-    .map-frame {
-      width: 100%; height: 100%; min-height: 380px;
-      border: 0; display: block;
-    }
-    html[data-theme=light] .form-group input,
-    html[data-theme=light] .form-group textarea {
-      background: rgba(0,0,0,0.03);
-      border-color: rgba(0,0,0,0.1);
-      color: #111827;
-    }
-    html[data-theme=light] .form-group input::placeholder,
-    html[data-theme=light] .form-group textarea::placeholder { color: rgba(0,0,0,0.3); }
-    html[data-theme=light] .faq-item summary { color: #1e40af; }
-    html[data-theme=light] .pricing-card.featured { border-color: #1e40af; }
-    html[data-theme=light] .hero-overlay { background: linear-gradient(135deg, rgba(245,247,250,0.9) 0%, rgba(245,247,250,0.6) 50%, rgba(245,247,250,0.25) 100%) !important; }
-    html[data-theme=light] .btn-primary { color: #1e40af !important; border-color: #1e40af !important; }
-    html[data-theme=light] .btn-primary:hover { background: rgba(30,64,175,0.1) !important; box-shadow: 0 0 25px rgba(30,64,175,0.2) !important; }
-    html[data-theme=light] .btn-gold { color: #b45309 !important; border-color: #b45309 !important; }
-    html[data-theme=light] .nav { background: rgba(245,247,250,0.85) !important; }
-    html[data-theme=light] .scroll-indicator a { border-color: rgba(0,0,0,0.2) !important; }
-    html[data-theme=light] .scroll-indicator a::after { background: #1e40af !important; }
-    html[data-theme=light] .author-card img { border-color: #1e40af !important; box-shadow: 0 0 20px rgba(30,64,175,0.2) !important; }
-
-    /* ===== SOCIAL ICONS ===== */
-    .social-links { display: flex; gap: 10px; align-items: center; }
-    .social-links a {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--glass-border);
-      color: rgba(255,255,255,0.5);
-      transition: all 0.3s ease;
-    }
-    .social-links a:hover {
-      background: rgba(0, 240, 255, 0.1);
-      border-color: var(--primary);
-      color: var(--primary);
-      transform: translateY(-2px);
-    }
-    html[data-theme=light] .social-links a {
-      background: rgba(0,0,0,0.03);
-      border-color: rgba(0,0,0,0.1);
-      color: rgba(0,0,0,0.4);
-    }
-    html[data-theme=light] .social-links a:hover {
-      background: rgba(30, 64, 175, 0.1);
-      border-color: #1e40af;
-      color: #1e40af;
-    }
-    @media (max-width: 960px) {
-      .contact-grid { grid-template-columns: 1fr; }
-    }
-    .glass-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
-    }
-    .glass-card:hover {
-      transform: translateY(-5px);
-      background: rgba(255,255,255,0.05);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    }
-    .glass-card img {
-      width: 100%; height: 170px; object-fit: cover;
-      border-radius: 14px; margin-bottom: 16px;
-    }
-    .glass-card h3 { font-family: 'Syne', sans-serif; font-size: 1rem; margin-bottom: 6px; }
-    .glass-card p { color: rgba(255,255,255,0.6); font-size: 0.88rem; line-height: 1.6; }
-    .glass-card .icon-big { font-size: 2.2rem; margin-bottom: 12px; display: block; }
-
-    /* ===== GRIDS ===== */
-    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-
-    /* ===== STATS ===== */
-    .stats-row {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
-      padding: 32px 24px;
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius);
-      position: relative; overflow: hidden;
-    }
-    .stats-row::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
-    }
-    .stat-item { text-align: center; }
-    .stat-num {
-      font-family: 'Syne', sans-serif;
-      font-size: 2.2rem; font-weight: 700;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .stat-label { display: block; margin-top: 6px; color: rgba(255,255,255,0.5); font-size: 0.8rem; letter-spacing: 1px; }
-
-    /* ===== CHAPTER LIST ===== */
-    .chapter-list { display: grid; gap: 10px; }
-    .chapter-item {
-      display: flex; align-items: center; gap: 16px;
-      padding: 16px 20px;
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
-      border-radius: 14px;
-      transition: all 0.3s ease;
-      position: relative; overflow: hidden;
-    }
-    .chapter-item::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-    }
-    .chapter-item:hover {
-      transform: translateX(6px);
-      border-color: rgba(0, 240, 255, 0.2);
-    }
-    .chapter-num {
-      width: 34px; height: 34px; border-radius: 10px;
-      background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(157, 78, 221, 0.2));
-      border: 1px solid rgba(0, 240, 255, 0.2);
-      display: grid; place-items: center;
-      font-family: 'Syne', sans-serif;
-      font-weight: 700; font-size: 0.8rem;
-      color: var(--primary); flex: 0 0 34px;
-    }
-    .chapter-item h4 { font-size: 0.92rem; margin-bottom: 2px; }
-    .chapter-item p { color: rgba(255,255,255,0.5); font-size: 0.8rem; margin: 0; }
-
-    /* ===== TESTIMONIALS ===== */
-    .testimonials { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .testimonial {
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius);
-      padding: 26px;
-      position: relative; overflow: hidden;
-      transition: all 0.3s ease;
-    }
-    .testimonial::before { content: '"'; position: absolute; top: 16px; right: 22px;
-      font-family: 'Syne', sans-serif; font-size: 56px;
-      color: rgba(0, 240, 255, 0.08); line-height: 1;
-    }
-    .testimonial:hover { transform: translateY(-3px); border-color: rgba(0, 240, 255, 0.15); }
-    .testimonial .stars { color: #fbbf24; font-size: 1rem; margin-bottom: 10px; }
-    .testimonial blockquote {
-      font-style: italic; color: rgba(255,255,255,0.7);
-      font-size: 0.88rem; line-height: 1.7; margin-bottom: 14px;
-    }
-    .testimonial cite { font-style: normal; color: rgba(255,255,255,0.4); font-size: 0.78rem; }
-
-    /* ===== PRICING ===== */
-    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .pricing-card {
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius);
-      padding: 30px 24px;
-      text-align: center;
-      position: relative; overflow: hidden;
-      transition: all 0.4s ease;
-    }
-    .pricing-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
-    }
-    .pricing-card.featured { transform: scale(1.04); border-color: var(--primary); }
-    .pricing-card.featured::after {
-      content: "Più venduto";
-      position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
-      padding: 4px 18px;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      border-radius: 0 0 50px 50px;
-      font-size: 0.65rem; font-weight: 600; letter-spacing: 1px; color: #fff;
-    }
-    .pricing-card:hover { transform: translateY(-5px); border-color: rgba(0, 240, 255, 0.2); }
-    .pricing-card.featured:hover { transform: scale(1.04) translateY(-5px); }
-    .pricing-card h3 { font-family: 'Syne', sans-serif; font-size: 1.05rem; margin-bottom: 4px; }
-    .pricing-card .price-big {
-      font-family: 'Syne', sans-serif;
-      font-size: 2.2rem; font-weight: 700;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin: 14px 0;
-    }
-    .pricing-card ul { list-style: none; padding: 0; margin: 16px 0; text-align: left; }
-    .pricing-card ul li {
-      padding: 6px 0; display: flex; gap: 8px; align-items: center;
-      font-size: 0.85rem; color: rgba(255,255,255,0.6);
-    }
-    .pricing-card ul li::before { content: "✓"; color: var(--primary); font-weight: 700; }
-
-    /* ===== AUTHOR ===== */
-    .author-card {
-      display: flex; gap: 30px; align-items: center;
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius);
-      padding: 32px;
-      position: relative; overflow: hidden;
-    }
-    .author-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
-    }
-    .author-card img {
-      width: 110px; height: 110px; border-radius: 50%;
-      object-fit: cover; flex: 0 0 110px;
-      border: 2px solid var(--primary);
-      box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
-    }
-    .author-card h3 { font-family: 'Syne', sans-serif; margin-bottom: 4px; }
-    .author-card .role { color: var(--primary); font-weight: 500; font-size: 0.85rem; }
-    .author-card p { margin-top: 10px; color: rgba(255,255,255,0.5); font-size: 0.85rem; line-height: 1.7; }
-
-    /* ===== FAQ ===== */
-    .faq-item {
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
-      border-radius: 16px;
-      padding: 18px 22px;
-      margin-bottom: 12px;
-      position: relative; overflow: hidden;
-      transition: border-color 0.3s ease;
-    }
-    .faq-item:hover { border-color: rgba(0, 240, 255, 0.15); }
-    .faq-item summary {
-      font-family: 'Syne', sans-serif;
-      font-weight: 600; cursor: pointer;
-      font-size: 0.92rem;
-    }
-    .faq-item p { margin: 14px 0 0; color: rgba(255,255,255,0.5); font-size: 0.85rem; line-height: 1.7; }
-
-    /* ===== CTA BAND ===== */
-    .cta-band {
-      margin-top: 48px; padding: 48px 40px; text-align: center;
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
-      border-radius: 30px;
-      position: relative; overflow: hidden;
-    }
-    .cta-band::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--primary), var(--accent), transparent);
-    }
-    .cta-band h2 { font-family: 'Syne', sans-serif; font-size: 1.6rem; margin-bottom: 10px; }
-    .cta-band p { color: rgba(255,255,255,0.5); margin-bottom: 22px; font-size: 0.92rem; }
-    .cta-band .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-
-    /* ===== FOOTER ===== */
-    footer {
-      margin-top: 48px; padding: 30px 0;
-      border-top: 1px solid var(--glass-border);
-      color: rgba(255,255,255,0.4); font-size: 0.8rem;
-    }
-    .footer-inner { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
-    .footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
-    .footer-links a:hover { color: var(--primary); }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 960px) {
-      .grid-3, .grid-2, .pricing-grid, .testimonials, .stats-row {
-        grid-template-columns: 1fr;
-      }
-      .pricing-card.featured { transform: scale(1); }
-      .pricing-card.featured:hover { transform: translateY(-5px); }
-      .author-card { flex-direction: column; text-align: center; }
-      .hero h1 { font-size: clamp(1.8rem, 6vw, 2.8rem); }
-    }
-    @media (max-width: 720px) {
-      .menu { display: none; }
-      .hamburger { display: inline-flex; }
-    }
-
-    /* ===== MAIN CONTENT WRAPPER ===== */
-    main { padding: 60px 0 72px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Il Mestiere del Sindaco - Coming Soon</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            max-width: 600px;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 1s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #00f0ff, #ff00d4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { opacity: 0.8; }
+        }
+        
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            min-width: 80px;
+        }
+        
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #00f0ff;
+        }
+        
+        .countdown-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: #aaa;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(to right, #00f0ff, #ff00d4);
+            width: 30%;
+            border-radius: 4px;
+            animation: progress 3s infinite ease-in-out;
+        }
+        
+        @keyframes progress {
+            0% { width: 30%; }
+            50% { width: 70%; }
+            100% { width: 30%; }
+        }
+        
+        .contact {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        .contact a {
+            color: #00f0ff;
+            text-decoration: none;
+        }
+        
+        .contact a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            p {
+                font-size: 1rem;
+            }
+            
+            .countdown {
+                flex-wrap: wrap;
+            }
+            
+            .countdown-item {
+                min-width: 60px;
+                padding: 0.7rem;
+            }
+            
+            .countdown-number {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- Ambient Background -->
-  <div class="ambient-bg">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-  </div>
-  <div class="grid-overlay"></div>
-
-  <!-- NAV -->
-  <div class="nav">
-    <div class="container nav-inner">
-      <div class="brand">
-        <span class="brand-mark"></span>
-        <span>Il Mestiere del Sindaco</span>
-      </div>
-      <div class="nav-right">
-        <div class="menu" id="desktopMenu">
-          <a href="#manuale">Manuale</a>
-          <a href="#indice">Indice</a>
-          <a href="#autore">Autore</a>
-          <a href="#recensioni">Recensioni</a>
-          <a href="#acquista">Acquista</a>
-          <a href="#contatti">Contatti</a>
+    <div class="container">
+        <h1>Il Mestiere del Sindaco</h1>
+        <p>Stiamo preparando qualcosa di straordinario per voi. Il nostro sito ufficiale sarà presto disponibile con contenuti esclusivi e risorse utili per amministratori locali.</p>
+        
+        <div class="progress-bar">
+            <div class="progress"></div>
         </div>
-        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Tema chiaro">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="5"></circle>
-            <path d="M12 1v2"></path>
-            <path d="M12 21v2"></path>
-            <path d="M4.22 4.22l1.42 1.42"></path>
-            <path d="M18.36 18.36l1.42 1.42"></path>
-            <path d="M1 12h2"></path>
-            <path d="M21 12h2"></path>
-            <path d="M4.22 19.78l1.42-1.42"></path>
-            <path d="M18.36 5.64l1.42-1.42"></path>
-          </svg>
-          <span>Light</span>
-        </button>
-        <button class="hamburger" id="hamburgerBtn" type="button" aria-label="Menu">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-            <path d="M4 7h16"></path>
-            <path d="M4 12h16"></path>
-            <path d="M4 17h16"></path>
-          </svg>
-        </button>
-      </div>
+        
+        <p>Restate sintonizzati per il lancio ufficiale!</p>
+        
+        <div class="contact">
+            Per informazioni: <a href="mailto:info@ilmestieredelsindaco.com">info@ilmestieredelsindaco.com</a>
+        </div>
     </div>
-  </div>
-
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#manuale">Manuale</a>
-    <a href="#indice">Indice</a>
-    <a href="#autore">Autore</a>
-    <a href="#recensioni">Recensioni</a>
-    <a href="#acquista">Acquista</a>
-    <a href="#contatti">Contatti</a>
-  </div>
-
-  <!-- HERO — BREEZED STYLE: full-viewport image -->
-  <section class="hero" id="top">
-    <img class="hero-bg" src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1800&q=80" alt="Palazzo comunale" />
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <div class="hero-badge">📖 Manuale pratico per nuovi amministratori</div>
-      <h1><span>Il Mestiere</span> del Sindaco</h1>
-      <div class="subtitle">Dalla proclamazione al primo consiglio comunale</div>
-      <p>
-        La guida completa per affrontare con sicurezza il ruolo di sindaco: competenze, modelli,
-        check-list, procedure e strategie. <strong>Scritto da un ex sindaco per i nuovi sindaci.</strong>
-      </p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="#acquista">Acquista il manuale →</a>
-        <a class="btn btn-secondary" href="#indice">Scopri l'indice</a>
-      </div>
-    </div>
-    <div class="scroll-indicator">
-      <a href="#contenuto"></a>
-    </div>
-  </section>
-
-  <main id="contenuto" class="container">
-    <!-- STATS -->
-    <section class="section">
-      <div class="stats-row">
-        <div class="stat-item">
-          <div class="stat-num">320+</div>
-          <span class="stat-label">Pagine</span>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">12</div>
-          <span class="stat-label">Capitoli</span>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">50+</div>
-          <span class="stat-label">Modelli e check-list</span>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">100%</div>
-          <span class="stat-label">Pratico, zero teoria astratta</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- MANUALE -->
-    <section id="manuale" class="section">
-      <div class="section-head">
-        <span class="badge">Il libro</span>
-        <h2>Cosa contiene il manuale</h2>
-        <p>Dalla proclamazione alla gestione quotidiana: 6 aree chiave per un sindaco.</p>
-      </div>
-      <div class="grid-3">
-        <div class="glass-card">
-          <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?auto=format&fit=crop&w=800&q=80" alt="Primi 100 giorni" loading="lazy" />
-          <h3>✅ Primi 100 giorni</h3>
-          <p>Check-list giorno per giorno: insediamento, nomine, passaggio di consegne, primo consiglio comunale.</p>
-        </div>
-        <div class="glass-card">
-          <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=80" alt="Modelli e procedure" loading="lazy" />
-          <h3>📋 Modelli e procedure</h3>
-          <p>Decreti, ordinanze, delibere di giunta, determine: 50 documenti pronti all'uso con spiegazioni.</p>
-        </div>
-        <div class="glass-card">
-          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80" alt="Gestione squadra" loading="lazy" />
-          <h3>👥 Gestione della squadra</h3>
-          <p>Come scegliere assessori, dirigenti e collaboratori. Deleghe, valutazione e gestione dei conflitti.</p>
-        </div>
-        <div class="glass-card">
-          <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=800&q=80" alt="Comunicazione" loading="lazy" />
-          <h3>📢 Comunicazione istituzionale</h3>
-          <p>Social, stampa, comunicati, conferenze, gestione delle crisi: un piano di comunicazione per il sindaco.</p>
-        </div>
-        <div class="glass-card">
-          <img src="https://images.unsplash.com/photo-1453873531674-2151bcd01707?auto=format&fit=crop&w=800&q=80" alt="Bilancio" loading="lazy" />
-          <h3>💰 Bilancio e finanze</h3>
-          <p>Dal bilancio di previsione al rendiconto: capire i numeri del Comune senza essere commercialisti.</p>
-        </div>
-        <div class="glass-card">
-          <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&w=800&q=80" alt="Emergenze" loading="lazy" />
-          <h3>🚨 Gestione emergenze</h3>
-          <p>Ordinanze contingibili, protezione civile, crisi idrica, eventi climatici: protocolli e procedure.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- INDICE -->
-    <section id="indice" class="section">
-      <div class="section-head">
-        <span class="badge">Indice</span>
-        <h2>I 12 capitoli del manuale</h2>
-        <p>Ogni capitolo è autonomo e contiene esempi reali, riferimenti normativi e azioni concrete.</p>
-      </div>
-      <div class="chapter-list">
-        <div class="chapter-item"><div class="chapter-num">1</div><div><h4>L'insediamento: i primi 30 giorni</h4><p>Passaggio di consegne, Segretario Comunale, primo consiglio, nomina assessori, deleghe</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">2</div><div><h4>La macchina comunale: organi e funzionamento</h4><p>Giunta, Consiglio, dirigenti, Segretario, organi di controllo e di valutazione</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">3</div><div><h4>Il bilancio spiegato semplice</h4><p>Bilancio di previsione, PEG, rendiconto, variazioni, pareggio e armadi contabili</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">4</div><div><h4>Provvedimenti amministrativi: ordinanze, delibere, decreti</h4><p>Modelli, procedure, competenze, tempi, pubblicazione e impugnative</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">5</div><div><h4>La gestione del personale</h4><p>Assunzioni, dirigenti, RSU, contrattazione, valutazione, assenze, concorsi</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">6</div><div><h4>Servizi pubblici e appalti</h4><p>Gare, concessioni, servizi alla persona, rifiuti, trasporti, economie di scala</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">7</div><div><h4>Urbanistica e territorio</h4><p>PUG, permessi di costruire, edilizia, vincoli ambientali, paesaggio, rigenerazione urbana</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">8</div><div><h4>Ordine pubblico e sicurezza</h4><p>Polizia locale, ordinanze di sicurezza, videosorveglianza, DASPO, gestione eventi</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">9</div><div><h4>Protezione civile ed emergenze</h4><p>Piano comunale, rischi, volontariato, ordinanze contingibili, stato di calamità</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">10</div><div><h4>Comunicare da sindaco</h4><p>Ufficio stampa, social media, conferenze, comunicati, gestione delle crisi reputazionali</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">11</div><div><h4>Rapporti con enti e istituzioni</h4><p>Regione, Provincia, Prefettura, ANCI, Unione dei Comuni, fondi PNRR</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">12</div><div><h4>Sopravvivere al mandato: tempo, stress e relazioni</h4><p>Organizzazione personale, gestione del tempo, conflitto politico, famiglia, uscita di scena</p></div></div>
-      </div>
-    </section>
-
-    <!-- PER CHI -->
-    <section class="section">
-      <div class="section-head">
-        <span class="badge">Destinatari</span>
-        <h2>A chi serve questo manuale</h2>
-      </div>
-      <div class="grid-3">
-        <div class="glass-card" style="text-align:center;">
-          <span class="icon-big">🏛️</span>
-          <h3>Nuovi sindaci</h3>
-          <p>Eletti per la prima volta e pronti ad affrontare la sfida amministrativa senza esperienza pregressa.</p>
-        </div>
-        <div class="glass-card" style="text-align:center;">
-          <span class="icon-big">🧑‍💼</span>
-          <h3>Assessori e consiglieri</h3>
-          <p>Chi entra in giunta o in consiglio per la prima volta e vuole capire ruoli, procedure e confini.</p>
-        </div>
-        <div class="glass-card" style="text-align:center;">
-          <span class="icon-big">📚</span>
-          <h3>Candidati sindaco</h3>
-          <p>Chi si prepara a candidarsi e vuole sapere esattamente cosa significa fare il sindaco.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- AUTORE -->
-    <section id="autore" class="section">
-      <div class="section-head">
-        <span class="badge">Autore</span>
-        <h2>Chi ha scritto il manuale</h2>
-      </div>
-      <div class="author-card">
-        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" alt="Autore" loading="lazy" />
-        <div>
-          <h3>Mario Rossi</h3>
-          <div class="role">Ex sindaco · Consulente PA · Docente</div>
-          <p>Due mandati da sindaco in un Comune di 15.000 abitanti, consulente ANCI, formatore per nuovi amministratori. Ha scritto questo manuale mettendo nero su bianco tutto ciò che avrebbe voluto sapere il giorno dell'elezione.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- RECENSIONI -->
-    <section id="recensioni" class="section">
-      <div class="section-head">
-        <span class="badge">Recensioni</span>
-        <h2>Cosa dicono i lettori</h2>
-      </div>
-      <div class="testimonials">
-        <div class="testimonial">
-          <div class="stars">★★★★★</div>
-          <blockquote>"Un manuale essenziale. Me lo hanno regalato il giorno della proclamazione e senza quello sarei andato in tilt."</blockquote>
-          <cite>— Luca F., Sindaco, Comune di 8.000 ab.</cite>
-        </div>
-        <div class="testimonial">
-          <div class="stars">★★★★★</div>
-          <blockquote>"Finalmente un libro pratico. Modelli pronti, check-list, esempi. Lo tengo sulla scrivania."</blockquote>
-          <cite>— Elena M., Assessora al Bilancio</cite>
-        </div>
-        <div class="testimonial">
-          <div class="stars">★★★★☆</div>
-          <blockquote>"L'ho regalato al mio successore. Se tutti i nuovi sindaci lo leggessero, il primo anno sarebbe più efficace."</blockquote>
-          <cite>— Giovanni P., Ex sindaco, 10 anni</cite>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTATTI -->
-    <section id="contatti" class="section">
-      <div class="section-head">
-        <span class="badge">Contatti</span>
-        <h2>Contattaci</h2>
-        <p>Hai domande? Vuoi un preventivo per il tuo Comune? Scrivici.</p>
-      </div>
-      <div class="contact-grid">
-        <div class="glass-card">
-          <form class="contact-form">
-            <div class="form-group">
-              <input type="text" placeholder="Nome e Cognome" />
-            </div>
-            <div class="form-group">
-              <input type="email" placeholder="Email" />
-            </div>
-            <div class="form-group">
-              <input type="text" placeholder="Oggetto" />
-            </div>
-            <div class="form-group">
-              <textarea placeholder="Il tuo messaggio"></textarea>
-            </div>
-            <button class="btn btn-primary" type="submit" style="width:100%;">Invia messaggio</button>
-          </form>
-        </div>
-        <div class="glass-card" style="padding:0;overflow:hidden;">
-          <iframe class="map-frame" src="https://www.google.com/maps?q=Roma&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mappa"></iframe>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="section">
-      <div class="section-head">
-        <span class="badge">FAQ</span>
-        <h2>Domande frequenti</h2>
-      </div>
-      <div class="faq-item"><details><summary>Il manuale è aggiornato alle ultime normative?</summary><p>Sì, l'edizione 2026 è aggiornata al TUEL, Codice degli Appalti e norme PNRR. Aggiornamento gratuito annuale per chi ha già acquistato.</p></details></div>
-      <div class="faq-item"><details><summary>Esiste anche in formato digitale?</summary><p>Sì, il manuale è disponibile in PDF, ePub e cartaceo. Con l'acquisto del cartaceo ricevi gratis il PDF.</p></details></div>
-      <div class="faq-item"><details><summary>Posso ordinarlo per il mio Comune?</summary><p>Certamente. Per ordini da 10 copie contattaci: sconti progressivi e fatturazione elettronica PA.</p></details></div>
-      <div class="faq-item"><details><summary>I modelli sono davvero pronti all'uso?</summary><p>Sì. Ogni modello è scaricabile in .docx e .pdf con QR code nei capitoli.</p></details></div>
-    </section>
-
-    <!-- PREZZI -->
-    <section id="acquista" class="section">
-      <div class="section-head">
-        <span class="badge">Acquista</span>
-        <h2>Scegli la tua edizione</h2>
-        <p>Consegna rapida in tutta Italia. Per ordini PA contattaci per fatturazione e sconti quantità.</p>
-      </div>
-      <div class="pricing-grid">
-        <div class="pricing-card">
-          <h3>Digitale</h3>
-          <p style="opacity:0.5;font-size:0.85rem;">PDF + ePub</p>
-          <div class="price-big">€14,90</div>
-          <ul>
-            <li>Formato PDF e ePub</li>
-            <li>Links cliccabili e indice navigabile</li>
-            <li>Modelli scaricabili</li>
-            <li>Consegna immediata via email</li>
-          </ul>
-          <a class="btn btn-secondary" href="#" style="width:100%;">Acquista</a>
-        </div>
-        <div class="pricing-card featured">
-          <h3>📖 Cartaceo</h3>
-          <p style="opacity:0.5;font-size:0.85rem;">Libro + PDF gratuito</p>
-          <div class="price-big">€24,90</div>
-          <ul>
-            <li>Volume cartaceo 320 pagine</li>
-            <li>PDF incluso gratis</li>
-            <li>Spedizione in 2-3 giorni</li>
-            <li>Modelli con QR code</li>
-            <li>Aggiornamenti annuali gratis</li>
-          </ul>
-          <a class="btn btn-primary" href="#" style="width:100%;">Acquista ora</a>
-        </div>
-        <div class="pricing-card">
-          <h3>🏢 PA Multipla</h3>
-          <p style="opacity:0.5;font-size:0.85rem;">10+ copie</p>
-          <div class="price-big">€19,90</div>
-          <ul>
-            <li>Prezzo per copia (da 10+)</li>
-            <li>Fatturazione elettronica PA</li>
-            <li>Spedizione centralizzata</li>
-            <li>PDF per ogni copia incluso</li>
-            <li>Supporto diretto con l'autore</li>
-          </ul>
-          <a class="btn btn-secondary" href="#" style="width:100%;">Contattaci</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <div class="cta-band">
-      <h2>Non aspettare il primo consiglio comunale</h2>
-      <p>Ordina ora e ricevi il manuale in 2-3 giorni. Oppure scarica l'anteprima gratuita.</p>
-      <div class="cta-btns">
-        <a class="btn btn-primary" href="#acquista">Acquista il manuale →</a>
-        <a class="btn btn-secondary" href="#">Scarica anteprima</a>
-      </div>
-    </div>
-  </main>
-
-  <footer>
-    <div class="container footer-inner">
-      <div><strong>Il Mestiere del Sindaco</strong> · Manuale per nuovi amministratori</div>
-      <div class="footer-links">
-        <a href="#">Privacy</a>
-        <a href="#">Termini</a>
-        <a href="#">FAQ</a>
-      </div>
-      <div class="social-links">
-        <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
-        <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
-        <a href="#" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-        <a href="#" aria-label="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
-      </div>
-      <div>© 2026</div>
-    </div>
-  </footer>
-
-  <script>
-    (function() {
-      // Theme toggle
-      const toggle = document.getElementById('themeToggle');
-      let lightMode = false;
-      toggle.addEventListener('click', () => {
-        lightMode = !lightMode;
-        if (lightMode) {
-          document.documentElement.setAttribute('data-theme', 'light');
-          document.documentElement.style.cssText = '';
-          document.body.style.color = '#111827';
-          toggle.querySelector('span').textContent = 'Dark';
-          toggle.querySelector('.icon').innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3c.5 0 .6.68.16.91A6.5 6.5 0 0 0 19.09 12.5c.23.44-.42.59-.88.29A8.96 8.96 0 0 1 21 12.79Z"></path>';
-        } else {
-          document.documentElement.setAttribute('data-theme', 'dark');
-          document.documentElement.style.cssText = '';
-          document.body.style.color = '#ffffff';
-          toggle.querySelector('span').textContent = 'Light';
-          toggle.querySelector('.icon').innerHTML = '<circle cx="12" cy="12" r="5"></circle><path d="M12 1v2"></path><path d="M12 21v2"></path><path d="M4.22 4.22l1.42 1.42"></path><path d="M18.36 18.36l1.42 1.42"></path><path d="M1 12h2"></path><path d="M21 12h2"></path><path d="M4.22 19.78l1.42-1.42"></path><path d="M18.36 5.64l1.42-1.42"></path>';
-        }
-      });
-
-      // Hamburger
-      const ham = document.getElementById('hamburgerBtn');
-      const mobile = document.getElementById('mobileMenu');
-      ham.addEventListener('click', () => mobile.classList.toggle('open'));
-      mobile.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobile.classList.remove('open')));
-
-      // Smooth scroll
-      document.querySelectorAll('a[href^="#"]').forEach(a => {
-        a.addEventListener('click', e => {
-          const target = document.querySelector(a.getAttribute('href'));
-          if (target) {
-            e.preventDefault();
-            target.scrollIntoView({ behavior: 'smooth' });
-          }
-        });
-      });
-    })();
-  </script>
 </body>
 </html>
