@@ -5,13 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accesso Protetto - Il Mestiere del Sindaco</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
+        /* Stili per la pagina di login - completamente separati */
+        #login-page {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
             background-size: 400% 400%;
@@ -23,6 +18,12 @@
             color: white;
             text-align: center;
             overflow: hidden;
+            margin: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
         }
 
         @keyframes gradientBG {
@@ -47,7 +48,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        h1 {
+        .login-container h1 {
             font-size: 1.8rem;
             margin-bottom: 1rem;
             background: linear-gradient(to right, #00f0ff, #ff00d4);
@@ -56,7 +57,7 @@
             color: transparent;
         }
 
-        p {
+        .login-container p {
             font-size: 1rem;
             margin-bottom: 1.5rem;
             color: #e0e0e0;
@@ -68,7 +69,7 @@
             text-align: left;
         }
 
-        label {
+        .form-group label {
             display: block;
             margin-bottom: 0.5rem;
             color: #ccc;
@@ -76,7 +77,7 @@
             text-align: left;
         }
 
-        input {
+        .form-group input {
             width: 100%;
             padding: 14px 15px;
             border-radius: 10px;
@@ -87,13 +88,13 @@
             transition: all 0.3s ease;
         }
 
-        input:focus {
+        .form-group input:focus {
             outline: none;
             border-color: #00f0ff;
             box-shadow: 0 0 0 2px rgba(0, 240, 255, 0.3);
         }
 
-        button {
+        .login-container button {
             width: 100%;
             padding: 14px;
             background: linear-gradient(135deg, #00f0ff, #00b3c3);
@@ -107,12 +108,12 @@
             letter-spacing: 0.5px;
         }
 
-        button:hover {
+        .login-container button:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 20px rgba(0, 240, 255, 0.4);
         }
 
-        button:active {
+        .login-container button:active {
             transform: translateY(0);
         }
 
@@ -127,18 +128,11 @@
             border: 1px solid rgba(255, 107, 107, 0.3);
         }
 
-        .protected-content {
-            display: none;
-            width: 100%;
-            height: 100vh;
-            overflow-y: auto;
-        }
-
         .back-link {
             position: fixed;
             top: 20px;
             left: 20px;
-            z-index: 1000;
+            z-index: 1001;
             display: none;
         }
 
@@ -161,8 +155,19 @@
             border-color: rgba(255, 255, 255, 0.3);
         }
         
-        /* Template per contenuto nascosto */
-        #manual-content {
+        /* Nascondi il contenuto protetto all'inizio */
+        #protected-content {
+            display: none;
+        }
+        
+        /* Quando il contenuto è visibile, nascondi la pagina di login */
+        #protected-content.visible {
+            display: block;
+            position: relative;
+            z-index: 999;
+        }
+        
+        #login-page.hidden {
             display: none;
         }
     </style>
@@ -172,23 +177,21 @@
         <a href="/">&larr; Torna alla Home</a>
     </div>
 
-    <div class="login-container" id="loginContainer">
-        <h1>Accesso Protetto</h1>
-        <p>Questo contenuto è riservato. Inserisci la password per accedere alla guida completa.</p>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" placeholder="Inserisci la password" autocomplete="off">
+    <div id="login-page">
+        <div class="login-container">
+            <h1>Accesso Protetto</h1>
+            <p>Questo contenuto è riservato. Inserisci la password per accedere alla guida completa.</p>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Inserisci la password" autocomplete="off">
+            </div>
+            <button id="submitBtn">Accedi</button>
+            <div class="error" id="error">Password errata. Riprova.</div>
         </div>
-        <button id="submitBtn">Accedi</button>
-        <div class="error" id="error">Password errata. Riprova.</div>
     </div>
 
-    <div class="protected-content" id="protectedContent">
-        <!-- Contenuto protetto verrà caricato qui -->
-    </div>
-    
-    <!-- Template nascosto con il contenuto completo -->
-    <div id="manual-content">
+    <div id="protected-content">
+        <!-- Contenuto completo del manuale -->
         <!DOCTYPE html>
 <html lang="it" data-theme="light">
 <head>
@@ -1253,26 +1256,22 @@
     </div>
 
     <script>
-        // Password protection
+        // Password protection - completamente separata dagli stili del contenuto
         const correctPassword = "G14nluc4";
-        const loginContainer = document.getElementById('loginContainer');
-        const protectedContent = document.getElementById('protectedContent');
+        const loginPage = document.getElementById('login-page');
+        const protectedContent = document.getElementById('protected-content');
         const passwordInput = document.getElementById('password');
         const submitBtn = document.getElementById('submitBtn');
         const errorDiv = document.getElementById('error');
         const backLink = document.getElementById('backLink');
-        const manualContent = document.getElementById('manual-content');
 
         // Handle password submission
         function checkPassword() {
             if (passwordInput.value === correctPassword) {
-                // Hide login form and show protected content
-                loginContainer.style.display = 'none';
+                // Nascondi la pagina di login e mostra il contenuto protetto
+                loginPage.classList.add('hidden');
                 backLink.style.display = 'block';
-                
-                // Load the protected content from the hidden template
-                protectedContent.innerHTML = manualContent.innerHTML;
-                protectedContent.style.display = 'block';
+                protectedContent.classList.add('visible');
                 
                 // Store authentication status in sessionStorage
                 sessionStorage.setItem('ooindex_authenticated', 'true');
@@ -1286,10 +1285,9 @@
 
         // Check if already authenticated
         if (sessionStorage.getItem('ooindex_authenticated') === 'true') {
-            loginContainer.style.display = 'none';
+            loginPage.classList.add('hidden');
             backLink.style.display = 'block';
-            protectedContent.innerHTML = manualContent.innerHTML;
-            protectedContent.style.display = 'block';
+            protectedContent.classList.add('visible');
         }
 
         // Handle button click
