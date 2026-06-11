@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Il Mestiere del Sindaco - Coming Soon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,7 +13,7 @@
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Montserrat', 'Poppins', system-ui, -apple-system, sans-serif;
             background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
@@ -47,6 +48,8 @@
         }
         
         h1 {
+            font-family: 'Poppins', 'Montserrat', system-ui, -apple-system, sans-serif;
+            font-weight: 800;
             font-size: 2.5rem;
             margin-bottom: 1rem;
             background: linear-gradient(to right, #00f0ff, #ff00d4);
@@ -54,6 +57,7 @@
             background-clip: text;
             color: transparent;
             animation: pulse 2s infinite;
+            letter-spacing: -0.5px;
         }
         
         @keyframes pulse {
@@ -67,13 +71,17 @@
             margin-bottom: 2rem;
             color: #e0e0e0;
             line-height: 1.6;
+            font-weight: 400;
         }
         
         .cta-button {
-            display: inline-block;
-            padding: 16px 32px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 36px;
             background: linear-gradient(135deg, #ff00d4, #00f0ff);
             color: #000;
+            font-family: 'Poppins', 'Montserrat', system-ui, -apple-system, sans-serif;
             font-weight: 800;
             font-size: 1.3rem;
             text-decoration: none;
@@ -84,11 +92,22 @@
             animation: pulse-cta 2s infinite;
             border: none;
             cursor: pointer;
+            letter-spacing: 0.5px;
         }
         
         .cta-button:hover {
             transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 12px 30px rgba(255, 0, 212, 0.6);
+            box-shadow: 0 12px 35px rgba(255, 0, 212, 0.6);
+        }
+        
+        .book-icon {
+            font-size: 1.5rem;
+            animation: bounce 1.5s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
         
         @keyframes pulse-cta {
@@ -149,8 +168,13 @@
             }
             
             .cta-button {
-                padding: 14px 24px;
+                padding: 16px 28px;
                 font-size: 1.1rem;
+                gap: 10px;
+            }
+            
+            .book-icon {
+                font-size: 1.3rem;
             }
         }
     </style>
@@ -160,7 +184,10 @@
         <h1>Il Mestiere del Sindaco</h1>
         <p>Il nostro sito ufficiale sarà presto disponibile con contenuti esclusivi e risorse utili per amministratori locali.</p>
         
-        <a href="https://amzn.eu/d/0gu5PerT" class="cta-button">📚 PRENOTA IL LIBRO</a>
+        <a href="https://amzn.eu/d/0gu5PerT" class="cta-button" target="_blank" rel="noopener">
+            <span class="book-icon">📚</span>
+            PRENOTA IL LIBRO
+        </a>
         
         <div class="progress-bar">
             <div class="progress"></div>
