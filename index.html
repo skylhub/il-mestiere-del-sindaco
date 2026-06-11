@@ -1,181 +1,176 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Il Mestiere del Sindaco - Coming Soon</title>
- <style>
- * {
- margin: 0;
- padding: 0;
- box-sizing: border-box;
- }
-
- body {
- font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
- background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
- background-size: 400% 400%;
- animation: gradientBG 15s ease infinite;
- height: 100vh;
- display: flex;
- justify-content: center;
- align-items: center;
- color: white;
- text-align: center;
- overflow: hidden;
- }
-
- @keyframes gradientBG {
- 0% { background-position: 0% 50%; }
- 50% { background-position: 100% 50%; }
- 100% { background-position: 0% 50%; }
- }
-
- .container {
- max-width: 600px;
- padding: 2rem;
- background: rgba(0, 0, 0, 0.7);
- border-radius: 20px;
- box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
- backdrop-filter: blur(10px);
- animation: fadeIn 1s ease-out;
- }
-
- @keyframes fadeIn {
- from { opacity: 0; transform: translateY(30px); }
- to { opacity: 1; transform: translateY(0); }
- }
-
- h1 {
- font-size: 2.5rem;
- margin-bottom: 1rem;
- background: linear-gradient(to right, #00f0ff, #ff00d4);
- -webkit-background-clip: text;
- background-clip: text;
- color: transparent;
- animation: pulse 2s infinite;
- }
-
- @keyframes pulse {
- 0% { opacity: 0.8; }
- 50% { opacity: 1; }
- 100% { opacity: 0.8; }
- }
-
- p {
- font-size: 1.2rem;
- margin-bottom: 2rem;
- color: #e0e0e0;
- line-height: 1.6;
- }
-
- .countdown {
- display: flex;
- justify-content: center;
- gap: 1rem;
- margin: 2rem 0;
- }
-
- .countdown-item {
- background: rgba(255, 255, 255, 0.1);
- border-radius: 10px;
- padding: 1rem;
- min-width: 80px;
- }
-
- .countdown-number {
- font-size: 2rem;
- font-weight: bold;
- color: #00f0ff;
- }
-
- .countdown-label {
- font-size: 0.8rem;
- text-transform: uppercase;
- color: #aaa;
- }
-
- .progress-bar {
- height: 8px;
- background: rgba(255, 255, 255, 0.1);
- border-radius: 4px;
- overflow: hidden;
- margin: 2rem 0;
- }
-
- .progress {
- height: 100%;
- background: linear-gradient(to right, #00f0ff, #ff00d4);
- width: 30%;
- border-radius: 4px;
- animation: progress 3s infinite ease-in-out;
- }
-
- @keyframes progress {
- 0% { width: 30%; }
- 50% { width: 70%; }
- 100% { width: 30%; }
- }
-
- .contact {
- margin-top: 2rem;
- font-size: 0.9rem;
- color: #aaa;
- }
-
- .contact a {
- color: #00f0ff;
- text-decoration: none;
- }
-
- .contact a:hover {
- text-decoration: underline;
- }
-
- @media (max-width: 600px) {
- .container {
- margin: 1rem;
- padding: 1.5rem;
- }
-
- h1 {
- font-size: 2rem;
- }
-
- p {
- font-size: 1rem;
- }
-
- .countdown {
- flex-wrap: wrap;
- }
-
- .countdown-item {
- min-width: 60px;
- padding: 0.7rem;
- }
-
- .countdown-number {
- font-size: 1.5rem;
- }
- }
- </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Il Mestiere del Sindaco - Coming Soon</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            max-width: 600px;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 1s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #00f0ff, #ff00d4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { opacity: 0.8; }
+        }
+        
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #ff00d4, #00f0ff);
+            color: #000;
+            font-weight: 800;
+            font-size: 1.3rem;
+            text-decoration: none;
+            border-radius: 50px;
+            margin: 20px 0;
+            box-shadow: 0 8px 25px rgba(255, 0, 212, 0.4);
+            transition: all 0.3s ease;
+            animation: pulse-cta 2s infinite;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(255, 0, 212, 0.6);
+        }
+        
+        @keyframes pulse-cta {
+            0% { box-shadow: 0 0 15px rgba(255, 0, 212, 0.4); }
+            50% { box-shadow: 0 0 25px rgba(255, 0, 212, 0.7); }
+            100% { box-shadow: 0 0 15px rgba(255, 0, 212, 0.4); }
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(to right, #00f0ff, #ff00d4);
+            width: 30%;
+            border-radius: 4px;
+            animation: progress 3s infinite ease-in-out;
+        }
+        
+        @keyframes progress {
+            0% { width: 30%; }
+            50% { width: 70%; }
+            100% { width: 30%; }
+        }
+        
+        .contact {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        .contact a {
+            color: #00f0ff;
+            text-decoration: none;
+        }
+        
+        .contact a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            p {
+                font-size: 1rem;
+            }
+            
+            .cta-button {
+                padding: 14px 24px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
 </head>
 <body>
- <div class="container">
- <h1>Il Mestiere del Sindaco</h1>
- <p>Stiamo preparando qualcosa di straordinario per voi. Il nostro sito ufficiale sarà presto disponibile con contenuti esclusivi e risorse utili per amministratori locali.</p>
-
- <div class="progress-bar">
- <div class="progress"></div>
- </div>
-
- <p>Restate sintonizzati per il lancio ufficiale!</p>
-
- <div class="contact">
- Per informazioni: <a href="mailto:info@ilmestieredelsindaco.com">info@ilmestieredelsindaco.com</a> <br/>
-Puoi prenotare il libro in anteprima usando questo link: <a href="https://amzn.eu/d/0gu5PerT">PRENOTA</a>
-</div>
- </div>
+    <div class="container">
+        <h1>Il Mestiere del Sindaco</h1>
+        <p>Il nostro sito ufficiale sarà presto disponibile con contenuti esclusivi e risorse utili per amministratori locali.</p>
+        
+        <a href="https://amzn.eu/d/0gu5PerT" class="cta-button">📚 PRENOTA IL LIBRO</a>
+        
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+        
+        <p>Restate sintonizzati per il lancio ufficiale!</p>
+        
+        <div class="contact">
+            Per informazioni: <a href="mailto:info@ilmestieredelsindaco.com">info@ilmestieredelsindaco.com</a>
+        </div>
+    </div>
 </body>
-</html> 
+</html>
