@@ -14,12 +14,10 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0a0a0a;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1618005182384-a53a6a29160a?q=80&w=2070&auto=format&fit=crop');
-            background-position: center;
-            background-repeat: no-repeat;
+            background-color: #000000;
+            /* Programmatic Spotlight Effect: Pure CSS, No external files */
+            background-image: radial-gradient(circle at 50% 50%, #2c2c2c 0%, #000000 70%);
             background-attachment: fixed;
-            background-size: cover;
             color: #ffffff;
             min-height: 100vh;
             display: flex;
@@ -28,18 +26,6 @@
             padding: 20px;
             position: relative;
             overflow-x: hidden;
-        }
-
-        /* Overlay nero per contrasto e leggibilità */
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.75);
-            z-index: 1;
         }
 
         .container {
@@ -54,7 +40,7 @@
         .logo {
             width: 80px;
             height: 80px;
-            background: linear-gradient(135deg, #333333, #111111);
+            background: linear-gradient(135deg, #444444, #111111);
             border-radius: 24px;
             margin: 0 auto 30px;
             display: flex;
@@ -63,7 +49,7 @@
             font-size: 36px;
             color: white;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-            border: 1px solid #444;
+            border: 1px solid #333;
         }
 
         h1 {
@@ -73,20 +59,20 @@
             line-height: 1.1;
             margin-bottom: 20px;
             color: #ffffff;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            text-shadow: 0 2px 15px rgba(0,0,0,0.8);
             letter-spacing: -1px;
         }
 
         .subtitle {
             font-size: 1.4rem;
-            color: #cccccc;
+            color: #aaaaaa;
             margin-bottom: 40px;
             font-weight: 400;
             line-height: 1.5;
         }
 
         p {
-            color: #bbbbbb;
+            color: #cccccc;
             font-size: 1.2rem;
             line-height: 1.6;
             margin-bottom: 45px;
@@ -100,7 +86,7 @@
             align-items: center;
             gap: 12px;
             padding: 20px 45px;
-            background: linear-gradient(135deg, #444444, #222222);
+            background: linear-gradient(135deg, #555555, #222222);
             color: white;
             font-family: 'Inter', sans-serif;
             font-weight: 600;
@@ -108,21 +94,17 @@
             text-decoration: none;
             border-radius: 16px;
             margin: 30px 0;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
             transition: all 0.3s ease;
-            border: 1px solid #555;
+            border: 1px solid #444;
             cursor: pointer;
             letter-spacing: -0.2px;
         }
 
         .cta-button:hover {
             transform: translateY(-2px);
-            background: linear-gradient(135deg, #555555, #333333);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-        }
-
-        .cta-button:active {
-            transform: translateY(0);
+            background: linear-gradient(135deg, #666666, #333333);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
         }
 
         .book-icon {
@@ -141,7 +123,7 @@
         }
 
         .progress-text {
-            color: #94a3b8;
+            color: #888888;
             font-size: 1rem;
             margin-bottom: 20px;
             font-weight: 500;
@@ -158,14 +140,13 @@
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #666666, #333333);
+            background: linear-gradient(90deg, #888888, #333333);
             width: 45%;
             border-radius: 3px;
-            transition: width 1s ease-in-out;
         }
 
         .contact {
-            color: #94a3b8;
+            color: #888888;
             font-size: 1rem;
             margin-top: 40px;
         }
@@ -174,26 +155,12 @@
             color: #ffffff;
             text-decoration: none;
             font-weight: 500;
-            border-bottom: 1px solid #555;
-        }
-
-        .contact a:hover {
-            color: #cccccc;
-            border-bottom-color: #ffffff;
+            border-bottom: 1px solid #444;
         }
 
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
             .subtitle { font-size: 1.2rem; }
-            p { font-size: 1.1rem; }
-            .cta-button { padding: 18px 35px; font-size: 1.1rem; }
-        }
-
-        @media (max-width: 480px) {
-            h1 { font-size: 2rem; }
-            .subtitle { font-size: 1rem; }
-            p { font-size: 1rem; }
-            .cta-button { padding: 16px 30px; font-size: 1rem; gap: 10px; }
         }
 
         @keyframes fadeInUp {
@@ -204,39 +171,25 @@
         .container > * {
             animation: fadeInUp 0.8s ease-out;
         }
-
-        .container > *:nth-child(1) { animation-delay: 0.1s; }
-        .container > *:nth-child(2) { animation-delay: 0.2s; }
-        .container > *:nth-child(3) { animation-delay: 0.3s; }
-        .container > *:nth-child(4) { animation-delay: 0.4s; }
-        .container > *:nth-child(5) { animation-delay: 0.5s; }
-        .container > *:nth-child(6) { animation-delay: 0.6s; }
-        .container > *:nth-child(7) { animation-delay: 0.7s; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="logo">🏛️</div>
-        
         <h1>IL MESTIERE DEL SINDACO</h1>
         <div class="subtitle">La guida pratica per nuovi amministratori locali</div>
-        
         <p>Il nostro sito ufficiale sarà presto disponibile con contenuti esclusivi e risorse utili per amministratori locali.</p>
-        
         <a href="https://amzn.eu/d/0gu5PerT" class="cta-button" target="_blank" rel="noopener">
             <span class="book-icon">📚</span>
             PRENOTA IL LIBRO
         </a>
-        
         <div class="progress-container">
             <div class="progress-text">Preparazione del lancio...</div>
             <div class="progress-bar">
                 <div class="progress-fill"></div>
             </div>
         </div>
-        
         <p>Restate sintonizzati per il lancio ufficiale!</p>
-        
         <div class="contact">
             Per informazioni: <a href="mailto:info@ilmestieredelsindaco.com">info@ilmestieredelsindaco.com</a>
         </div>
