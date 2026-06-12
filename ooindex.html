@@ -48,7 +48,7 @@
         .back-link { position: fixed; top: 20px; left: 20px; z-index: 1001; display: none; }
         .back-link a { padding: 10px 16px; background: rgba(0,0,0,0.6); border-radius: 50px; color: white; text-decoration: none; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.1); }
 
-        /* STILE ORIGINALE RIPRISTINATO */
+        /* STILE ORIGINALE RIPRISTINATO E CORRETTO */
         :root {
           --bg: #f5f7fa;
           --surface: #ffffff;
@@ -70,22 +70,45 @@
           --hero-text: #111827;
         }
 
+        html[data-theme="dark"] {
+          --bg: #0b1220;
+          --surface: #111827;
+          --surface-soft: #0f172a;
+          --text: #e5e7eb;
+          --muted: #9ca3af;
+          --border: rgba(255,255,255,0.08);
+          --silver: #94a3b8;
+          --accent: #60a5fa;
+          --accent-light: #1e3a5f;
+          --accent-glow: rgba(96, 165, 250, 0.15);
+          --gold: #fbbf24;
+          --gold-light: #78350f;
+          --shadow: 0 20px 60px rgba(0,0,0,0.30);
+          --hero-overlay: rgba(11, 18, 32, 0.94);
+          --hero-overlay-mid: rgba(11, 18, 32, 0.72);
+          --hero-overlay-end: rgba(11, 18, 32, 0.22);
+          --hero-text: #e5e7eb;
+        }
+
         body {
           margin: 0;
           font-family: Inter, system-ui, -apple-system, sans-serif;
           background: var(--bg);
           color: var(--text);
           line-height: 1.6;
+          transition: background-color 0.3s ease;
         }
         .container { width: min(1160px, calc(100% - 32px)); margin: 0 auto; }
         .nav { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
         .nav-inner { min-height: 74px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
         .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; }
         .brand-mark { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px var(--accent-glow); }
+        .nav-right { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: flex-end; }
         .menu { display: flex; align-items: center; gap: 0; }
         .menu a { margin-left: 18px; color: var(--muted); font-weight: 700; font-size: 0.92rem; text-decoration: none; }
         .menu a:hover { color: var(--text); }
-        .theme-toggle { display: inline-flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text); cursor: pointer; min-width: 110px; justify-content: center; font-size: 0.85rem; }
+        .theme-toggle { display: inline-flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text); cursor: pointer; min-width: 110px; justify-content: center; font-size: 0.85rem; transition: all 0.3s ease; }
+        .theme-toggle:hover { transform: translateY(-1px); }
         .hamburger { display: none; width: 46px; height: 46px; border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 14px; cursor: pointer; align-items: center; justify-content: center; }
         .mobile-menu { display: none; position: fixed; inset: 74px 0 auto 0; background: var(--bg); border-bottom: 1px solid var(--border); z-index: 40; padding: 18px 16px 20px; }
         .mobile-menu.open { display: block; }
@@ -177,22 +200,22 @@
         <div>
           <div class="eyebrow">📖 Manuale di Sopravvivenza per Amministratori</div>
           <div class="subtitle">Tutto quello che gli atti non dicono</div>
-          <h1>Il Mestiere del Sindaco</h1>
+          <h1 style="color: var(--hero-text);">Il Mestiere del Sindaco</h1>
           <p>
-            Non è solo un manuale tecnico, ma una guida concreta costruita attraverso esperienze vissute, 
-            errori e intuizioni. Per chi vuole governare con consapevolezza, gestendo il peso delle decisioni 
-            senza perdere l'umanità.
+            Non è solo un manuale tecnico, ma una guida concreta basata su 25 anni di esperienza. 
+            Per chi vuole governare con consapevolezza, gestendo il peso delle decisioni 
+            senza perdere l'umanità e l'equilibrio.
           </p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#acquista">Ordina il libro →</a>
-            <a class="btn btn-secondary" href="#indice">Sfoglia l'indice</a>
+            <a class la="btn btn-primary" href="#acquista">Ordina il libro →</a>
+            <a class la="btn btn-secondary" href="#indice">Sfoglia l'indice</a>
           </div>
         </div>
         <aside class="hero-card">
           <img class="book-cover" src="https://images.unsplash.com/photo-1544716278-ca5e3 la-cover" alt="Copertina" />
-          <h3>Il Mestiere del Sindaco</h3>
-          <div class="price">€24,90 <small>+ IVA</small></div>
-          <a class="btn btn-gold" href="#acquista" style="width:100%;margin-top:8px;">Acquista Ora</a>
+          <h3 style="text-align:center;">Il Mestiere del Sindaco</h3>
+          <div class="price" style="text-align:center; font-size: 1.8rem; font-weight: 900; color: var(--accent); margin: 8px 0;">€24,90 <small style="font-size: 0.9rem; font-weight: 400; color: var(--muted);">+ IVA</small></div>
+          <a class la="btn btn-gold" href="#acquista" style="width:100%;margin-top:8px;">Acquista Ora</a>
         </aside>
       </div>
     </div>
@@ -202,21 +225,21 @@
     <section id="manuale" class="section">
       <div class="section-head">
         <span class="badge">Il Valore</span>
-        <h2>Perché questo libro è diverso?</h2>
-        <p>Perché non si impara a scuola a diventare sindaco. Questo manuale colma il vuoto tra la norma e la pratica.</p>
+        <h2 style="text-align:center;">Oltre la Burocrazia</h2>
+        <p style="text-align:center;">Perché non si impara a scuola a diventare sindaco. Questo manuale colma il vuoto tra la norma e la pratica quotidiana.</p>
       </div>
       <div class="grid-3">
         <div class="card">
-          <h3 style="color:var(--accent)">⚖️ Oltre il TUEL</h3>
-          <p>Le leggi definiscono cosa fare, ma questo libro ti spiega <strong>come</strong> farlo, gestendo i rapporti umani e le tensioni tra politica e amministrazione.</p>
+          <h3 style="color:var(--accent)">⚖️ Più che un TUEL</h3>
+          <p>Le leggi dicono cosa fare, ma questo libro ti spiega <strong>come</strong> farlo, gestendo i rapporti umani e le tensioni tra politica e macchina amministrativa.</p>
         </div>
         <div class="card">
-          <h3 style="color:var(--accent)">🛡️ Gestione dello Stress</h3>
-          <p>Strategie concrete per mantenere la lucidità nei momenti di crisi e gestire la pressione costante di un ruolo totalizzante.</p>
+          <h3 style="color:var(--accent)">🛡️ Sopravvivenza Psichica</h3>
+          <p>Strategie concrete per mantenere la lucidità nei momenti di crisi e gestire la pressione di un ruolo che non lascia spazio al privato.</p>
         </div>
         <div class="card">
-          <h3 style="color:var(--accent)">🛠️ Strumenti Pratici</h3>
-          <p>Non solo teoria: modelli, check-list e procedure operative per i primi 30 giorni e per tutta la durata del mandato.</p>
+          <h3 style="color:var(--accent)">🛠️ Guida Operativa</h3>
+          <p>Non solo teoria: modelli, check-list e procedure per i primi 30 giorni e per l'intera durata del mandato.</p>
         </div>
       </div>
     </section>
@@ -224,39 +247,39 @@
     <section id="indice" class="section">
       <div class="section-head">
         <span class="badge">Percorso</span>
-        <h2>L'Architettura del Successo</h2>
-        <p>Un viaggio in 12 capitoli per navigare sicuri nelle acque dell'amministrazione locale.</p>
+        <h2 style="text-align:center;">L'Architettura del Successo</h2>
+        <p style="text-align:center;">Un viaggio in 12 capitoli per navigare sicuri tra responsabilità e visione.</p>
       </div>
       <div class="chapter-list">
-        <div class="chapter-item"><div class="chapter-num">1</div><div><h4>I primi 30 giorni</h4><p>Dal giuramento alle prime nomine: non farsi prendere dal panico.</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">2</div><div><h4>Organizzazione dell'Ente</h4><p>Costruire una squadra coesa: Giunta, Consiglio e Dirigenti.</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">3</div><div><h4>Bilancio e Finanze</h4><p>Capire i numeri senza essere commercialisti: previsione e rendiconto.</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">4</div><div><h4>Provvedimenti Amministrativi</h4><p>Ordinanze e delibere: l'arte di decidere senza rischiare.</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">5</div><div><h4>Il Capitale Umano</h4><p>Gestire il personale, le RSU e i conflitti interni all'amministrazione.</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">6</div><div><h4>Appalti e Servizi</h4><p>Semplificare il complesso mondo delle gare e delle concessioni.</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">7</div><div><h4>Governo del Territorio</h4><p>Urbanistica, PUG e la sfida della rigenerazione urbana.</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">8</div><div><h4>Sicurezza e Ordine Pubblico l</h4><p>Polizia locale e gestione dei conflitti sul territorio.</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">9</div><div><h4>Emergenze e Protezione Civile</h4><p>Protocolli operativi per i momenti di massima crisi.</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">10</div><div><h4>Comunicazione Istituzionale</h4><p>Gestire l'immagine pubblica e i social media senza farsi travolgere.</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">11</div><div><h4>Rapporti Istituzionali</h4><p>Interfacciarsi con Regione, Provincia, Prefettura e l'ANCI.</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">12</div><div><h4>Sopravvivere al Mandato l</h4><p>L'equilibrio tra vita pubblica e privata: non bruciare le energie.</p></div></div>
+        <div class="chapter-item"><div class="chapter-num">1</div><div><h4 style="margin:0;font-size:1rem;">I primi 30 giorni</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Dal giuramento alle prime nomine: l'arte di non farsi travolgere dall'entusiasmo.</p></div></div>
+        <div class="chapter-item"><div class="chapter-num">2</div><div><h4 style="margin:0;font-size:1rem;">L'Organizzazione dell'Ente</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Costruire una squadra coesa: Giunta, Consiglio e il ruolo chiave dei Dirigenti.</p></div></div>
+        <div class="chapter-item"><div class="chapter-num">3</div><div><h4 style="margin:0;font-size:1rem;">Bilancio e Finanze</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Capire i numeri senza essere commercialisti: previsione, rendiconto e armadi contabili.</p></div></div>
+        <div class="chapter-item"><div class="chapter-num">4</div><div><h4 style="margin:0;font-size:1rem;">Provvedimenti Amministrativi</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">L'arte di decidere tra ordinanze, delibere e decreti senza rischiare l'errore.</p></div></div>
+        <div class="chapter-item"><div class="chapter-num">5</div><div><h4 style="margin:0;font-size:1rem;">Il Capitale Umano</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Gestire l'elemento più complesso: il personale, le RSU e i conflitti interni.</p></div></div>
+        <div class="chapter-item"><div class="chapter-num">6</div><div><h4 style="margin:0;font-size:1rem;">Appalti e Servizi Pubblici</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Semplificare il mondo delle gare e delle concessioni per l'efficienza del Comune.</p></div></div>
+        <div class="chapter-item"><div class="chapter-num">7</div><div><h4 style="margin:0;font-size:1rem;">Governo del Territorio</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Urbanistica, PUG e la sfida della rigenerazione urbana consapevole.</p></div></div>
+        <div class="chapter-item"><div class="chapter-num">8</div><div><h4 style="margin:0;font-size:1rem;">Sicurezza e Ordine Pubblico</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Polizia locale, ordinanze di sicurezza e gestione dei conflitti sul territorio.</p></div></div>
+        <div class="chapter-item"><div class="chapter-num">9</div><div><h4 style="margin:0;font-size:1rem;">Emergenze e Protezione Civile</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Protocolli operativi per i momenti di massima crisi: quando ogni secondo conta.</p></div></div>
+        <div class="chapter-item"><div class="chapter-num">10</div><div><h4 style="margin:0;font-size:1rem;">Comunicazione Istituzionale</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Saper comunicare l'amministrazione: dai social media alla gestione delle crisi.</p></div></div>
+        <div class="chapter-item"><div class="chapter-num">11</div><div><h4 style="margin:0;font-size:1rem;">Rapporti Istituzionali</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Interfacciarsi con Regione, Provincia, Prefettura e l'ecosistema ANCI.</p></div></div>
+        <div class="chapter-item"><div class="chapter-num">12</div><div><h4 style="margin:0;font-size:1rem;">Sopravvivere al Mandato</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">L'equilibrio tra vita pubblica e privata: non bruciare le proprie energie.</p></div></div>
       </div>
     </section>
 
     <section id="autore" class="section">
       <div class="section-head">
         <span class="badge">L'Esperienza</span>
-        <h2>Chi scrive questa guida</h2>
+        <h2 style="text-align:center;">Chi scrive questa guida</h2>
       </div>
       <div class="author-card">
-        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" alt="Autore" />
-        <div>
-          <h3>Giancarlo Volpe</h3>
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd72 la-cover" alt="Autore" />
+        <div style="text-align:left;">
+          <h3 style="margin:0 0 6px;">Giancarlo Volpe</h3>
           <div class="role">Esperto di Governance Locale e Amministrazione Pubblica</div>
-          <p style="margin-top:12px;color:var(--muted);">
+          <p style="margin-top:12px;color:var(--muted);text-align:left;">
             Venticinque anni di esperienza a fianco di una dozzina di sindaci di diverse estrazioni politiche. 
-            Il suo obiettivo è trasformare l'entusiasmo del primo giorno in competenza amministrativa reale, 
-            evitando gli errori comuni e valorizzando il bene comune.
+            Ha trasformato l'osservazione diretta in un metodo di supporto per i neoeletti, 
+            aiutandoli a navigare tra procedure, nomine e gestione delle emozioni.
           </p>
         </div>
       </div>
@@ -265,38 +288,38 @@
     <section id="acquista" class="section">
       <div class="section-head">
         <span class="badge">Edizioni</span>
-        <h2 style="font-size: 2.5rem;">Scegli il tuo formato</h2>
-        <p>Un investimento minimo per evitare errori costosi nel tuo mandato.</p>
+        <h2 style="text-align:center; font-size: 2.5rem;">Scegli il tuo formato</h2>
+        <p style="text-align:center;">Un investimento minimo per evitare errori costosi nel tuo mandato.</p>
       </div>
       <div class="pricing-grid">
         <div class="pricing-card">
-          <h3>Digitale</h3>
-          <div class="price-big">€14,90</div>
-          <ul><li>PDF + ePub</li><li>Modelli scaricabili</li><li>Consegna immediata</li></ul>
+          <h3 style="text-align:center;">Digitale</h3>
+          <div class="price-big" style="text-align:center;">€14,90</div>
+          <ul style="text-align:left;"><li style="display:flex; gap:8px; align-items:center;">PDF + ePub</li><li style="display:flex; gap:8px; align-items:center;">Modelli scaricabili</li><li style="display:flex; gap:8px; align-items:center;">Consegna immediata</li></ul>
           <a class="btn btn-secondary" href="#" style="width:100%;">Acquista</a>
         </div>
         <div class="pricing-card featured">
-          <h3>📖 Cartaceo</h3>
-          <div class="price-big">€24,90</div>
-          <ul><li>Volume 320 pagine</li><li>PDF incluso gratis</li><li>Sconto per PA</li><li>Aggiornamenti annuali</li></ul>
+          <h3 style="text-align:center;">📖 Cartaceo</h3>
+          <div class="price-big" style="text-align:center;">€24,90</div>
+          <ul style="text-align:left;"><li style="display:flex; gap:8px; align-items:center;">Volume 320 pagine</li><li style="display:flex; gap:8px; align-items:center;">PDF incluso gratis</li><li style="display:flex; gap:8px; align-items:center;">Sconto per PA</li><li style="display:flex; gap:8px; align-items:center;">Aggiornamenti annuali</li></ul>
           <a class="btn btn-primary" href="https://amzn.eu/d/0gu5PerT" target="_blank" style="width:100%;">Ordina su Amazon</a>
         </div>
         <div class="pricing-card">
-          <h3>🏢 PA Multipla</h3>
-          <div class="price-big">€19,90</div>
-          <ul><li>Prezzo per copia (10+)</li><li>Fatturazione elettronica</li><li>Supporto diretto</li></ul>
+          <h3 style="text-align:center;">🏢 PA Multipla</h3>
+          <div class="price-big" style="text-align:center;">€19,90</div>
+          <ul style="text-align:left;"><li style="display:flex; gap:8px; align-items:center;">Prezzo per copia (10+)</li><li style="display:flex; gap:8px; align-items:center;">Fatturazione elettronica</li><li style="display:flex; gap:8px; align-items:center;">Supporto diretto</li></ul>
           <a class="btn btn-secondary" href="#" style="width:100%;">Contattaci</a>
         </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="container footer-inner" style="display:flex; justify-content:space-between; padding: 30px 0; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.9rem;">
-      <div><strong>Il Mestiere del Sindaco</strong> © 2026</div>
+  <footer style="display:flex; justify-content:space-between; padding: 30px 0; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.9rem;">
+    <div class="container" style="display:flex; justify-content:space-between; align-items:center; width:100%;">
+      <div><strong style="color:var(--text);">Il Mestiere del Sindaco</strong> © 2026</div>
       <div style="display:flex; gap: 15px;">
-        <a href="#" style="color:var(--muted)">Privacy</a>
-        <a href="#" style="color:var(--muted)">Contatti</a>
+        <a href="#" style="color:var(--muted); text-decoration:none;">Privacy</a>
+        <a href="#" style="color:var(--muted); text-decoration:none;">Contatti</a>
       </div>
     </div>
   </footer>
@@ -311,7 +334,7 @@
 
       function applyTheme(theme) {
         root.setAttribute("data-theme", theme);
-        label.textContent = theme.charAt(0).toUpperCase() + theme.slice(1);
+        if(label) label.textContent = theme.charAt(0).toUpperCase() + theme.slice(1);
       }
 
       const saved = localStorage.getItem("ims-theme");
