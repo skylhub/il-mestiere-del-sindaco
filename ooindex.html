@@ -5,49 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Il Mestiere del Sindaco</title>
     <style>
-        /* Shell di Login - Mantenuta originale */
-        #login-page {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            text-align: center;
-            overflow: hidden;
-            margin: 0;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-        }
-        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        .login-container {
-            max-width: 400px;
-            padding: 2rem;
-            background: rgba(0, 0, 0, 0.85);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .login-container h1 { font-size: 1.8rem; margin-bottom: 1rem; color: #fff; }
-        .login-container p { font-size: 1rem; margin-bottom: 1.5rem; color: #e0e0e0; }
-        .form-group { margin-bottom: 1.5rem; text-align: left; }
-        .form-group label { display: block; margin-bottom: 0.5rem; color: #ccc; font-size: 0.9rem; }
-        .form-group input { width: 100%; padding: 14px 15px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(255, 255, 255, 0.08); color: white; font-size: 1rem; }
-        .login-container button { width: 100%; padding: 14px; background: linear-gradient(135deg, #00f0ff, #00b3c3); border: none; border-radius: 10px; color: #000; font-weight: bold; cursor: pointer; }
-        .error { color: #ff6b6b; display: none; margin-top: 10px; }
-        #protected-content { display: none; }
-        #protected-content.visible { display: block; position: relative; z-index: 999; }
-        #login-page.hidden { display: none; }
-        .back-link { position: fixed; top: 20px; left: 20px; z-index: 1001; display: none; }
-        .back-link a { padding: 10px 16px; background: rgba(0,0,0,0.6); border-radius: 50px; color: white; text-decoration: none; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.1); }
-
         /* STILE ORIGINALE RIPRISTINATO E CORRETTO */
         :root {
           --bg: #f5f7fa;
@@ -107,26 +64,30 @@
         .menu { display: flex; align-items: center; gap: 0; }
         .menu a { margin-left: 18px; color: var(--muted); font-weight: 700; font-size: 0.92rem; text-decoration: none; }
         .menu a:hover { color: var(--text); }
-        .theme-toggle { display: inline-flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text); cursor: pointer; min-width: 110px; justify-content: center; font-size: 0.85rem; transition: all 0.3s ease; }
+        .theme-toggle { display: inline-flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text); cursor: pointer; font-weight: 700; font-size: 0.85rem; transition: all 0.25s ease; }
         .theme-toggle:hover { transform: translateY(-1px); }
-        .hamburger { display: none; width: 46px; height: 46px; border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 14px; cursor: pointer; align-items: center; justify-content: center; }
+        .hamburger { display: none; width: 46px; height: 46px; border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 14px; cursor: pointer; align-items: center; justify-content: center; font-size: 1.2rem; }
         .mobile-menu { display: none; position: fixed; inset: 74px 0 auto 0; background: var(--bg); border-bottom: 1px solid var(--border); z-index: 40; padding: 18px 16px 20px; }
         .mobile-menu.open { display: block; }
         .mobile-menu a { display: block; padding: 14px 10px; font-weight: 800; color: var(--text); text-decoration: none; border-radius: 14px; }
         .mobile-menu a:hover { background: var(--surface-soft); }
 
         .hero { padding: 24px 0 0; }
-        .hero-shell { overflow: hidden; border: 1px solid var(--border); border-radius: 30px; box-shadow: var(--shadow); background: linear-gradient(135deg, var(--hero-overlay) 0%, var(--hero-overlay-mid) 50%, var(--hero-overlay-end) 100%), url("https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1800&q=80") center/cover no-repeat; min-height: 80vh; display: flex; align-items: end; }
+        .hero-shell { overflow: hidden; border: 1px solid var(--border); border-radius: 30px; box-shadow: var(--shadow); background: linear-gradient(135deg, var(--hero-overlay) 0%, var(--hero-overlay-mid) 50%, var(--hero-overlay-end) 100%); }
         .hero-content { width: 100%; padding: 48px; display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 30px; align-items: end; }
-        .eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 999px; background: var(--accent-light); color: var(--accent); border: 1px solid var(--accent); font-size: 0.85rem; font-weight: 700; margin-bottom: 18px; }
+        .eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 999px; background: var(--accent-light); color: var(--accent); border: 1px solid var(--accent); font-size: 0.8rem; font-weight: 700; margin-bottom: 12px; width: fit-content; }
         .hero h1 { margin: 0 0 12px; font-size: clamp(2.4rem, 5vw, 4.2rem); line-height: 0.98; max-width: 14ch; letter-spacing: -0.03em; color: var(--hero-text); }
         .hero .subtitle { font-size: 1.2rem; font-weight: 700; color: var(--accent); margin-bottom: 12px; }
         .hero p { margin: 0; max-width: 58ch; color: var(--muted); font-size: 1.05rem; }
         .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
-        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 6px 12px; border-radius: 999px; font-weight: 800; border: 1px solid transparent; transition: all 0.28s ease; text-decoration: none; font-size: 0.85rem; }
+        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 6px 12px; border-radius: 999px; font-weight: 800; border: 1px solid transparent; transition: all 0.28s ease; font-size: 0.95rem; cursor: pointer; }
+        .btn:hover { transform: translateY(-2px); }
         .btn-primary { background: var(--accent); color: #ffffff; box-shadow: 0 14px 30px var(--accent-glow); }
+        .btn-primary:hover { box-shadow: 0 18px 40px var(--accent-glow); }
         .btn-secondary { background: var(--surface); border-color: var(--border); color: var(--text); }
+        .btn-secondary:hover { background: var(--surface-soft); }
         .btn-gold { background: var(--gold); color: #111827; box-shadow: 0 14px 30px rgba(245, 158, 11, 0.25); }
+        .btn-gold:hover { box-shadow: 0 18px 40px rgba(245, 158, 11, 0.35); }
         .hero-card { background: color-mix(in srgb, var(--surface) 82%, transparent); border: 1px solid var(--border); border-radius: 22px; padding: 24px; backdrop-filter: blur(10px); }
         .hero-card .book-cover { width: 140px; height: 200px; object-fit: cover; border-radius: 12px; margin: 0 auto 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
         .hero-card h3 { margin: 0 0 6px; text-align: center; }
@@ -140,22 +101,24 @@
         .section-head p { margin: 10px 0 0; color: var(--muted); font-size: 1.05rem; }
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); transition: transform 0.25s ease; }
+        .card:hover { transform: translateY(-4px); }
         .card img { width: 100%; height: 180px; object-fit: cover; border-radius: 16px; margin-bottom: 16px; }
         .card h3 { margin: 0 0 8px; font-size: 1.15rem; }
         .card p { margin: 0; color: var(--muted); font-size: 0.95rem; }
         .chapter-list { display: grid; gap: 12px; }
-        .chapter-item { display: flex; align-items: center; gap: 16px; padding: 18px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow); transition: transform 0.2s ease; }
-        .chapter-item:hover { transform: translateX(4px); }
-        .chapter-num { width: 36px; height: 36px; border-radius: 10px; background: var(--accent-light); color: var(--accent); display: grid; place-items: center; font-weight: 900; font-size: 0.9rem; flex: 0 0 36px; }
+        .chapter-item { display: flex; align-items: center; gap: 16px; padding: 18px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow); transition: all 0.25s ease; }
+        .chapter-item:hover { transform: translateX(4px); background: var(--surface-soft); }
+        .chapter-num { width: 36px; height: 36px; border-radius: 10px; background: var(--accent-light); color: var(--accent); display: grid; place-items: center; font-weight: 900; font-size: 0.9rem; flex-shrink: 0; }
         .chapter-item h4 { margin: 0; font-size: 1rem; }
         .chapter-item p { margin: 2px 0 0; color: var(--muted); font-size: 0.88rem; }
         .author-card { display: flex; gap: 30px; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow); }
         .author-card img { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; flex: 0 0 140px; }
         .author-card .role { color: var(--accent); font-weight: 700; }
         .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .pricing-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 24px; box-shadow: var(--shadow); text-align: center; transition: transform 0.3s ease; }
+        .pricing-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 24px; box-shadow: var(--shadow); text-align: center; transition: transform 0.25s ease; }
+        .pricing-card:hover { transform: translateY(-4px); }
         .pricing-card.featured { border-color: var(--accent); transform: scale(1.04); position: relative; }
-        .pricing-card.featured::before { content: "Più venduto"; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; padding: 4px 16px; border-radius: 999px; font-size: 0.75rem; font-weight: 800; }
+        .pricing-card.featured::before { content: "Più venduto"; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; padding: 4px 16px; border-radius: 999px; font-size: 0.75rem; font-weight: 700; }
         .pricing-card .price-big { font-size: 1.5rem; font-weight: 900; color: var(--accent); margin: 12px 0; }
         .pricing-card ul { list-style: none; padding: 0; margin: 16px 0; text-align: left; }
         .pricing-card ul li { padding: 6px 0; display: flex; gap: 8px; align-items: center; font-size: 0.92rem; }
@@ -168,6 +131,8 @@
           .btn { padding: 4px 8px; font-size: 0.8rem; }
           .hero-card .price { font-size: 1rem; }
           .pricing-card .price-big { font-size: 1.2rem; }
+          .hamburger { display: flex; }
+          .menu { display: none; }
         }
     </style>
 </head>
@@ -217,7 +182,7 @@
         <aside class="hero-card">
           <img class="book-cover" src="https://images.unsplash.com/photo-1544716278-ca5e3f82c33c4?auto=format&fit=crop&w=300&q=80" alt="Copertina" />
           <h3 style="text-align:center;">Il Mestiere del Sindaco</h3>
-          <div class="price" style="text-align:center; font-size: 1.8rem; font-weight: 900; color: var(--accent); margin: 8px 0;">€24,90 <small style="font-size: 0.9rem; font-weight: 400; color: var(--muted);">+ IVA</small></div>
+          <div class="price" style="text-align:center; font-size: 1.8rem; font-weight: 900; color: var(--accent); margin: 8px 0;">€24,90 <small style="font-size: 0.9rem; font-weight: 400; color: var(--muted);">+ spedizione</small></div>
           <a class="btn btn-gold" href="#acquista" style="width:90%;margin-top:8px;">Acquista Ora</a>
         </aside>
       </div>
@@ -254,18 +219,18 @@
         <p style="text-align:center;">Un viaggio in 12 capitoli per navigare sicuri tra responsabilità e visione.</p>
       </div>
       <div class="chapter-list">
-        <div class="chapter-item"><div class="chapter-num">1</div><div><h4 style="margin:0;font-size:1rem;">I primi 30 giorni</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Dal giuramento alle prime nomine: l'arte di non farsi travolgere dall'entusiasmo.</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">2</div><div><h4 style="margin:0;font-size:1rem;">L'Organizzazione dell'Ente</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Costruire una squadra coesa: Giunta, Consiglio e il ruolo chiave dei Dirigenti.</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">3</div><div><h4 style="margin:0;font-size:1rem;">Bilancio e Finanze</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Capire i numeri senza essere commercialisti: previsione, rendiconto e armadi contabili.</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">4</div><div><h4 style="margin:0;font-size:1rem;">Provvedimenti Amministrativi</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">L'arte di decidere tra ordinanze, delibere e decreti senza rischiare l'errore.</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">5</div><div><h4 style="margin:0;font-size:1rem;">Il Capitale Umano</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Gestire l'elemento più complesso: il personale, le RSU e i conflitti interni.</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">6</div><div><h4 style="margin:0;font-size:1rem;">Appalti e Servizi Pubblici</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Semplificare il mondo delle gare e delle concessioni per l'efficienza del Comune.</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">7</div><div><h4 style="margin:0;font-size:1rem;">Governo del Territorio</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Urbanistica, PUG e la sfida della rigenerazione urbana consapevole.</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">8</div><div><h4 style="margin:0;font-size:1rem;">Sicurezza e Ordine Pubblico</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Polizia locale, ordinanze di sicurezza e gestione dei conflitti sul territorio.</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">9</div><div><h4 style="margin:0;font-size:1rem;">Emergenze e Protezione Civile</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Protocolli operativi per i momenti di massima crisi: quando ogni secondo conta.</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">10</div><div><h4 style="margin:0;font-size:1rem;">Comunicazione Istituzionale</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Saper comunicare l'amministrazione: dai social media alla gestione delle crisi.</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">11</div><div><h4 style="margin:0;font-size:1rem;">Rapporti Istituzionali</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Interfacciarsi con Regione, Provincia, Prefettura e l'ecosistema ANCI.</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">12</div><div><h4 style="margin:0;font-size:1rem;">Sopravvivere al Mandato</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">L'equilibrio tra vita pubblica e privata: non bruciare le proprie energie.</p></div></div>
+        <div class="chapter-item"><div class="chapter-num">1</div><div><h4 style="margin:0;font-size:1rem;">I primi 30 giorni</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Dal giuramento alle prime decisioni amministrative</p></div></div>
+        <div class="chapter-item"><div class="chapter-num">2</div><div><h4 style="margin:0;font-size:1rem;">L'Organizzazione dell'Ente</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Capire la struttura e le responsabilità</p></div></div>
+        <div class="chapter-item"><div class="chapter-num">3</div><div><h4 style="margin:0;font-size:1rem;">Bilancio e Finanze</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Capire i numeri e le risorse disponibili</p></div></div>
+        <div class="chapter-item"><div class="chapter-num">4</div><div><h4 style="margin:0;font-size:1rem;">Provvedimenti Amministrativi</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Le decisioni e come documentarle correttamente</p></div></div>
+        <div class="chapter-item"><div class="chapter-num">5</div><div><h4 style="margin:0;font-size:1rem;">Il Capitale Umano</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Gestire il personale e creare team affidabili</p></div></div>
+        <div class="chapter-item"><div class="chapter-num">6</div><div><h4 style="margin:0;font-size:1rem;">Appalti e Servizi Pubblici</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Procedure, trasparenza e gestione dei contratti</p></div></div>
+        <div class="chapter-item"><div class="chapter-num">7</div><div><h4 style="margin:0;font-size:1rem;">Governo del Territorio</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Urbanistica, sviluppo sostenibile e pianificazione</p></div></div>
+        <div class="chapter-item"><div class="chapter-num">8</div><div><h4 style="margin:0;font-size:1rem;">Sicurezza e Ordine Pubblico</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Il ruolo del sindaco nella sicurezza cittadina</p></div></div>
+        <div class="chapter-item"><div class="chapter-num">9</div><div><h4 style="margin:0;font-size:1rem;">Emergenze e Protezione Civile</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Prepararsi e agire nelle situazioni critiche</p></div></div>
+        <div class="chapter-item"><div class="chapter-num">10</div><div><h4 style="margin:0;font-size:1rem;">Comunicazione Istituzionale</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Raccontare la città e dialogare con i cittadini</p></div></div>
+        <div class="chapter-item"><div class="chapter-num">11</div><div><h4 style="margin:0;font-size:1rem;">Rapporti Istituzionali</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Collaborare con provincia, regione e istituzioni nazionali</p></div></div>
+        <div class="chapter-item"><div class="chapter-num">12</div><div><h4 style="margin:0;font-size:1rem;">Sopravvivere al Mandato</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Equilibrio, consapevolezza e gestione del carico psicologico</p></div></div>
       </div>
     </section>
 
@@ -275,7 +240,7 @@
         <h2 style="text-align:center;">Chi scrive questa guida</h2>
       </div>
       <div class="author-card">
-        <img src="https://ilmestieredelsindaco.com/00.jpg" alt="Autore" />
+        <img src="https://ilmestieredelsindaco.com/00.jpg" alt="Giancarlo Volpe" />
         <div style="text-align:left;">
           <h3 style="margin:0 0 6px;">Giancarlo Volpe</h3>
           <div class="role">Esperto di Governance Locale e Amministrazione Pubblica</div>
@@ -298,20 +263,20 @@
         <div class="pricing-card">
           <h3 style="text-align:center;">Digitale</h3>
           <div class="price-big" style="text-align:center;">€14,90</div>
-          <ul style="text-align:left;"><li style="display:flex; gap:8px; align-items:center;">PDF + ePub</li><li style="display:flex; gap:8px; align-items:center;">Modelli scaricabili</li><li style="display:flex; gap:8px; align-items:center;">Consegna immediata</li></ul>
-          <a class="btn btn-secondary" href="#" style="width:90%;">Acquista</a>
+          <ul style="text-align:left;"><li style="display:flex; gap:8px; align-items:center;">PDF + ePub</li><li style="display:flex; gap:8px; align-items:center;">Modelli scaricabili</li><li style="display:flex; gap:8px; align-items:center;">Accesso illimitato</li></ul>
+          <a class="btn btn-secondary" href="#" style="width:100%;">Acquista</a>
         </div>
         <div class="pricing-card featured">
           <h3 style="text-align:center;">📖 Cartaceo</h3>
           <div class="price-big" style="text-align:center;">€24,90</div>
-          <ul style="text-align:left;"><li style="display:flex; gap:8px; align-items:center;">Volume 320 pagine</li><li style="display:flex; gap:8px; align-items:center;">PDF incluso gratis</li><li style="display:flex; gap:8px; align-items:center;">Sconto per PA</li><li style="display:flex; gap:8px; align-items:center;">Aggiornamenti annuali</li></ul>
-          <a class="btn btn-primary" href="https://amzn.eu/d/0gu5PerT" target="_blank" style="width:90%;">Ordina su Amazon</a>
+          <ul style="text-align:left;"><li style="display:flex; gap:8px; align-items:center;">Volume 320 pagine</li><li style="display:flex; gap:8px; align-items:center;">PDF incluso gratis</li><li style="display:flex; gap:8px; align-items:center;">Spedizione inclusa</li></ul>
+          <a class="btn btn-primary" href="https://amzn.eu/d/0gu5PerT" target="_blank" style="width:100%;">Ordina su Amazon</a>
         </div>
         <div class="pricing-card">
           <h3 style="text-align:center;">🏢 PA Multipla</h3>
           <div class="price-big" style="text-align:center;">€19,90</div>
-          <ul style="text-align:left;"><li style="display:flex; gap:8px; align-items:center;">Prezzo per copia (10+)</li><li style="display:flex; gap:8px; align-items:center;">Fatturazione elettronica</li><li style="display:flex; gap:8px; align-items:center;">Supporto diretto</li></ul>
-          <a class="btn btn-secondary" href="#" style="width:90%;">Contattaci</a>
+          <ul style="text-align:left;"><li style="display:flex; gap:8px; align-items:center;">Prezzo per copia (10+)</li><li style="display:flex; gap:8px; align-items:center;">Fatturazione elettronica</li><li style="display:flex; gap:8px; align-items:center;">Supporto dedicato</li></ul>
+          <a class="btn btn-secondary" href="#" style="width:100%;">Contattaci</a>
         </div>
       </div>
     </section>
