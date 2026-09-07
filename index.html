@@ -1,159 +1,286 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Il Mestiere del Sindaco</title>
-    <style>
-        /* STILE ORIGINALE RIPRISTINATO E CORRETTO */
-        :root {
-          --bg: #f5f7fa;
-          --surface: #ffffff;
-          --surface-soft: #eef2f7;
-          --text: #111827;
-          --muted: #6b7280;
-          --border: #d9e1ea;
-          --silver: #aeb7c4;
-          --accent: #1e40af;
-          --accent-light: #dbeafe;
-          --accent-glow: rgba(30, 64, 175, 0.15);
-          --gold: #f59e0b;
-          --gold-light: #fef3c7;
-          --shadow: 0 18px 50px rgba(17, 24, 39, 0.08);
-          --radius: 24px;
-          --hero-overlay: rgba(245, 247, 250, 0.92);
-          --hero-overlay-mid: rgba(245, 247, 250, 0.72);
-          --hero-overlay-end: rgba(245, 247, 250, 0.18);
-          --hero-text: #111827;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Il Mestiere del Sindaco di Giancarlo Volpe: manuale di sopravvivenza per amministratori locali.">
+  <title>Il Mestiere del Sindaco | Giancarlo Volpe</title>
+  <style>
+    :root {
+      --bg: #f5f7fa;
+      --surface: #ffffff;
+      --surface-soft: #eef2f7;
+      --text: #111827;
+      --muted: #6b7280;
+      --border: #d9e1ea;
+      --accent: #1e40af;
+      --accent-light: #dbeafe;
+      --accent-glow: rgba(30, 64, 175, 0.15);
+      --gold: #f59e0b;
+      --shadow: 0 18px 50px rgba(17, 24, 39, 0.08);
+      --radius: 24px;
+      --hero-overlay: rgba(245, 247, 250, 0.92);
+      --hero-overlay-mid: rgba(245, 247, 250, 0.72);
+      --hero-overlay-end: rgba(245, 247, 250, 0.18);
+      --hero-text: #111827;
+    }
 
-        html[data-theme="dark"] {
-          --bg: #0b1220;
-          --surface: #111827;
-          --surface-soft: #0f172a;
-          --text: #e5e7eb;
-          --muted: #9ca3af;
-          --border: rgba(255,255,255,0.08);
-          --silver: #94a3b8;
-          --accent: #60a5fa;
-          --accent-light: #1e3a5f;
-          --accent-glow: rgba(96, 165, 250, 0.15);
-          --gold: #fbbf24;
-          --gold-light: #78350f;
-          --shadow: 0 20px 60px rgba(0,0,0,0.30);
-          --hero-overlay: rgba(11, 18, 32, 0.94);
-          --hero-overlay-mid: rgba(11, 18, 32, 0.72);
-          --hero-overlay-end: rgba(11, 18, 32, 0.22);
-          --hero-text: #e5e7eb;
-        }
+    html[data-theme="dark"] {
+      --bg: #0b1220;
+      --surface: #111827;
+      --surface-soft: #0f172a;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: rgba(255, 255, 255, 0.08);
+      --accent: #60a5fa;
+      --accent-light: #1e3a5f;
+      --accent-glow: rgba(96, 165, 250, 0.15);
+      --gold: #fbbf24;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.30);
+      --hero-overlay: rgba(11, 18, 32, 0.94);
+      --hero-overlay-mid: rgba(11, 18, 32, 0.72);
+      --hero-overlay-end: rgba(11, 18, 32, 0.22);
+      --hero-text: #e5e7eb;
+    }
 
-        body {
-          margin: 0;
-          font-family: Inter, system-ui, -apple-system, sans-serif;
-          background: var(--bg);
-          color: var(--text);
-          line-height: 1.6;
-          transition: background-color 0.3s ease;
-        }
-        .container { width: min(1160px, calc(100% - 32px)); margin: 0 auto; }
-        .nav { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
-        .nav-inner { min-height: 74px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-        .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; }
-        .brand-mark { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px var(--accent-glow); }
-        .nav-right { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: flex-end; }
-        .menu { display: flex; align-items: center; gap: 0; }
-        .menu a { margin-left: 18px; color: var(--muted); font-weight: 700; font-size: 0.92rem; text-decoration: none; }
-        .menu a:hover { color: var(--text); }
-        .theme-toggle { display: inline-flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text); cursor: pointer; font-weight: 700; font-size: 0.85rem; transition: all 0.25s ease; }
-        .theme-toggle:hover { transform: translateY(-1px); }
-        .hamburger { display: none; width: 46px; height: 46px; border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 14px; cursor: pointer; align-items: center; justify-content: center; font-size: 1.2rem; }
-        .mobile-menu { display: none; position: fixed; inset: 74px 0 auto 0; background: var(--bg); border-bottom: 1px solid var(--border); z-index: 40; padding: 18px 16px 20px; }
-        .mobile-menu.open { display: block; }
-        .mobile-menu a { display: block; padding: 14px 10px; font-weight: 800; color: var(--text); text-decoration: none; border-radius: 14px; }
-        .mobile-menu a:hover { background: var(--surface-soft); }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
-        .hero { padding: 24px 0 0; }
-        .hero-shell { overflow: hidden; border: 1px solid var(--border); border-radius: 30px; box-shadow: var(--shadow); background: linear-gradient(135deg, var(--hero-overlay) 0%, var(--hero-overlay-mid) 50%, var(--hero-overlay-end) 100%); }
-        .hero-content { width: 100%; padding: 48px; display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 30px; align-items: end; }
-        .eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 999px; background: var(--accent-light); color: var(--accent); border: 1px solid var(--accent); font-size: 0.8rem; font-weight: 700; margin-bottom: 12px; width: fit-content; }
-        .hero h1 { margin: 0 0 12px; font-size: clamp(2.4rem, 5vw, 4.2rem); line-height: 0.98; max-width: 14ch; letter-spacing: -0.03em; color: var(--hero-text); }
-        .hero .subtitle { font-size: 1.2rem; font-weight: 700; color: var(--accent); margin-bottom: 12px; }
-        .hero p { margin: 0; max-width: 58ch; color: var(--muted); font-size: 1.05rem; }
-        .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
-        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 6px 12px; border-radius: 999px; font-weight: 800; border: 1px solid transparent; transition: all 0.28s ease; font-size: 0.95rem; cursor: pointer; }
-        .btn:hover { transform: translateY(-2px); }
-        .btn-primary { background: var(--accent); color: #ffffff; box-shadow: 0 14px 30px var(--accent-glow); }
-        .btn-primary:hover { box-shadow: 0 18px 40px var(--accent-glow); }
-        .btn-secondary { background: var(--surface); border-color: var(--border); color: var(--text); }
-        .btn-secondary:hover { background: var(--surface-soft); }
-        .btn-gold { background: var(--gold); color: #111827; box-shadow: 0 14px 30px rgba(245, 158, 11, 0.25); }
-        .btn-gold:hover { box-shadow: 0 18px 40px rgba(245, 158, 11, 0.35); }
-        .hero-card { background: color-mix(in srgb, var(--surface) 82%, transparent); border: 1px solid var(--border); border-radius: 22px; padding: 24px; backdrop-filter: blur(10px); }
-        .hero-card .book-cover { width: 140px; height: 200px; object-fit: cover; border-radius: 12px; margin: 0 auto 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
-        .hero-card h3 { margin: 0 0 6px; text-align: center; }
-        .hero-card .price { text-align: center; font-size: 1.2rem; font-weight: 900; color: var(--accent); margin: 8px 0; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
 
-        main { padding: 40px 0 72px; }
-        .section { margin-top: 48px; }
-        .section-head { margin-bottom: 24px; text-align: center; max-width: 700px; margin-left: auto; margin-right: auto; }
-        .section-head h2 { margin: 0; font-size: 2rem; }
-        .section-head .badge { display: inline-block; padding: 6px 14px; border-radius: 999px; background: var(--accent-light); color: var(--accent); font-size: 0.8rem; font-weight: 700; margin-bottom: 12px; }
-        .section-head p { margin: 10px 0 0; color: var(--muted); font-size: 1.05rem; }
-        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); transition: transform 0.25s ease; }
-        .card:hover { transform: translateY(-4px); }
-        .card img { width: 100%; height: 180px; object-fit: cover; border-radius: 16px; margin-bottom: 16px; }
-        .card h3 { margin: 0 0 8px; font-size: 1.15rem; }
-        .card p { margin: 0; color: var(--muted); font-size: 0.95rem; }
-        .chapter-list { display: grid; gap: 12px; }
-        .chapter-item { display: flex; align-items: center; gap: 16px; padding: 18px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow); transition: all 0.25s ease; }
-        .chapter-item:hover { transform: translateX(4px); background: var(--surface-soft); }
-        .chapter-num { width: 36px; height: 36px; border-radius: 10px; background: var(--accent-light); color: var(--accent); display: grid; place-items: center; font-weight: 900; font-size: 0.9rem; flex-shrink: 0; }
-        .chapter-item h4 { margin: 0; font-size: 1rem; }
-        .chapter-item p { margin: 2px 0 0; color: var(--muted); font-size: 0.88rem; }
-        .author-card { display: flex; gap: 30px; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow); }
-        .author-card img { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; flex: 0 0 140px; }
-        .author-card .role { color: var(--accent); font-weight: 700; }
-        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .pricing-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 24px; box-shadow: var(--shadow); text-align: center; transition: transform 0.25s ease; }
-        .pricing-card:hover { transform: translateY(-4px); }
-        .pricing-card.featured { border-color: var(--accent); transform: scale(1.04); position: relative; }
-        .pricing-card.featured::before { content: "Più venduto"; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; padding: 4px 16px; border-radius: 999px; font-size: 0.75rem; font-weight: 700; }
-        .pricing-card .price-big { font-size: 1.5rem; font-weight: 900; color: var(--accent); margin: 12px 0; }
-        .pricing-card ul { list-style: none; padding: 0; margin: 16px 0; text-align: left; }
-        .pricing-card ul li { padding: 6px 0; display: flex; gap: 8px; align-items: center; font-size: 0.92rem; }
-        .pricing-card ul li::before { content: "✓"; color: var(--accent); font-weight: 900; }
+    a { color: inherit; }
+    .container { width: min(1160px, calc(100% - 32px)); margin: 0 auto; }
 
-        @media (max-width: 960px) {
-          .grid-3, .pricing-grid { grid-template-columns: 1fr; }
-          .hero-content { grid-template-columns: 1fr; }
-          .author-card { flex-direction: column; text-align: center; }
-          .btn { padding: 4px 8px; font-size: 0.8rem; }
-          .hero-card .price { font-size: 1rem; }
-          .pricing-card .price-big { font-size: 1.2rem; }
-          .hamburger { display: flex; }
-          .menu { display: none; }
-        }
-    </style>
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: color-mix(in srgb, var(--bg) 86%, transparent);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; text-decoration: none; }
+    .brand-mark { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px var(--accent-glow); }
+    .nav-right { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: flex-end; }
+    .menu { display: flex; align-items: center; }
+    .menu a { margin-left: 18px; color: var(--muted); font-weight: 700; font-size: 0.92rem; text-decoration: none; }
+    .menu a:hover { color: var(--text); }
+
+    .theme-toggle, .hamburger {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    .theme-toggle:hover, .hamburger:hover { transform: translateY(-1px); }
+    .hamburger { display: none; width: 46px; height: 46px; border-radius: 14px; font-size: 1.2rem; }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 74px 0 auto 0;
+      z-index: 40;
+      padding: 18px 16px 20px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mobile-menu.open { display: block; }
+    .mobile-menu a { display: block; padding: 14px 10px; border-radius: 14px; color: var(--text); font-weight: 800; text-decoration: none; }
+    .mobile-menu a:hover { background: var(--surface-soft); }
+
+    .hero { padding: 24px 0 0; }
+    .hero-shell {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      background: linear-gradient(135deg, var(--hero-overlay) 0%, var(--hero-overlay-mid) 50%, var(--hero-overlay-end) 100%);
+    }
+
+    .hero-content {
+      width: 100%;
+      padding: 48px;
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 30px;
+      align-items: end;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      margin-bottom: 12px;
+      padding: 8px 16px;
+      border: 1px solid var(--accent);
+      border-radius: 999px;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .hero h1 { max-width: 14ch; margin: 0 0 12px; color: var(--hero-text); font-size: clamp(2.4rem, 5vw, 4.2rem); line-height: 0.98; letter-spacing: -0.03em; }
+    .hero .subtitle { margin-bottom: 12px; color: var(--accent); font-size: 1.2rem; font-weight: 700; }
+    .hero p { max-width: 58ch; margin: 0; color: var(--muted); font-size: 1.05rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.28s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--accent); color: #ffffff; box-shadow: 0 14px 30px var(--accent-glow); }
+    .btn-primary:hover { box-shadow: 0 18px 40px var(--accent-glow); }
+    .btn-secondary { border-color: var(--border); background: var(--surface); color: var(--text); }
+    .btn-secondary:hover { background: var(--surface-soft); }
+    .btn-gold { background: var(--gold); color: #111827; box-shadow: 0 14px 30px rgba(245, 158, 11, 0.25); }
+    .btn-gold:hover { box-shadow: 0 18px 40px rgba(245, 158, 11, 0.35); }
+
+    .hero-card {
+      justify-self: center;
+      width: min(100%, 290px);
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: color-mix(in srgb, var(--surface) 82%, transparent);
+      text-align: center;
+      backdrop-filter: blur(10px);
+    }
+
+    .book-cover { display: block; width: 140px; height: 200px; margin: 0 auto 16px; border-radius: 12px; object-fit: cover; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); }
+    .hero-card h3 { margin: 0 0 6px; }
+    .price { margin: 8px 0; color: var(--accent); font-size: 1.8rem; font-weight: 900; }
+    .price small { color: var(--muted); font-size: 0.9rem; font-weight: 400; }
+
+    main { padding: 40px 0 72px; }
+    .section { margin-top: 48px; scroll-margin-top: 90px; }
+    .section-head { max-width: 760px; margin: 0 auto 24px; text-align: center; }
+    .section-head h2 { margin: 0; font-size: 2rem; }
+    .section-head .badge { display: inline-block; margin-bottom: 12px; padding: 6px 14px; border-radius: 999px; background: var(--accent-light); color: var(--accent); font-size: 0.8rem; font-weight: 700; }
+    .section-head p { margin: 10px 0 0; color: var(--muted); font-size: 1.05rem; }
+
+    .grid-3, .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .card, .pricing-card, .author-card, .chapter-item { background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow); }
+    .card { padding: 24px; border-radius: var(--radius); transition: transform 0.25s ease; }
+    .card:hover, .pricing-card:hover { transform: translateY(-4px); }
+    .card h3 { margin: 0 0 8px; color: var(--accent); font-size: 1.15rem; }
+    .card p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+
+    .chapter-list { display: grid; gap: 12px; }
+    .chapter-item { display: flex; align-items: center; gap: 16px; padding: 18px 20px; border-radius: 16px; transition: all 0.25s ease; }
+    .chapter-item:hover { transform: translateX(4px); background: var(--surface-soft); }
+    .chapter-num { display: grid; flex-shrink: 0; width: 36px; height: 36px; place-items: center; border-radius: 10px; background: var(--accent-light); color: var(--accent); font-size: 0.9rem; font-weight: 900; }
+    .chapter-item h3 { margin: 0; font-size: 1rem; }
+    .chapter-item p { margin: 2px 0 0; color: var(--muted); font-size: 0.88rem; }
+
+    .author-card { display: flex; align-items: center; gap: 30px; padding: 32px; border-radius: var(--radius); }
+    .author-card img { flex: 0 0 140px; width: 140px; height: 140px; border-radius: 50%; object-fit: cover; }
+    .author-card h3 { margin: 0 0 6px; }
+    .author-card .role { color: var(--accent); font-weight: 700; }
+    .author-card p { margin: 12px 0 0; color: var(--muted); }
+
+    .pricing-card { position: relative; padding: 28px 24px; border-radius: var(--radius); text-align: center; transition: transform 0.25s ease; }
+    .pricing-card.featured { border-color: var(--accent); transform: scale(1.04); }
+    .pricing-card.featured:hover { transform: scale(1.04) translateY(-4px); }
+    .pricing-card.featured::before { content: "Disponibile"; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); padding: 4px 16px; border-radius: 999px; background: var(--accent); color: #fff; font-size: 0.75rem; font-weight: 700; }
+    .pricing-card h3 { margin: 0; }
+    .price-big { margin: 12px 0; color: var(--accent); font-size: 1.5rem; font-weight: 900; }
+    .pricing-card ul { margin: 16px 0; padding: 0; list-style: none; text-align: left; }
+    .pricing-card li { display: flex; align-items: center; gap: 8px; padding: 6px 0; font-size: 0.92rem; }
+    .pricing-card li::before { content: "✓"; color: var(--accent); font-weight: 900; }
+    .pricing-card .btn { width: 80%; }
+
+    footer { padding: 30px 0; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.9rem; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    footer strong { color: var(--text); }
+    .footer-links { display: flex; gap: 15px; }
+    .footer-links a { color: var(--muted); text-decoration: none; }
+    .footer-links a:hover { color: var(--text); }
+
+    @media (max-width: 960px) {
+      .grid-3, .pricing-grid, .hero-content { grid-template-columns: 1fr; }
+      .author-card { flex-direction: column; text-align: center; }
+      .hero-card { justify-self: start; }
+      .hamburger { display: inline-flex; align-items: center; justify-content: center; }
+      .menu { display: none; }
+    }
+
+    @media (max-width: 560px) {
+      .nav-inner { min-height: 66px; }
+      .brand { font-size: 0.9rem; }
+      .theme-toggle { padding: 9px 11px; }
+      .hamburger { width: 42px; height: 42px; }
+      .mobile-menu { inset: 66px 0 auto 0; }
+      .hero-content { padding: 32px 24px; }
+      .hero h1 { font-size: 2.5rem; }
+      .hero .subtitle { font-size: 1.05rem; }
+      .section-head h2 { font-size: 1.75rem; }
+      .pricing-card.featured, .pricing-card.featured:hover { transform: none; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
 </head>
 <body>
-  <div class="nav">
+  <nav class="nav" aria-label="Navigazione principale">
     <div class="container nav-inner">
-      <div class="brand"><span class="brand-mark"></span><span>Il Mestiere del Sindaco</span></div>
+      <a class="brand" href="#top" aria-label="Torna all'inizio">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Il Mestiere del Sindaco</span>
+      </a>
       <div class="nav-right">
-        <div class="menu" id="desktopMenu">
+        <div class="menu">
           <a href="#manuale">Il Manuale</a>
           <a href="#indice">Indice</a>
           <a href="#autore">Autore</a>
           <a href="#acquista">Acquista</a>
         </div>
-        <button class="theme-toggle" id="themeToggle">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambia tema">
           <span id="themeLabel">Light</span>
         </button>
-        <button class="hamburger" id="hamburgerBtn">☰</button>
+        <button class="hamburger" id="hamburgerBtn" type="button" aria-label="Apri il menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
       </div>
     </div>
-  </div>
+  </nav>
 
   <div class="mobile-menu" id="mobileMenu">
     <a href="#manuale">Il Manuale</a>
@@ -162,28 +289,24 @@
     <a href="#acquista">Acquista</a>
   </div>
 
-  <section class="hero">
+  <section class="hero" id="top">
     <div class="container hero-shell">
       <div class="hero-content">
         <div>
-          <div class="eyebrow">📖 Manuale di Sopravvivenza per Amministratori</div>
+          <div class="eyebrow">📖 Manuale di sopravvivenza per amministratori locali</div>
           <div class="subtitle">Tutto quello che gli atti non dicono</div>
-          <h1 style="color: var(--hero-text);">Il Mestiere del Sindaco</h1>
-          <p>
-            Non è solo un manuale tecnico, ma una guida concreta basata su 25 anni di esperienza. 
-            Per chi vuole governare con consapevolezza, gestendo il peso delle decisioni 
-            senza perdere l'umanità e l'equilibrio.
-          </p>
+          <h1>Il Mestiere del Sindaco</h1>
+          <p>Una guida concreta, nata dall'esperienza sul campo, per chi vuole amministrare con consapevolezza: tra decisioni difficili, relazioni, organizzazione dell'ente e responsabilità verso la comunità.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#acquista">Ordina il libro →</a>
+            <a class="btn btn-primary" href="#acquista">Acquista il libro →</a>
             <a class="btn btn-secondary" href="#indice">Sfoglia l'indice</a>
           </div>
         </div>
-        <aside class="hero-card" style="width:65%">
-          <img class="book-cover" src="https://ilmestieredelsindaco.com/copertinaLibro0.jpg" alt="Copertina" style="align:center"/>
-          <h3 style="text-align:center;">Il Mestiere del Sindaco</h3>
-          <div class="price" style="text-align:center; font-size: 1.8rem; font-weight: 900; color: var(--accent); margin: 8px 0;">€24,90 <small style="font-size: 0.9rem; font-weight: 400; color: var(--muted);">+ spedizione</small></div>
-          <a class="btn btn-gold" href="#acquista" style="width:90%;margin-top:8px;">Acquista Ora</a>
+        <aside class="hero-card" aria-label="Informazioni sul libro">
+          <img class="book-cover" src="https://ilmestieredelsindaco.com/copertinaLibro0.jpg" alt="Copertina del libro Il Mestiere del Sindaco" width="140" height="200">
+          <h3>Il Mestiere del Sindaco</h3>
+          <div class="price">€ 14,00 <small>145 pagine</small></div>
+          <a class="btn btn-gold" href="#acquista" style="width: 90%; margin-top: 8px;">Acquista ora</a>
         </aside>
       </div>
     </div>
@@ -192,102 +315,142 @@
   <main class="container">
     <section id="manuale" class="section">
       <div class="section-head">
-        <span class="badge">Il Valore</span>
-        <h2 style="text-align:center;">Oltre la Burocrazia</h2>
-        <p style="text-align:center;">Perché non si impara a scuola a diventare sindaco. Questo manuale colma il vuoto tra la norma e la pratica quotidiana.</p>
+        <span class="badge">Il valore</span>
+        <h2>Oltre la burocrazia</h2>
+        <p>Non una semplice raccolta di norme, ma un percorso per comprendere il lavoro quotidiano del sindaco: il rapporto con i cittadini, la squadra, le istituzioni e le scelte che costruiscono valore pubblico.</p>
       </div>
       <div class="grid-3">
-        <div class="card">
-          <h3 style="color:var(--accent)">⚖️ Più che un TUEL</h3>
-          <p>Le leggi dicono cosa fare, ma questo libro ti spiega <strong>come</strong> farlo, gestendo i rapporti umani e le tensioni tra politica e macchina amministrativa.</p>
-        </div>
-        <div class="card">
-          <h3 style="color:var(--accent)">🛡️ Sopravvivenza Psichica</h3>
-          <p>Strategie concrete per mantenere la lucidità nei momenti di crisi e gestire la pressione di un ruolo che non lascia spazio al privato.</p>
-        </div>
-        <div class="card">
-          <h3 style="color:var(--accent)">🛠️ Guida Operativa</h3>
-          <p>Non solo teoria: modelli, check-list e procedure per i primi 30 giorni e per l'intera durata del mandato.</p>
-        </div>
+        <article class="card">
+          <h3>⚖️ Più che un TUEL</h3>
+          <p>Il libro parte dalle regole, ma soprattutto racconta come affrontare la distanza tra l'indirizzo politico e la pratica amministrativa.</p>
+        </article>
+        <article class="card">
+          <h3>🛡️ Il lato umano del ruolo</h3>
+          <p>Pressione, aspettative, conflitti e delusioni: strumenti di riflessione per mantenere lucidità, equilibrio e senso della responsabilità.</p>
+        </article>
+        <article class="card">
+          <h3>🛠️ Esperienza operativa</h3>
+          <p>Dalla campagna elettorale ai primi passi in Comune, fino al fine mandato: casi, consigli e situazioni concrete maturate sul campo.</p>
+        </article>
       </div>
     </section>
 
     <section id="indice" class="section">
       <div class="section-head">
-        <span class="badge">Percorso</span>
-        <h2 style="text-align:center;">L'Architettura del Successo</h2>
-        <p style="text-align:center;">Un viaggio in 12 capitoli per navigare sicuri tra responsabilità e visione.</p>
+        <span class="badge">Indice</span>
+        <h2>Dieci tappe per amministrare</h2>
+        <p>Il percorso effettivo del libro: dalla scelta di candidarsi alla conclusione del mandato, con un'appendice dedicata ai fondamenti della democrazia e delle funzioni pubbliche.</p>
       </div>
       <div class="chapter-list">
-        <div class="chapter-item"><div class="chapter-num">1</div><div><h4 style="margin:0;font-size:1rem;">I primi 30 giorni</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Dal giuramento alle prime decisioni amministrative</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">2</div><div><h4 style="margin:0;font-size:1rem;">L'Organizzazione dell'Ente</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Capire la struttura e le responsabilità</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">3</div><div><h4 style="margin:0;font-size:1rem;">Bilancio e Finanze</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Capire i numeri e le risorse disponibili</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">4</div><div><h4 style="margin:0;font-size:1rem;">Provvedimenti Amministrativi</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Le decisioni e come documentarle correttamente</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">5</div><div><h4 style="margin:0;font-size:1rem;">Il Capitale Umano</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Gestire il personale e creare team affidabili</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">6</div><div><h4 style="margin:0;font-size:1rem;">Appalti e Servizi Pubblici</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Procedure, trasparenza e gestione dei contratti</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">7</div><div><h4 style="margin:0;font-size:1rem;">Governo del Territorio</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Urbanistica, sviluppo sostenibile e pianificazione</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">8</div><div><h4 style="margin:0;font-size:1rem;">Sicurezza e Ordine Pubblico</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Il ruolo del sindaco nella sicurezza cittadina</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">9</div><div><h4 style="margin:0;font-size:1rem;">Emergenze e Protezione Civile</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Preparasi e agire nelle situazioni critiche</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">10</div><div><h4 style="margin:0;font-size:1rem;">Comunicazione Istituzionale</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Raccontare la città e dialogare con i cittadini</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">11</div><div><h4 style="margin:0;font-size:1rem;">Rapporti Istituzionali</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Collaborare con provincia, regione e istituzioni nazionali</p></div></div>
-        <div class="chapter-item"><div class="chapter-num">12</div><div><h4 style="margin:0;font-size:1rem;">Sopravvivere al Mandato</h4><p style="margin:2px 0 0;color:var(--muted);font-size:0.88rem;">Equilibrio, consapevolezza e gestione del carico psicologico</p></div></div>
+        <article class="chapter-item">
+          <div class="chapter-num">1</div>
+          <div><h3>Perché fare il sindaco: una professione o una missione?</h3><p>Motivazioni, responsabilità, impegno personale e realtà dei Comuni italiani.</p></div>
+        </article>
+        <article class="chapter-item">
+          <div class="chapter-num">2</div>
+          <div><h3>La campagna elettorale: strategie per vincere</h3><p>Candidabilità, programma, comunicazione, squadra e organizzazione della competizione elettorale.</p></div>
+        </article>
+        <article class="chapter-item">
+          <div class="chapter-num">3</div>
+          <div><h3>I primi passi: iniziare bene e ottenere subito risultati</h3><p>Giunta, deleghe, giuramento, vertici amministrativi e rapporto iniziale con la struttura dell'ente.</p></div>
+        </article>
+        <article class="chapter-item">
+          <div class="chapter-num">4</div>
+          <div><h3>Chi me lo ha fatto fare? Aspettative e delusioni</h3><p>Come superare i primi ostacoli, gestire le difficoltà e non perdere la direzione del mandato.</p></div>
+        </article>
+        <article class="chapter-item">
+          <div class="chapter-num">5</div>
+          <div><h3>L'organizzazione del comune e i falsi miti</h3><p>La famigerata burocrazia, il ruolo del TUEL e l'equilibrio tra politica, gestione e responsabilità.</p></div>
+        </article>
+        <article class="chapter-item">
+          <div class="chapter-num">6</div>
+          <div><h3>Le relazioni interne ed esterne</h3><p>Sindacati, dirigenti, istituzioni e imprenditori: costruire collaborazione senza perdere autorevolezza.</p></div>
+        </article>
+        <article class="chapter-item">
+          <div class="chapter-num">7</div>
+          <div><h3>L'esperienza della pandemia</h3><p>Una riflessione sulla gestione dell'emergenza e sul ruolo di prossimità del sindaco.</p></div>
+        </article>
+        <article class="chapter-item">
+          <div class="chapter-num">8</div>
+          <div><h3>Comunicare bene: 10 regole per dialogare sui social</h3><p>Presenza pubblica, ascolto e comunicazione istituzionale nell'ecosistema digitale.</p></div>
+        </article>
+        <article class="chapter-item">
+          <div class="chapter-num">9</div>
+          <div><h3>L'intelligenza artificiale tra burocrazia e politica</h3><p>Opportunità, limiti e uso consapevole delle nuove tecnologie nella pubblica amministrazione.</p></div>
+        </article>
+        <article class="chapter-item">
+          <div class="chapter-num">10</div>
+          <div><h3>Fine mandato: stanchezza o rilancio</h3><p>Bilancio dell'esperienza, risultati per la comunità e decisioni sul futuro impegno politico.</p></div>
+        </article>
+        <article class="chapter-item">
+          <div class="chapter-num">+</div>
+          <div><h3>Appendice</h3><p>Il discorso di Pericle agli Ateniesi e articoli selezionati della Costituzione della Repubblica italiana.</p></div>
+        </article>
       </div>
     </section>
 
     <section id="autore" class="section">
       <div class="section-head">
-        <span class="badge">L'Esperienza</span>
-        <h2 style="text-align:center;">Chi scrive questa guida</h2>
+        <span class="badge">L'esperienza</span>
+        <h2>Chi scrive questa guida</h2>
       </div>
       <div class="author-card">
-        <img src="https://ilmestieredelsindaco.com/00.jpg" alt="Giancarlo Volpe" />
-        <div style="text-align:left;">
-          <h3 style="margin:0 0 6px;">Giancarlo Volpe</h3>
-          <div class="role">Esperto di Governance Locale e Amministrazione Pubblica</div>
-          <p style="margin-top:12px;color:var(--muted);text-align:left;">
-            Venticinque anni di esperienza a fianco di una dozzina di sindaci di diverse estrazioni politiche. 
-            Ha trasformato l'osservazione diretta in un metodo di supporto per i neoeletti, 
-            aiutandoli a navigare tra procedure, nomine e gestione delle emozioni.
-          </p>
+        <img src="https://ilmestieredelsindaco.com/00.jpg" alt="Giancarlo Volpe" width="140" height="140">
+        <div>
+          <h3>Giancarlo Volpe</h3>
+          <div class="role">Esperto di governance locale e amministrazione pubblica</div>
+          <p>Venticinque anni di esperienza a fianco di una dozzina di sindaci di diverse estrazioni politiche. Trasforma l'osservazione diretta della vita amministrativa in una guida per chi si avvicina al ruolo di primo cittadino e vuole comprenderne davvero responsabilità, procedure e dimensione umana.</p>
         </div>
       </div>
     </section>
 
     <section id="acquista" class="section">
       <div class="section-head">
-        <span class="badge">Edizioni</span>
-        <h2 style="text-align:center; font-size: 2.5rem;">Scegli il tuo formato</h2>
-        <p style="text-align:center;">Un investimento minimo per evitare errori costosi nel tuo mandato.</p>
+        <span class="badge">Il libro</span>
+        <h2>Scegli dove acquistarlo</h2>
+        <p>Edizione di 145 pagine, disponibile al prezzo di € 14,00.</p>
       </div>
       <div class="pricing-grid">
-        <div class="pricing-card">
-          <h3 style="text-align:center;">Digitale</h3>
-          <div class="price-big" style="text-align:center;">€14,90</div>
-          <ul style="text-align:left;"><li style="display:flex; gap:8px; align-items:center;">PDF + ePub</li><li style="display:flex; gap:8px; align-items:center;">Modelli scaricabili</li><li style="display:flex; gap:8px; align-items:center;">Accesso illimitato</li></ul>
-          <a class="btn btn-secondary" href="https://www.librerie.coop/libri/9788849889765-il-mestiere-del-sindaco-rubbettino-editore/" style="width:80%;">Acquista</a>
-        </div>
-        <div class="pricing-card featured">
-          <h3 style="text-align:center;">📖 Cartaceo</h3>
-          <div class="price-big" style="text-align:center;">€24,90</div>
-          <ul style="text-align:left;"><li style="display:flex; gap:8px; align-items:center;">Volume 320 pagine</li><li style="display:flex; gap:8px; align-items:center;">PDF incluso gratis</li><li style="display:flex; gap:8px; align-items:center;">Spedizione inclusa</li></ul>
-          <a class="btn btn-primary" href="https://amzn.eu/d/0gu5PerT" target="_blank" style="width:80%;">Ordina su Amazon</a>
-        </div>
-        <div class="pricing-card">
-          <h3 style="text-align:center;">🏢 PA Multipla</h3>
-          <div class="price-big" style="text-align:center;">€19,90</div>
-          <ul style="text-align:left;"><li style="display:flex; gap:8px; align-items:center;">Prezzo per copia (10+)</li><li style="display:flex; gap:8px; align-items:center;">Fatturazione elettronica</li><li style="display:flex; gap:8px; align-items:center;">Supporto dedicato</li></ul>
-          <a class="btn btn-secondary" href="https://www.store.rubbettinoeditore.it/catalogo/il-mestiere-del-sindaco/" style="width:80%;">Contattaci</a>
-        </div>
+        <article class="pricing-card">
+          <h3>Coop</h3>
+          <div class="price-big">€ 14,00</div>
+          <ul>
+            <li>Edizione cartacea</li>
+            <li>145 pagine</li>
+            <li>Acquisto online</li>
+          </ul>
+          <a class="btn btn-secondary" href="https://www.librerie.coop/libri/9788849889765-il-mestiere-del-sindaco-rubbettino-editore/" target="_blank" rel="noopener noreferrer">Acquista</a>
+        </article>
+        <article class="pricing-card featured">
+          <h3>📖 Amazon</h3>
+          <div class="price-big">€ 14,00</div>
+          <ul>
+            <li>Edizione cartacea</li>
+            <li>145 pagine</li>
+            <li>Ordine su Amazon</li>
+          </ul>
+          <a class="btn btn-primary" href="https://amzn.eu/d/0gu5PerT" target="_blank" rel="noopener noreferrer">Ordina su Amazon</a>
+        </article>
+        <article class="pricing-card">
+          <h3>Rubbettino</h3>
+          <div class="price-big">€ 14,00</div>
+          <ul>
+            <li>Edizione cartacea</li>
+            <li>145 pagine</li>
+            <li>Acquisto dall'editore</li>
+          </ul>
+          <a class="btn btn-secondary" href="https://www.store.rubbettinoeditore.it/catalogo/il-mestiere-del-sindaco/" target="_blank" rel="noopener noreferrer">Acquista</a>
+        </article>
       </div>
     </section>
   </main>
 
-  <footer style="display:flex; justify-content:space-between; padding: 30px 0; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.9rem;">
-    <div class="container" style="display:flex; justify-content:space-between; align-items:center; width:100%;">
-      <div><strong style="color:var(--text);">Il Mestiere del Sindaco</strong> © 2026</div>
-      <div style="display:flex; gap: 15px;">
-        <a href="#" style="color:var(--muted); text-decoration:none;">Privacy</a>
-        <a href="#" style="color:var(--muted); text-decoration:none;">Contatti</a>
+  <footer>
+    <div class="container footer-inner">
+      <div><strong>Il Mestiere del Sindaco</strong> © 2026</div>
+      <div class="footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Contatti</a>
       </div>
     </div>
   </footer>
@@ -302,20 +465,32 @@
 
       function applyTheme(theme) {
         root.setAttribute("data-theme", theme);
-        if(label) label.textContent = theme.charAt(0).toUpperCase() + theme.slice(1);
+        label.textContent = theme === "dark" ? "Dark" : "Light";
       }
 
-      const saved = localStorage.getItem("ims-theme");
-      if (saved) applyTheme(saved);
-      else applyTheme(window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      const savedTheme = localStorage.getItem("ims-theme");
+      const preferredTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      applyTheme(savedTheme || preferredTheme);
 
-      toggle.addEventListener("click", () => {
-        const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-        applyTheme(next);
-        localStorage.setItem("ims-theme", next);
+      toggle.addEventListener("click", function () {
+        const nextTheme = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        applyTheme(nextTheme);
+        localStorage.setItem("ims-theme", nextTheme);
       });
 
-      hamburger.addEventListener("click", () => mobileMenu.classList.toggle("open"));
+      hamburger.addEventListener("click", function () {
+        const isOpen = mobileMenu.classList.toggle("open");
+        hamburger.setAttribute("aria-expanded", String(isOpen));
+        hamburger.setAttribute("aria-label", isOpen ? "Chiudi il menu" : "Apri il menu");
+      });
+
+      mobileMenu.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () {
+          mobileMenu.classList.remove("open");
+          hamburger.setAttribute("aria-expanded", "false");
+          hamburger.setAttribute("aria-label", "Apri il menu");
+        });
+      });
     })();
   </script>
 </body>
