@@ -196,7 +196,7 @@
     .section { margin-top: 48px; scroll-margin-top: 90px; }
     .section-head { max-width: 760px; margin: 0 auto 24px; text-align: center; }
     .section-head h2 { margin: 0; font-size: 2rem; }
-    .section-head .badge { display: inline-block; margin-bottom: 12px; padding: 6px 14px; border-radius: 999px; background: var(--accent-light); color: var(--accent); font-size: 0.8rem; font-weight: 700; }
+    .section-head .badge { display: inline-block; margin-bottom: 12px; padding: 6px 14px; border-radius: 999px; background: var(--accent-light); color: var(--accent); font-size: 0.8rem; font-weig[...]
     .section-head p { margin: 10px 0 0; color: var(--muted); font-size: 1.05rem; }
 
     .grid-3, .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -209,7 +209,7 @@
     .chapter-list { display: grid; gap: 12px; }
     .chapter-item { display: flex; align-items: center; gap: 16px; padding: 18px 20px; border-radius: 16px; transition: all 0.25s ease; }
     .chapter-item:hover { transform: translateX(4px); background: var(--surface-soft); }
-    .chapter-num { display: grid; flex-shrink: 0; width: 36px; height: 36px; place-items: center; border-radius: 10px; background: var(--accent-light); color: var(--accent); font-size: 0.9rem; font-weight: 900; }
+    .chapter-num { display: grid; flex-shrink: 0; width: 36px; height: 36px; place-items: center; border-radius: 10px; background: var(--accent-light); color: var(--accent); font-size: 0.9rem; fo[...]
     .chapter-item h3 { margin: 0; font-size: 1rem; }
     .chapter-item p { margin: 2px 0 0; color: var(--muted); font-size: 0.88rem; }
 
@@ -222,7 +222,7 @@
     .pricing-card { position: relative; padding: 28px 24px; border-radius: var(--radius); text-align: center; transition: transform 0.25s ease; }
     .pricing-card.featured { border-color: var(--accent); transform: scale(1.04); }
     .pricing-card.featured:hover { transform: scale(1.04) translateY(-4px); }
-    .pricing-card.featured::before { content: "Disponibile"; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); padding: 4px 16px; border-radius: 999px; background: var(--accent); color: #fff; font-size: 0.75rem; font-weight: 700; }
+    .pricing-card.featured::before { content: "Disponibile"; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); padding: 4px 16px; border-radius: 999px; background: var(--acc[...]
     .pricing-card h3 { margin: 0; }
     .price-big { margin: 12px 0; color: var(--accent); font-size: 1.5rem; font-weight: 900; }
     .pricing-card ul { margin: 16px 0; padding: 0; list-style: none; text-align: left; }
@@ -236,6 +236,40 @@
     .footer-links { display: flex; gap: 15px; }
     .footer-links a { color: var(--muted); text-decoration: none; }
     .footer-links a:hover { color: var(--text); }
+
+    /* Overlay modal styles */
+    .overlay-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      padding: 20px;
+    }
+    .overlay-dialog {
+      position: relative;
+      background: var(--surface);
+      border-radius: 14px;
+      padding: 18px;
+      max-width: 960px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+    .overlay-close {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      border: none;
+      background: transparent;
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+      color: var(--muted);
+    }
+    .overlay-close:hover { color: var(--text); }
+    .overlay-img { display:block; max-width: 100%; height: auto; border-radius: 8px; }
 
     @media (max-width: 960px) {
       .grid-3, .pricing-grid, .hero-content { grid-template-columns: 1fr; }
@@ -293,14 +327,13 @@
     <div class="container hero-shell">
     
 
-
       
       <div class="hero-content">
         <div>
           <div class="eyebrow">📖 Manuale di sopravvivenza per amministratori locali</div>
           <div class="subtitle">Tutto quello che gli atti non dicono</div>
           <h1>Il Mestiere del Sindaco</h1>
-          <p>Una guida concreta, nata dall'esperienza sul campo, per chi vuole amministrare con consapevolezza: tra decisioni difficili, relazioni, organizzazione dell'ente e responsabilità verso la comunità.</p>
+          <p>Una guida concreta, nata dall'esperienza sul campo, per chi vuole amministrare con consapevolezza: tra decisioni difficili, relazioni, organizzazione dell'ente e responsabilità vers[...]
           <div class="hero-actions">
             <a class="btn btn-primary" href="#acquista">Acquista il libro →</a>
             <a class="btn btn-secondary" href="#indice">Sfoglia l'indice</a>
@@ -321,7 +354,7 @@
       <div class="section-head">
         <span class="badge">Il valore</span>
         <h2>Oltre la burocrazia</h2>
-        <p>Non una semplice raccolta di norme, ma un percorso per comprendere il lavoro quotidiano del sindaco: il rapporto con i cittadini, la squadra, le istituzioni e le scelte che costruiscono valore pubblico.</p>
+        <p>Non una semplice raccolta di norme, ma un percorso per comprendere il lavoro quotidiano del sindaco: il rapporto con i cittadini, la squadra, le istituzioni e le scelte che costruiscon[...]
       </div>
       <div class="grid-3">
         <article class="card">
@@ -403,7 +436,7 @@
         <div>
           <h3>Giancarlo Volpe</h3>
           <div class="role">Esperto di governance locale e amministrazione pubblica</div>
-          <p>Venticinque anni di esperienza a fianco di una dozzina di sindaci di diverse estrazioni politiche. Trasforma l'osservazione diretta della vita amministrativa in una guida per chi si avvicina al ruolo di primo cittadino e vuole comprenderne davvero responsabilità, procedure e dimensione umana.</p>
+          <p>Venticinque anni di esperienza a fianco di una dozzina di sindaci di diverse estrazioni politiche. Trasforma l'osservazione diretta della vita amministrativa in una guida per chi si [...]
         </div>
       </div>
     </section>
@@ -459,6 +492,14 @@
     </div>
   </footer>
 
+  <!-- Overlay modal for canottieri.png -->
+  <div id="canottieriOverlay" class="overlay-backdrop" hidden>
+    <div class="overlay-dialog" role="dialog" aria-modal="true" aria-labelledby="canottieriTitle">
+      <button class="overlay-close" id="overlayClose" aria-label="Chiudi finestra">×</button>
+      <img src="canottieri.png" alt="Canottieri" class="overlay-img">
+    </div>
+  </div>
+
   <script>
     (function () {
       const root = document.documentElement;
@@ -494,6 +535,50 @@
           hamburger.setAttribute("aria-expanded", "false");
           hamburger.setAttribute("aria-label", "Apri il menu");
         });
+      });
+    })();
+  </script>
+
+  <script>
+    // Overlay modal script: show on load, close with X, click outside or ESC
+    (function () {
+      const overlay = document.getElementById('canottieriOverlay');
+      const closeBtn = document.getElementById('overlayClose');
+
+      function showOverlay() {
+        overlay.removeAttribute('hidden');
+        // move focus to close button for accessibility
+        if (closeBtn) closeBtn.focus();
+      }
+
+      function hideOverlay() {
+        overlay.setAttribute('hidden', '');
+      }
+
+      // Show overlay after DOM is ready
+      document.addEventListener('DOMContentLoaded', function () {
+        // Small delay so it doesn't feel abrupt
+        setTimeout(function () {
+          // Only show if image exists (optional check)
+          const img = overlay && overlay.querySelector('img');
+          if (overlay && img) showOverlay();
+        }, 300);
+      });
+
+      if (closeBtn) closeBtn.addEventListener('click', hideOverlay);
+
+      // click outside dialog closes
+      if (overlay) {
+        overlay.addEventListener('click', function (e) {
+          if (e.target === overlay) hideOverlay();
+        });
+      }
+
+      // ESC closes
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && overlay && !overlay.hasAttribute('hidden')) {
+          hideOverlay();
+        }
       });
     })();
   </script>
