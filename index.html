@@ -56,6 +56,10 @@
       transition: background-color 0.3s ease, color 0.3s ease;
     }
 
+    body.modal-open {
+      overflow: hidden;
+    }
+
     a { color: inherit; }
     .container { width: min(1160px, calc(100% - 32px)); margin: 0 auto; }
 
@@ -342,6 +346,106 @@
       font-size: 1.05rem;
     }
 
+    /* Gallery Section & Layer Styles */
+    .gallery-preview-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .gallery-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .gallery-modal.active {
+      display: flex;
+    }
+
+    .gallery-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(8px);
+    }
+
+    .gallery-dialog {
+      position: relative;
+      z-index: 101;
+      width: min(1000px, 100%);
+      max-height: 85vh;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .gallery-dialog-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .gallery-dialog-header h3 {
+      margin: 0;
+      font-size: 1.25rem;
+    }
+
+    .gallery-close-btn {
+      background: transparent;
+      border: none;
+      color: var(--text);
+      font-size: 1.8rem;
+      line-height: 1;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 8px;
+    }
+
+    .gallery-close-btn:hover {
+      background: var(--surface-soft);
+    }
+
+    .gallery-grid {
+      padding: 24px;
+      overflow-y: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .gallery-media {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      transition: transform 0.2s ease;
+    }
+
+    .gallery-media:hover {
+      transform: scale(1.02);
+    }
+
+    video.gallery-media {
+      object-fit: contain;
+      background: #000;
+    }
+
     .grid-3,
     .pricing-grid {
       display: grid;
@@ -611,6 +715,7 @@
 
       <div class="nav-right">
         <div class="menu">
+          <a href="#galleria" class="open-gallery-trigger">Galleria</a>
           <a href="#manuale">Il Manuale</a>
           <a href="#indice">Indice</a>
           <a href="#autore">Autore</a>
@@ -621,12 +726,13 @@
           <span id="themeLabel">Light</span>
         </button>
 
-        <button class="hamburger" id="hamburgerBtn" type="button" aria-label="Apri il menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
+        <button class="hamburger" id="hamburgerBtn" type="button" aria-label="Opzioni menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
       </div>
     </div>
   </nav>
 
   <div class="mobile-menu" id="mobileMenu">
+    <a href="#galleria" class="open-gallery-trigger">Galleria</a>
     <a href="#manuale">Il Manuale</a>
     <a href="#indice">Indice</a>
     <a href="#autore">Autore</a>
@@ -661,6 +767,24 @@
   </section>
 
   <main class="container">
+
+    <!-- NEW SECTION: GALLERIA UNDER HEADER / HERO -->
+    <section id="galleria" class="section">
+      <div class="section-head">
+        <span class="badge">Raccolta Media</span>
+        <h2>Galleria Fotografica e Video</h2>
+        <p>Sfoglia gli scatti, le locandine e le video-testimonianze delle presentazioni ed eventi.</p>
+      </div>
+
+      <div class="gallery-preview-card">
+        <h3>Esplora i contenuti multimediali</h3>
+        <p style="color: var(--muted); margin: 8px 0 20px;">Fai clic sul pulsante sottostante per aprire il layer interattivo con tutti i file della cartella <code>/images/</code>.</p>
+        <button type="button" class="btn btn-primary open-gallery-trigger" id="openGalleryBtn">
+          📸 Apri Galleria Multimediale
+        </button>
+      </div>
+    </section>
+
     <section id="manuale" class="section">
       <div class="section-head">
         <span class="badge">Il valore</span>
@@ -851,6 +975,40 @@
     </section>
   </main>
 
+  <!-- OVERLAY / MODAL LAYER FOR GALLERY -->
+  <div class="gallery-modal" id="galleryModal" role="dialog" aria-modal="true" aria-labelledby="galleryModalTitle">
+    <div class="gallery-backdrop" id="galleryBackdrop"></div>
+    <div class="gallery-dialog">
+      <div class="gallery-dialog-header">
+        <h3 id="galleryModalTitle">Galleria Immagini e Video (/images/)</h3>
+        <button type="button" class="gallery-close-btn" id="closeGalleryBtn" aria-label="Chiudi galleria">&times;</button>
+      </div>
+      <div class="gallery-grid">
+        <!-- Media elements loaded from /images/ -->
+        <img class="gallery-media" src="images/canottieri001.jpg" alt="Canottieri 1" loading="lazy">
+        <img class="gallery-media" src="images/canottieri002.jpg" alt="Canottieri 2" loading="lazy">
+        <img class="gallery-media" src="images/canottieri003.jpg" alt="Canottieri 3" loading="lazy">
+        <img class="gallery-media" src="images/canottieri004.jpg" alt="Canottieri 4" loading="lazy">
+        <img class="gallery-media" src="images/locandinca_Cascina.jpg" alt="Locandina Cascina" loading="lazy">
+        <img class="gallery-media" src="images/rz01.jpg" alt="Foto RZ 01" loading="lazy">
+        <img class="gallery-media" src="images/rz02.jpg" alt="Foto RZ 02" loading="lazy">
+        <img class="gallery-media" src="images/rz03.jpg" alt="Foto RZ 03" loading="lazy">
+        <img class="gallery-media" src="images/rz04.jpg" alt="Foto RZ 04" loading="lazy">
+        <img class="gallery-media" src="images/rz05.jpg" alt="Foto RZ 05" loading="lazy">
+        <img class="gallery-media" src="images/rz06.jpg" alt="Foto RZ 06" loading="lazy">
+        <img class="gallery-media" src="images/rz07.jpg" alt="Foto RZ 07" loading="lazy">
+        <img class="gallery-media" src="images/rz08.jpg" alt="Foto RZ 08" loading="lazy">
+        <img class="gallery-media" src="images/rz09.jpg" alt="Foto RZ 09" loading="lazy">
+        <img class="gallery-media" src="images/rz11.jpg" alt="Foto RZ 11" loading="lazy">
+        <img class="gallery-media" src="images/rz12.jpg" alt="Foto RZ 12" loading="lazy">
+        <video class="gallery-media" controls preload="metadata">
+          <source src="images/rzvideo01.mp4" type="video/mp4">
+          Il tuo browser non supporta la riproduzione video.
+        </video>
+      </div>
+    </div>
+  </div>
+
   <footer>
     <div class="container footer-inner">
       <div><strong>Il Mestiere del Sindaco</strong> © 2026</div>
@@ -870,6 +1028,7 @@
       const hamburger = document.getElementById("hamburgerBtn");
       const mobileMenu = document.getElementById("mobileMenu");
 
+      /* Theme toggle logic */
       function applyTheme(theme) {
         root.setAttribute("data-theme", theme);
         label.textContent = theme === "dark" ? "Dark" : "Light";
@@ -886,6 +1045,7 @@
         localStorage.setItem("ims-theme", nextTheme);
       });
 
+      /* Mobile menu logic */
       hamburger.addEventListener("click", function () {
         const isOpen = mobileMenu.classList.toggle("open");
 
@@ -899,6 +1059,38 @@
           hamburger.setAttribute("aria-expanded", "false");
           hamburger.setAttribute("aria-label", "Apri il menu");
         });
+      });
+
+      /* Gallery Modal logic */
+      const modal = document.getElementById("galleryModal");
+      const closeBtn = document.getElementById("closeGalleryBtn");
+      const backdrop = document.getElementById("galleryBackdrop");
+      const triggers = document.querySelectorAll(".open-gallery-trigger");
+
+      function openModal() {
+        modal.classList.add("active");
+        document.body.classList.add("modal-open");
+      }
+
+      function closeModal() {
+        modal.classList.remove("active");
+        document.body.classList.remove("modal-open");
+      }
+
+      triggers.forEach(function (trigger) {
+        trigger.addEventListener("click", function (e) {
+          e.preventDefault();
+          openModal();
+        });
+      });
+
+      closeBtn.addEventListener("click", closeModal);
+      backdrop.addEventListener("click", closeModal);
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && modal.classList.contains("active")) {
+          closeModal();
+        }
       });
     })();
   </script>
