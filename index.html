@@ -481,7 +481,7 @@
       position: absolute;
       inset: 0;
       z-index: 20;
-      background: rgba(0, 0, 0, 0.92);
+      background: rgba(0, 0, 0, 0.94);
       display: none;
       align-items: center;
       justify-content: center;
@@ -494,8 +494,8 @@
     }
 
     .gallery-expanded-content {
-      max-width: 90%;
-      max-height: 80vh;
+      max-width: 85%;
+      max-height: 75vh;
       border-radius: 12px;
       box-shadow: 0 10px 40px rgba(0,0,0,0.5);
       object-fit: contain;
@@ -510,6 +510,42 @@
       border-radius: 999px;
       font-weight: 700;
       cursor: pointer;
+      z-index: 30;
+    }
+
+    /* Navigation Arrows Styles */
+    .gallery-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      font-size: 2.2rem;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+      z-index: 30;
+      line-height: 1;
+    }
+
+    .gallery-nav-btn:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .gallery-nav-left {
+      left: 20px;
+    }
+
+    .gallery-nav-right {
+      right: 20px;
     }
 
     .grid-3,
@@ -772,6 +808,14 @@
         width: 100px;
         height: 100px;
       }
+
+      .gallery-nav-btn {
+        width: 42px;
+        height: 42px;
+        font-size: 1.8rem;
+      }
+      .gallery-nav-left { left: 8px; }
+      .gallery-nav-right { right: 8px; }
     }
   </style>
 </head>
@@ -1061,7 +1105,9 @@
 
       <!-- Expanded Media Overlay -->
       <div class="gallery-expanded-view" id="galleryExpandedView">
+        <button class="gallery-nav-btn gallery-nav-left" id="prevMediaBtn" aria-label="Precedente">&lsaquo;</button>
         <div id="expandedMediaContainer"></div>
+        <button class="gallery-nav-btn gallery-nav-right" id="nextMediaBtn" aria-label="Successivo">&rsaquo;</button>
         <button class="gallery-expanded-close" id="closeExpandedBtn">Chiudi Vista</button>
       </div>
     </div>
@@ -1120,7 +1166,7 @@
       });
     })();
 
-    /* 3D Gallery Integration Script */
+    /* 3D Gallery Integration Script with Navigation Arrows */
     $(document).ready(function() {
       var mediaList = [
         { type: "image", src: "images/canottieri001.jpg" },
@@ -1142,18 +1188,62 @@
         { type: "video", src: "images/rzvideo01.mp4" }
       ];
 
+      var currentIndex = -1;
       var $grid = $("#gallery3DGrid");
 
-      // Generate 3D Tiles
-      mediaList.forEach(function(item) {
+      // Generate 3D Tiles with index reference
+      mediaList.forEach(function(item, index) {
         var $tile = $('<div class="demo__placeholder"></div>');
         if (item.type === "image") {
           $tile.css("background-image", "url('" + item.src + "')");
         } else {
           $tile.addClass("video-tile").css("background", "#1e293b");
         }
-        $tile.data("media", item);
+        $tile.data("index", index);
         $grid.append($tile);
+      });
+
+      // Render media in expanded view & manage arrow visibility
+      function renderExpandedMedia(index) {
+        if (index < 0 || index >= mediaList.length) return;
+        var item = mediaList[index];
+        var $container = $("#expandedMediaContainer").empty();
+
+        if (item.type === "image") {
+          $container.append('<img class="gallery-expanded-content" src="' + item.src + '" alt="Media Expanded">');
+        } else {
+          $container.append('<video class="gallery-expanded-content" controls autoPlay><source src="' + item.src + '" type="video/mp4"></video>');
+        }
+
+        // Boundary check: Hide left arrow on first item, right arrow on last item
+        if (index <= 0) {
+          $("#prevMediaBtn").hide();
+        } else {
+          $("#prevMediaBtn").show();
+        }
+
+        if (index >= mediaList.length - 1) {
+          $("#nextMediaBtn").hide();
+        } else {
+          $("#nextMediaBtn").show();
+        }
+      }
+
+      // Navigation button click handlers
+      $("#prevMediaBtn").on("click", function(e) {
+        e.stopPropagation();
+        if (currentIndex > 0) {
+          currentIndex--;
+          renderExpandedMedia(currentIndex);
+        }
+      });
+
+      $("#nextMediaBtn").on("click", function(e) {
+        e.stopPropagation();
+        if (currentIndex < mediaList.length - 1) {
+          currentIndex++;
+          renderExpandedMedia(currentIndex);
+        }
       });
 
       // Modal Controls
@@ -1175,32 +1265,39 @@
 
       $("#closeGalleryBtn, #galleryBackdrop").on("click", closeModal);
 
-      $(document).on("keydown", function(e) {
-        if (e.key === "Escape" && $("#galleryModal").hasClass("active")) {
-          closeModal();
-        }
-      });
-
       // Tile Expand Click Logic
       $(document).on("click", ".demo__placeholder", function() {
-        var item = $(this).data("media");
-        var $container = $("#expandedMediaContainer").empty();
-
-        if (item.type === "image") {
-          $container.append('<img class="gallery-expanded-content" src="' + item.src + '" alt="Media Expanded">');
-        } else {
-          $container.append('<video class="gallery-expanded-content" controls autoPlay><source src="' + item.src + '" type="video/mp4"></video>');
-        }
-
+        currentIndex = $(this).data("index");
+        renderExpandedMedia(currentIndex);
         $("#galleryExpandedView").addClass("active");
       });
 
       function closeExpandedView() {
         $("#galleryExpandedView").removeClass("active");
         $("#expandedMediaContainer").empty();
+        currentIndex = -1;
       }
 
       $("#closeExpandedBtn").on("click", closeExpandedView);
+
+      // Keyboard arrow and escape controls
+      $(document).on("keydown", function(e) {
+        if (!$("#galleryModal").hasClass("active")) return;
+
+        if ($("#galleryExpandedView").hasClass("active")) {
+          if (e.key === "ArrowLeft" && currentIndex > 0) {
+            currentIndex--;
+            renderExpandedMedia(currentIndex);
+          } else if (e.key === "ArrowRight" && currentIndex < mediaList.length - 1) {
+            currentIndex++;
+            renderExpandedMedia(currentIndex);
+          } else if (e.key === "Escape") {
+            closeExpandedView();
+          }
+        } else if (e.key === "Escape") {
+          closeModal();
+        }
+      });
     });
   </script>
 </body>
