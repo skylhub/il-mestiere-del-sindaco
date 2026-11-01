@@ -6,6 +6,9 @@
   <meta name="description" content="Il Mestiere del Sindaco di Giancarlo Volpe: manuale di sopravvivenza per amministratori locali.">
   <title>Il Mestiere del Sindaco | Giancarlo Volpe</title>
 
+  <!-- jQuery required for 3D Gallery Animation -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
   <style>
     :root {
       --bg: #f5f7fa;
@@ -346,7 +349,7 @@
       font-size: 1.05rem;
     }
 
-    /* Gallery Section & Layer Styles */
+    /* --- Gallery Preview & Modal Styles --- */
     .gallery-preview-card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -373,15 +376,15 @@
     .gallery-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.82);
+      background: rgba(0, 0, 0, 0.88);
       backdrop-filter: blur(8px);
     }
 
     .gallery-dialog {
       position: relative;
       z-index: 101;
-      width: min(1000px, 100%);
-      max-height: 85vh;
+      width: min(1080px, 98vw);
+      height: 85vh;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
@@ -395,13 +398,13 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 18px 24px;
+      padding: 16px 24px;
       border-bottom: 1px solid var(--border);
     }
 
     .gallery-dialog-header h3 {
       margin: 0;
-      font-size: 1.25rem;
+      font-size: 1.2rem;
     }
 
     .gallery-close-btn {
@@ -419,31 +422,94 @@
       background: var(--surface-soft);
     }
 
-    .gallery-grid {
-      padding: 24px;
-      overflow-y: auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 16px;
-    }
-
-    .gallery-media {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 14px;
-      border: 1px solid var(--border);
+    /* --- 3D CodePen Animation Integrated Gallery Styles --- */
+    .gallery-viewport {
+      position: relative;
+      flex: 1;
+      overflow: auto;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 30px 15px;
       background: var(--surface-soft);
-      transition: transform 0.2s ease;
     }
 
-    .gallery-media:hover {
-      transform: scale(1.02);
+    .demo__gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+      max-width: 920px;
+      gap: 12px;
+      perspective: 800px;
+      position: relative;
     }
 
-    video.gallery-media {
+    .demo__placeholder {
+      width: 130px;
+      height: 130px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 10px;
+      cursor: pointer;
+      border: 2px solid var(--border);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      position: relative;
+    }
+
+    .demo__placeholder:hover {
+      transform: translateY(-4px) scale(1.04);
+      border-color: var(--accent);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .demo__placeholder.video-tile::after {
+      content: "▶";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background: rgba(0,0,0,0.4);
+      color: #fff;
+      font-size: 1.5rem;
+      border-radius: 8px;
+    }
+
+    /* Expanded View Overlay */
+    .gallery-expanded-view {
+      position: absolute;
+      inset: 0;
+      z-index: 20;
+      background: rgba(0, 0, 0, 0.92);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .gallery-expanded-view.active {
+      display: flex;
+    }
+
+    .gallery-expanded-content {
+      max-width: 90%;
+      max-height: 80vh;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
       object-fit: contain;
-      background: #000;
+    }
+
+    .gallery-expanded-close {
+      margin-top: 16px;
+      padding: 8px 20px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
     }
 
     .grid-3,
@@ -701,6 +767,11 @@
         flex-direction: column;
         align-items: flex-start;
       }
+      
+      .demo__placeholder {
+        width: 100px;
+        height: 100px;
+      }
     }
   </style>
 </head>
@@ -768,7 +839,7 @@
 
   <main class="container">
 
-    <!-- NEW SECTION: GALLERIA UNDER HEADER / HERO -->
+    <!-- GALLERIA SECTION -->
     <section id="galleria" class="section">
       <div class="section-head">
         <span class="badge">Raccolta Media</span>
@@ -778,9 +849,9 @@
 
       <div class="gallery-preview-card">
         <h3>Esplora i contenuti multimediali</h3>
-        <p style="color: var(--muted); margin: 8px 0 20px;">Fai clic sul pulsante sottostante per aprire il layer interattivo con tutti i file della cartella <code>/images/</code>.</p>
+        <p style="color: var(--muted); margin: 8px 0 20px;">Fai clic sul pulsante sottostante per aprire la galleria 3D interattiva con tutti i file della cartella <code>/images/</code>.</p>
         <button type="button" class="btn btn-primary open-gallery-trigger" id="openGalleryBtn">
-          📸 Apri Galleria Multimediale
+          📸 Apri Galleria Multimediale 3D
         </button>
       </div>
     </section>
@@ -975,36 +1046,23 @@
     </section>
   </main>
 
-  <!-- OVERLAY / MODAL LAYER FOR GALLERY -->
+  <!-- OVERLAY MODAL CONTAINING CODEPEN 3D GALLERY -->
   <div class="gallery-modal" id="galleryModal" role="dialog" aria-modal="true" aria-labelledby="galleryModalTitle">
     <div class="gallery-backdrop" id="galleryBackdrop"></div>
     <div class="gallery-dialog">
       <div class="gallery-dialog-header">
-        <h3 id="galleryModalTitle">Galleria Immagini e Video (/images/)</h3>
+        <h3 id="galleryModalTitle">Galleria Multimediale 3D (/images/)</h3>
         <button type="button" class="gallery-close-btn" id="closeGalleryBtn" aria-label="Chiudi galleria">&times;</button>
       </div>
-      <div class="gallery-grid">
-        <!-- Media elements loaded from /images/ -->
-        <img class="gallery-media" src="images/canottieri001.jpg" alt="Canottieri 1" loading="lazy">
-        <img class="gallery-media" src="images/canottieri002.jpg" alt="Canottieri 2" loading="lazy">
-        <img class="gallery-media" src="images/canottieri003.jpg" alt="Canottieri 3" loading="lazy">
-        <img class="gallery-media" src="images/canottieri004.jpg" alt="Canottieri 4" loading="lazy">
-        <img class="gallery-media" src="images/locandinca_Cascina.jpg" alt="Locandina Cascina" loading="lazy">
-        <img class="gallery-media" src="images/rz01.jpg" alt="Foto RZ 01" loading="lazy">
-        <img class="gallery-media" src="images/rz02.jpg" alt="Foto RZ 02" loading="lazy">
-        <img class="gallery-media" src="images/rz03.jpg" alt="Foto RZ 03" loading="lazy">
-        <img class="gallery-media" src="images/rz04.jpg" alt="Foto RZ 04" loading="lazy">
-        <img class="gallery-media" src="images/rz05.jpg" alt="Foto RZ 05" loading="lazy">
-        <img class="gallery-media" src="images/rz06.jpg" alt="Foto RZ 06" loading="lazy">
-        <img class="gallery-media" src="images/rz07.jpg" alt="Foto RZ 07" loading="lazy">
-        <img class="gallery-media" src="images/rz08.jpg" alt="Foto RZ 08" loading="lazy">
-        <img class="gallery-media" src="images/rz09.jpg" alt="Foto RZ 09" loading="lazy">
-        <img class="gallery-media" src="images/rz11.jpg" alt="Foto RZ 11" loading="lazy">
-        <img class="gallery-media" src="images/rz12.jpg" alt="Foto RZ 12" loading="lazy">
-        <video class="gallery-media" controls preload="metadata">
-          <source src="images/rzvideo01.mp4" type="video/mp4">
-          Il tuo browser non supporta la riproduzione video.
-        </video>
+      
+      <div class="gallery-viewport">
+        <div class="demo__gallery" id="gallery3DGrid"></div>
+      </div>
+
+      <!-- Expanded Media Overlay -->
+      <div class="gallery-expanded-view" id="galleryExpandedView">
+        <div id="expandedMediaContainer"></div>
+        <button class="gallery-expanded-close" id="closeExpandedBtn">Chiudi Vista</button>
       </div>
     </div>
   </div>
@@ -1060,39 +1118,90 @@
           hamburger.setAttribute("aria-label", "Apri il menu");
         });
       });
+    })();
 
-      /* Gallery Modal logic */
-      const modal = document.getElementById("galleryModal");
-      const closeBtn = document.getElementById("closeGalleryBtn");
-      const backdrop = document.getElementById("galleryBackdrop");
-      const triggers = document.querySelectorAll(".open-gallery-trigger");
+    /* 3D Gallery Integration Script */
+    $(document).ready(function() {
+      var mediaList = [
+        { type: "image", src: "images/canottieri001.jpg" },
+        { type: "image", src: "images/canottieri002.jpg" },
+        { type: "image", src: "images/canottieri003.jpg" },
+        { type: "image", src: "images/canottieri004.jpg" },
+        { type: "image", src: "images/locandinca_Cascina.jpg" },
+        { type: "image", src: "images/rz01.jpg" },
+        { type: "image", src: "images/rz02.jpg" },
+        { type: "image", src: "images/rz03.jpg" },
+        { type: "image", src: "images/rz04.jpg" },
+        { type: "image", src: "images/rz05.jpg" },
+        { type: "image", src: "images/rz06.jpg" },
+        { type: "image", src: "images/rz07.jpg" },
+        { type: "image", src: "images/rz08.jpg" },
+        { type: "image", src: "images/rz09.jpg" },
+        { type: "image", src: "images/rz11.jpg" },
+        { type: "image", src: "images/rz12.jpg" },
+        { type: "video", src: "images/rzvideo01.mp4" }
+      ];
 
+      var $grid = $("#gallery3DGrid");
+
+      // Generate 3D Tiles
+      mediaList.forEach(function(item) {
+        var $tile = $('<div class="demo__placeholder"></div>');
+        if (item.type === "image") {
+          $tile.css("background-image", "url('" + item.src + "')");
+        } else {
+          $tile.addClass("video-tile").css("background", "#1e293b");
+        }
+        $tile.data("media", item);
+        $grid.append($tile);
+      });
+
+      // Modal Controls
       function openModal() {
-        modal.classList.add("active");
-        document.body.classList.add("modal-open");
+        $("#galleryModal").addClass("active");
+        $("body").addClass("modal-open");
       }
 
       function closeModal() {
-        modal.classList.remove("active");
-        document.body.classList.remove("modal-open");
+        $("#galleryModal").removeClass("active");
+        $("body").removeClass("modal-open");
+        closeExpandedView();
       }
 
-      triggers.forEach(function (trigger) {
-        trigger.addEventListener("click", function (e) {
-          e.preventDefault();
-          openModal();
-        });
+      $(".open-gallery-trigger").on("click", function(e) {
+        e.preventDefault();
+        openModal();
       });
 
-      closeBtn.addEventListener("click", closeModal);
-      backdrop.addEventListener("click", closeModal);
+      $("#closeGalleryBtn, #galleryBackdrop").on("click", closeModal);
 
-      document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape" && modal.classList.contains("active")) {
+      $(document).on("keydown", function(e) {
+        if (e.key === "Escape" && $("#galleryModal").hasClass("active")) {
           closeModal();
         }
       });
-    })();
+
+      // Tile Expand Click Logic
+      $(document).on("click", ".demo__placeholder", function() {
+        var item = $(this).data("media");
+        var $container = $("#expandedMediaContainer").empty();
+
+        if (item.type === "image") {
+          $container.append('<img class="gallery-expanded-content" src="' + item.src + '" alt="Media Expanded">');
+        } else {
+          $container.append('<video class="gallery-expanded-content" controls autoPlay><source src="' + item.src + '" type="video/mp4"></video>');
+        }
+
+        $("#galleryExpandedView").addClass("active");
+      });
+
+      function closeExpandedView() {
+        $("#galleryExpandedView").removeClass("active");
+        $("#expandedMediaContainer").empty();
+      }
+
+      $("#closeExpandedBtn").on("click", closeExpandedView);
+    });
   </script>
 </body>
 </html>
