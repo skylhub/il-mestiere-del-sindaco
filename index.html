@@ -449,7 +449,7 @@
       width: 130px;
       height: 130px;
       background-size: cover;
-      background-position: center;
+      background-position: top center;
       border-radius: 10px;
       cursor: pointer;
       border: 2px solid var(--border);
@@ -476,6 +476,18 @@
       border-radius: 8px;
     }
 
+    .demo__placeholder.article-tile::after {
+      content: "📰";
+      position: absolute;
+      bottom: 6px;
+      right: 6px;
+      background: rgba(30, 64, 175, 0.85);
+      color: #fff;
+      font-size: 0.85rem;
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+
     /* Expanded View Overlay */
     .gallery-expanded-view {
       position: absolute;
@@ -495,14 +507,21 @@
 
     .gallery-expanded-content {
       max-width: 85%;
-      max-height: 75vh;
+      max-height: 68vh;
       border-radius: 12px;
       box-shadow: 0 10px 40px rgba(0,0,0,0.5);
       object-fit: contain;
     }
 
+    .gallery-expanded-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 14px;
+      z-index: 30;
+    }
+
     .gallery-expanded-close {
-      margin-top: 16px;
       padding: 8px 20px;
       background: var(--accent);
       color: #fff;
@@ -510,7 +529,17 @@
       border-radius: 999px;
       font-weight: 700;
       cursor: pointer;
-      z-index: 30;
+    }
+
+    .gallery-link-btn {
+      padding: 8px 20px;
+      background: var(--gold);
+      color: #111827;
+      border: none;
+      border-radius: 999px;
+      font-weight: 800;
+      text-decoration: none;
+      font-size: 0.9rem;
     }
 
     /* Navigation Arrows Styles */
@@ -540,13 +569,8 @@
       transform: translateY(-50%) scale(1.1);
     }
 
-    .gallery-nav-left {
-      left: 20px;
-    }
-
-    .gallery-nav-right {
-      right: 20px;
-    }
+    .gallery-nav-left { left: 20px; }
+    .gallery-nav-right { right: 20px; }
 
     .grid-3,
     .pricing-grid {
@@ -617,16 +641,8 @@
       font-weight: 800;
     }
 
-    .chapter-item h3 {
-      margin: 0;
-      font-size: 1rem;
-    }
-
-    .chapter-item p {
-      margin: 2px 0 0;
-      color: var(--muted);
-      font-size: 0.88rem;
-    }
+    .chapter-item h3 { margin: 0; font-size: 1rem; }
+    .chapter-item p { margin: 2px 0 0; color: var(--muted); font-size: 0.88rem; }
 
     .author-card {
       display: flex;
@@ -645,16 +661,8 @@
     }
 
     .author-card h3 { margin: 0 0 6px; }
-
-    .author-card .role {
-      color: var(--accent);
-      font-weight: 700;
-    }
-
-    .author-card p {
-      margin: 12px 0 0;
-      color: var(--muted);
-    }
+    .author-card .role { color: var(--accent); font-weight: 700; }
+    .author-card p { margin: 12px 0 0; color: var(--muted); }
 
     .pricing-card {
       position: relative;
@@ -688,95 +696,25 @@
     }
 
     .pricing-card h3 { margin: 0; }
+    .price-big { margin: 12px 0; color: var(--accent); font-size: 1.5rem; font-weight: 900; }
 
-    .price-big {
-      margin: 12px 0;
-      color: var(--accent);
-      font-size: 1.5rem;
-      font-weight: 900;
-    }
-
-    .pricing-card ul {
-      margin: 16px 0;
-      padding: 0;
-      list-style: none;
-      text-align: left;
-    }
-
-    .pricing-card li {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 0;
-      font-size: 0.92rem;
-    }
-
-    .pricing-card li::before {
-      content: "✓";
-      color: var(--accent);
-      font-weight: 900;
-    }
-
+    .pricing-card ul { margin: 16px 0; padding: 0; list-style: none; text-align: left; }
+    .pricing-card li { display: flex; align-items: center; gap: 8px; padding: 6px 0; font-size: 0.92rem; }
+    .pricing-card li::before { content: "✓"; color: var(--accent); font-weight: 900; }
     .pricing-card .btn { width: 80%; }
 
-    footer {
-      padding: 30px 0;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    .footer-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
+    footer { padding: 30px 0; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.9rem; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
     footer strong { color: var(--text); }
-
-    .footer-links {
-      display: flex;
-      gap: 15px;
-    }
-
-    .footer-links a {
-      color: var(--muted);
-      text-decoration: none;
-    }
-
+    .footer-links { display: flex; gap: 15px; }
+    .footer-links a { color: var(--muted); text-decoration: none; }
     .footer-links a:hover { color: var(--text); }
 
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-
     @media (max-width: 960px) {
-      .grid-3,
-      .pricing-grid,
-      .hero-content { grid-template-columns: 1fr; }
-
-      .author-card {
-        flex-direction: column;
-        text-align: center;
-      }
-
+      .grid-3, .pricing-grid, .hero-content { grid-template-columns: 1fr; }
+      .author-card { flex-direction: column; text-align: center; }
       .hero-card { justify-self: start; }
-
-      .hamburger {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-      }
-
+      .hamburger { display: inline-flex; align-items: center; justify-content: center; }
       .menu { display: none; }
     }
 
@@ -784,36 +722,16 @@
       .nav-inner { min-height: 66px; }
       .brand { font-size: 0.9rem; }
       .theme-toggle { padding: 9px 11px; }
-
-      .hamburger {
-        width: 42px;
-        height: 42px;
-      }
-
+      .hamburger { width: 42px; height: 42px; }
       .mobile-menu { inset: 66px 0 auto 0; }
       .hero-content { padding: 32px 24px; }
       .hero h1 { font-size: 2.5rem; }
       .hero .subtitle { font-size: 1.05rem; }
       .section-head h2 { font-size: 1.75rem; }
-
-      .pricing-card.featured,
-      .pricing-card.featured:hover { transform: none; }
-
-      .footer-inner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      
-      .demo__placeholder {
-        width: 100px;
-        height: 100px;
-      }
-
-      .gallery-nav-btn {
-        width: 42px;
-        height: 42px;
-        font-size: 1.8rem;
-      }
+      .pricing-card.featured, .pricing-card.featured:hover { transform: none; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .demo__placeholder { width: 100px; height: 100px; }
+      .gallery-nav-btn { width: 42px; height: 42px; font-size: 1.8rem; }
       .gallery-nav-left { left: 8px; }
       .gallery-nav-right { right: 8px; }
     }
@@ -886,16 +804,16 @@
     <!-- GALLERIA SECTION -->
     <section id="galleria" class="section">
       <div class="section-head">
-        <span class="badge">Raccolta Media</span>
-        <h2>Galleria Fotografica e Video</h2>
-        <p>Sfoglia gli scatti, le locandine e le video-testimonianze delle presentazioni ed eventi.</p>
+        <span class="badge">Raccolta Media & Rassegna Stampa</span>
+        <h2>Galleria Fotografica, Video e Articoli</h2>
+        <p>Sfoglia gli scatti, le locandine, le video-testimonianze e gli articoli dedicati alle presentazioni e agli eventi.</p>
       </div>
 
       <div class="gallery-preview-card">
-        <h3>Esplora i contenuti multimediali</h3>
-        <p style="color: var(--muted); margin: 8px 0 20px;">Fai clic sul pulsante sottostante per aprire la galleria 3D interattiva con tutti i file della cartella <code>/images/</code>.</p>
+        <h3>Esplora i contenuti multimediali e la rassegna stampa</h3>
+        <p style="color: var(--muted); margin: 8px 0 20px;">Fai clic sul pulsante sottostante per aprire la galleria 3D interattiva con tutti gli scatti, i video e gli articoli pubblicati.</p>
         <button type="button" class="btn btn-primary open-gallery-trigger" id="openGalleryBtn">
-          📸 Apri Galleria Multimediale 3D
+          📸 Apri Galleria & Rassegna Stampa 3D
         </button>
       </div>
     </section>
@@ -1095,7 +1013,7 @@
     <div class="gallery-backdrop" id="galleryBackdrop"></div>
     <div class="gallery-dialog">
       <div class="gallery-dialog-header">
-        <h3 id="galleryModalTitle">Galleria Multimediale 3D (/images/)</h3>
+        <h3 id="galleryModalTitle">Galleria Multimediale e Rassegna Stampa (/images/)</h3>
         <button type="button" class="gallery-close-btn" id="closeGalleryBtn" aria-label="Chiudi galleria">&times;</button>
       </div>
       
@@ -1107,8 +1025,11 @@
       <div class="gallery-expanded-view" id="galleryExpandedView">
         <button class="gallery-nav-btn gallery-nav-left" id="prevMediaBtn" aria-label="Precedente">&lsaquo;</button>
         <div id="expandedMediaContainer"></div>
+        <div class="gallery-expanded-controls">
+          <a class="gallery-link-btn" id="externalArticleBtn" href="#" target="_blank" rel="noopener noreferrer" style="display: none;">🔗 Leggi Articolo Originale</a>
+          <button class="gallery-expanded-close" id="closeExpandedBtn">Chiudi Vista</button>
+        </div>
         <button class="gallery-nav-btn gallery-nav-right" id="nextMediaBtn" aria-label="Successivo">&rsaquo;</button>
-        <button class="gallery-expanded-close" id="closeExpandedBtn">Chiudi Vista</button>
       </div>
     </div>
   </div>
@@ -1166,9 +1087,11 @@
       });
     })();
 
-    /* 3D Gallery Integration Script with Navigation Arrows */
+    /* 3D Gallery Script with Articles Integration */
     $(document).ready(function() {
       var mediaList = [
+        { type: "article", src: "images/articolo_nicolaporro.jpg", url: "https://www.nicolaporro.it/milanoquotidiano/il-mestiere-del-sindaco-il-manuale-di-sopravvivenza-per-amministratori-locali-di-giancarlo-volpe/" },
+        { type: "article", src: "images/articolo_affaritaliani.jpg", url: "https://www.affaritaliani.it/milano/sindaco-chi-te-lha-fatto-fare-il-manuale-di-sopravvivenza-di-giancarlo-volpe-per-donne-e-uomini-in-fascia-tricolore.html" },
         { type: "image", src: "images/canottieri001.jpg" },
         { type: "image", src: "images/canottieri002.jpg" },
         { type: "image", src: "images/canottieri003.jpg" },
@@ -1191,11 +1114,14 @@
       var currentIndex = -1;
       var $grid = $("#gallery3DGrid");
 
-      // Generate 3D Tiles with index reference
+      // Render grid tiles
       mediaList.forEach(function(item, index) {
         var $tile = $('<div class="demo__placeholder"></div>');
-        if (item.type === "image") {
+        if (item.type === "image" || item.type === "article") {
           $tile.css("background-image", "url('" + item.src + "')");
+          if (item.type === "article") {
+            $tile.addClass("article-tile");
+          }
         } else {
           $tile.addClass("video-tile").css("background", "#1e293b");
         }
@@ -1203,33 +1129,32 @@
         $grid.append($tile);
       });
 
-      // Render media in expanded view & manage arrow visibility
+      // Render media in expanded view
       function renderExpandedMedia(index) {
         if (index < 0 || index >= mediaList.length) return;
         var item = mediaList[index];
         var $container = $("#expandedMediaContainer").empty();
+        var $linkBtn = $("#externalArticleBtn");
 
-        if (item.type === "image") {
+        if (item.type === "image" || item.type === "article") {
           $container.append('<img class="gallery-expanded-content" src="' + item.src + '" alt="Media Expanded">');
         } else {
           $container.append('<video class="gallery-expanded-content" controls autoPlay><source src="' + item.src + '" type="video/mp4"></video>');
         }
 
-        // Boundary check: Hide left arrow on first item, right arrow on last item
-        if (index <= 0) {
-          $("#prevMediaBtn").hide();
+        // Handle external link button for articles
+        if (item.type === "article" && item.url) {
+          $linkBtn.attr("href", item.url).show();
         } else {
-          $("#prevMediaBtn").show();
+          $linkBtn.hide();
         }
 
-        if (index >= mediaList.length - 1) {
-          $("#nextMediaBtn").hide();
-        } else {
-          $("#nextMediaBtn").show();
-        }
+        // Arrow boundary checks
+        $("#prevMediaBtn").toggle(index > 0);
+        $("#nextMediaBtn").toggle(index < mediaList.length - 1);
       }
 
-      // Navigation button click handlers
+      // Arrow navigation click handlers
       $("#prevMediaBtn").on("click", function(e) {
         e.stopPropagation();
         if (currentIndex > 0) {
@@ -1265,7 +1190,7 @@
 
       $("#closeGalleryBtn, #galleryBackdrop").on("click", closeModal);
 
-      // Tile Expand Click Logic
+      // Tile click handler
       $(document).on("click", ".demo__placeholder", function() {
         currentIndex = $(this).data("index");
         renderExpandedMedia(currentIndex);
@@ -1275,6 +1200,7 @@
       function closeExpandedView() {
         $("#galleryExpandedView").removeClass("active");
         $("#expandedMediaContainer").empty();
+        $("#externalArticleBtn").hide();
         currentIndex = -1;
       }
 
