@@ -21,6 +21,8 @@
       --accent-light: #dbeafe;
       --accent-glow: rgba(30, 64, 175, 0.15);
       --gold: #f59e0b;
+      --youtube: #dc2626;
+      --youtube-glow: rgba(220, 38, 38, 0.22);
       --shadow: 0 18px 50px rgba(17, 24, 39, 0.08);
       --radius: 24px;
       --hero-overlay: rgba(245, 247, 250, 0.92);
@@ -40,6 +42,8 @@
       --accent-light: #1e3a5f;
       --accent-glow: rgba(96, 165, 250, 0.15);
       --gold: #fbbf24;
+      --youtube: #ef4444;
+      --youtube-glow: rgba(239, 68, 68, 0.25);
       --shadow: 0 20px 60px rgba(0, 0, 0, 0.30);
       --hero-overlay: rgba(11, 18, 32, 0.94);
       --hero-overlay-mid: rgba(11, 18, 32, 0.72);
@@ -242,7 +246,8 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 10px 16px;
+      gap: 8px;
+      padding: 11px 18px;
       border: 1px solid transparent;
       border-radius: 999px;
       font-size: 0.95rem;
@@ -261,6 +266,14 @@
     }
 
     .btn-primary:hover { box-shadow: 0 18px 40px var(--accent-glow); }
+
+    .btn-youtube {
+      background: var(--youtube);
+      color: #ffffff;
+      box-shadow: 0 14px 30px var(--youtube-glow);
+    }
+
+    .btn-youtube:hover { box-shadow: 0 18px 40px var(--youtube-glow); }
 
     .btn-secondary {
       border-color: var(--border);
@@ -349,17 +362,68 @@
       font-size: 1.05rem;
     }
 
-    /* --- Gallery Preview & Modal Styles --- */
+    /* --- Split Media Cards (Galleria vs YouTube Intervista) --- */
+    .media-split-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
     .gallery-preview-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 32px;
+      padding: 32px 28px;
       text-align: center;
       box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      transition: transform 0.25s ease;
     }
 
-    .gallery-modal {
+    .gallery-preview-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .gallery-preview-card h3 {
+      margin: 10px 0 8px;
+      font-size: 1.25rem;
+    }
+
+    .gallery-preview-card p {
+      color: var(--muted);
+      margin: 0 0 22px;
+      font-size: 0.95rem;
+      max-width: 42ch;
+    }
+
+    .card-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .card-pill-gallery {
+      background: var(--accent-light);
+      color: var(--accent);
+    }
+
+    .card-pill-youtube {
+      background: rgba(220, 38, 38, 0.12);
+      color: var(--youtube);
+    }
+
+    /* --- Modals (Gallery + YouTube Popup) --- */
+    .gallery-modal,
+    .yt-modal {
       position: fixed;
       inset: 0;
       z-index: 100;
@@ -369,11 +433,13 @@
       padding: 20px;
     }
 
-    .gallery-modal.active {
+    .gallery-modal.active,
+    .yt-modal.active {
       display: flex;
     }
 
-    .gallery-backdrop {
+    .gallery-backdrop,
+    .yt-backdrop {
       position: fixed;
       inset: 0;
       background: rgba(0, 0, 0, 0.88);
@@ -392,6 +458,34 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
+    }
+
+    .yt-dialog {
+      position: relative;
+      z-index: 101;
+      width: min(920px, 96vw);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .yt-video-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000000;
+    }
+
+    .yt-video-wrapper iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
     }
 
     .gallery-dialog-header {
@@ -718,6 +812,10 @@
       .menu { display: none; }
     }
 
+    @media (max-width: 768px) {
+      .media-split-grid { grid-template-columns: 1fr; }
+    }
+
     @media (max-width: 560px) {
       .nav-inner { min-height: 66px; }
       .brand { font-size: 0.9rem; }
@@ -801,20 +899,38 @@
 
   <main class="container">
 
-    <!-- GALLERIA SECTION -->
+    <!-- GALLERIA & INTERVISTA SECTION -->
     <section id="galleria" class="section">
       <div class="section-head">
         <span class="badge">Raccolta Media & Rassegna Stampa</span>
         <h2>Galleria Fotografica, Video e Articoli</h2>
-        <p>Sfoglia gli scatti, le locandine, le video-testimonianze e gli articoli dedicati alle presentazioni e agli eventi.</p>
+        <p>Sfoglia le immagini, le locandine, gli articoli dedicati alle presentazioni o guarda l'intervista video all'autore.</p>
       </div>
 
-      <div class="gallery-preview-card">
-        <h3>Esplora i contenuti multimediali e la rassegna stampa</h3>
-        <p style="color: var(--muted); margin: 8px 0 20px;">Fai clic sul pulsante sottostante per aprire la galleria 3D interattiva con tutti gli scatti, i video e gli articoli pubblicati.</p>
-        <button type="button" class="btn btn-primary open-gallery-trigger" id="openGalleryBtn">
-          📸 Apri Galleria & Rassegna Stampa 3D
-        </button>
+      <div class="media-split-grid">
+        <!-- Card 1: Galleria 3D -->
+        <div class="gallery-preview-card">
+          <div>
+            <span class="card-pill card-pill-gallery">📸 Archivio Foto & Stampa</span>
+            <h3>Esplora i contenuti multimediali</h3>
+            <p>Apri la galleria 3D interattiva con tutti gli scatti dagli eventi, le locandine e gli articoli pubblicati sui giornali.</p>
+          </div>
+          <button type="button" class="btn btn-primary open-gallery-trigger" id="openGalleryBtn">
+            Apri Galleria & Rassegna Stampa
+          </button>
+        </div>
+
+        <!-- Card 2: Intervista YouTube (Popup separato) -->
+        <div class="gallery-preview-card">
+          <div>
+            <span class="card-pill card-pill-youtube">▶ Video Approfondimento</span>
+            <h3>Guarda l'intervista su YouTube</h3>
+            <p>Un dialogo diretto sui temi del libro, le sfide quotidiane dei primi cittadini e i retroscena dell'amministrazione locale.</p>
+          </div>
+          <button type="button" class="btn btn-youtube" id="openYoutubeBtn">
+            🎬 Guarda l'Intervista Video
+          </button>
+        </div>
       </div>
     </section>
 
@@ -1034,6 +1150,26 @@
     </div>
   </div>
 
+  <!-- POPUP DEDICATO PER INTERVISTA YOUTUBE -->
+  <div class="yt-modal" id="youtubeModal" role="dialog" aria-modal="true" aria-labelledby="ytModalTitle">
+    <div class="yt-backdrop" id="ytBackdrop"></div>
+    <div class="yt-dialog">
+      <div class="gallery-dialog-header">
+        <h3 id="ytModalTitle">🎬 Intervista Video — Il Mestiere del Sindaco</h3>
+        <button type="button" class="gallery-close-btn" id="closeYoutubeBtn" aria-label="Chiudi video">&times;</button>
+      </div>
+      <div class="yt-video-wrapper">
+        <iframe
+          id="youtubeIframe"
+          src=""
+          title="Intervista video su YouTube - Il Mestiere del Sindaco"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </div>
+
   <footer>
     <div class="container footer-inner">
       <div><strong>Il Mestiere del Sindaco</strong> © 2026</div>
@@ -1084,6 +1220,36 @@
           hamburger.setAttribute("aria-expanded", "false");
           hamburger.setAttribute("aria-label", "Apri il menu");
         });
+      });
+
+      /* YouTube Popup Logic (Separato dalla Galleria) */
+      const youtubeVideoId = "JBWAsjvje1I";
+      const ytModal = document.getElementById("youtubeModal");
+      const ytIframe = document.getElementById("youtubeIframe");
+      const openYtBtn = document.getElementById("openYoutubeBtn");
+      const closeYtBtn = document.getElementById("closeYoutubeBtn");
+      const ytBackdrop = document.getElementById("ytBackdrop");
+
+      function openYoutubeModal() {
+        ytIframe.src = "https://www.youtube.com/embed/" + youtubeVideoId + "?autoplay=1&rel=0";
+        ytModal.classList.add("active");
+        document.body.classList.add("modal-open");
+      }
+
+      function closeYoutubeModal() {
+        ytModal.classList.remove("active");
+        document.body.classList.remove("modal-open");
+        ytIframe.src = "";
+      }
+
+      openYtBtn.addEventListener("click", openYoutubeModal);
+      closeYtBtn.addEventListener("click", closeYoutubeModal);
+      ytBackdrop.addEventListener("click", closeYoutubeModal);
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && ytModal.classList.contains("active")) {
+          closeYoutubeModal();
+        }
       });
     })();
 
@@ -1139,7 +1305,7 @@
         if (item.type === "image" || item.type === "article") {
           $container.append('<img class="gallery-expanded-content" src="' + item.src + '" alt="Media Expanded">');
         } else {
-          $container.append('<video class="gallery-expanded-content" controls autoPlay><source src="' + item.src + '" type="video/mp4"></video>');
+          $container.append('<video class="gallery-expanded-content" controls autoplay><source src="' + item.src + '" type="video/mp4"></video>');
         }
 
         // Handle external link button for articles
